@@ -3,7 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projects/Android/Doctors/app/src/main/res/drawable/background_doctor_image.xml" value="0.1785" />
+        <entry key="..\:/Projects/Android/Doctors/app/src/main/res/drawable/background_information_splash.xml" value="0.1785" />
+        <entry key="..\:/Projects/Android/Doctors/app/src/main/res/drawable/circle.xml" value="0.1" />
+        <entry key="..\:/Projects/Android/Doctors/app/src/main/res/drawable/ic_doctor.xml" value="0.1785" />
         <entry key="..\:/Projects/Android/Doctors/app/src/main/res/layout/activity_main.xml" value="0.26197916666666665" />
+        <entry key="..\:/Projects/Android/Doctors/app/src/main/res/layout/fragment_splash.xml" value="0.264" />
       </map>
     </option>
   </component>
