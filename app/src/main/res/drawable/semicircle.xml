@@ -4,9 +4,9 @@
     android:shape="rectangle">
     <solid android:color="@color/blue_500"/>
     <size
-        android:width="120dp"
-        android:height="60dp"/>
+        android:width="200dp"
+        android:height="100dp"/>
     <corners
-        android:topLeftRadius="60dp"
-        android:topRightRadius="60dp"/>
+        android:topLeftRadius="100dp"
+        android:topRightRadius="100dp"/>
 </shape>
