@@ -18,13 +18,13 @@
         android:layout_marginTop="32dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_doctor"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintBottom_toTopOf="@+id/background_splash"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/background_splash"
         android:layout_width="0dp"
         android:layout_height="350dp"
         android:background="@drawable/background_information_splash"
@@ -34,12 +34,12 @@
 
         <TextView
             android:id="@+id/title_splash"
-            style="@style/title_splash"
+            style="@style/title_blue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:gravity="center"
-            android:text="@string/title_splash"
+            android:text="@string/title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -59,7 +59,7 @@
             android:id="@+id/start_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/circle"
+            android:background="@drawable/semicircle"
             android:scaleX="2.8"
             android:scaleY="2.8"
             app:layout_constraintBottom_toBottomOf="parent"
