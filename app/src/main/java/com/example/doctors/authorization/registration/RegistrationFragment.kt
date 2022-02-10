@@ -1,4 +1,4 @@
-package com.example.doctors.autorization.registration
+package com.example.doctors.authorization.registration
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

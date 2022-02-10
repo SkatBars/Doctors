@@ -1,4 +1,4 @@
-package com.example.doctors.autorization.signIn
+package com.example.doctors.authorization.signIn
 
 import android.content.Intent
 import android.os.Bundle

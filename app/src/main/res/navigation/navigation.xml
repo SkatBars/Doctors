@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_splash" />
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.example.doctors.autorization.signIn.SignInFragment"
+        android:name="com.example.doctors.authorization.signIn.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in" />
 </navigation>

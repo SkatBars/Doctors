@@ -1,10 +1,10 @@
-package com.example.doctors.autorization.signIn
+package com.example.doctors.authorization.signIn
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.doctors.autorization.data.FirebaseAuthDataSource
+import com.example.doctors.authorization.data.FirebaseAuthDataSource
 import kotlinx.coroutines.launch
 
 class SignInViewModel(private val db: FirebaseAuthDataSource) : ViewModel() {
