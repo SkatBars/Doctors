@@ -43,11 +43,5 @@ class FirebaseAuthDataSource(private val auth: FirebaseAuth) {
         idToken: String) : Task<AuthResult> = withContext(ioDispatcher) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         return@withContext auth.signInWithCredential(credential)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    task.result
-                }
-            }
     }
-
 }
