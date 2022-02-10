@@ -15,7 +15,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignInFragment : Fragment() {
 
-    private val viewModel: SignInViewModel by viewModel()
+    private val viewModel: AuthorizationViewModel by viewModel()
     private lateinit var binding: FragmentSignInBinding
 
     override fun onCreateView(

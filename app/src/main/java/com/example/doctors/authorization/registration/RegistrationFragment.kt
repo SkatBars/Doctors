@@ -6,11 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.doctors.R
+import com.example.doctors.authorization.signIn.AuthorizationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegistrationFragment : Fragment() {
 
-    private val viewModel: RegistationViewModel by viewModel()
+    private val viewModel: AuthorizationViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

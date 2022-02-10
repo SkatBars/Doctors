@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.doctors.authorization.data.FirebaseAuthDataSource
 import kotlinx.coroutines.launch
 
-class SignInViewModel(private val db: FirebaseAuthDataSource) : ViewModel() {
+class AuthorizationViewModel(private val db: FirebaseAuthDataSource) : ViewModel() {
 
     private val _openMainFragmentEvent = MutableLiveData<Boolean>(false)
     val openMainFragmentEvent: LiveData<Boolean>
