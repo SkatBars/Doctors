@@ -30,7 +30,11 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun configurationLiveDataObservers() {
-        viewModel.openMainFragmentEvent.observe(viewLifecycleOwner) { }
+        viewModel.openMainFragmentEvent.observe(viewLifecycleOwner) {
+            findNavController().navigate(
+                R.id.action_registrationFragment_to_mainFragment
+            )
+        }
         viewModel.showSnackbar.observe(viewLifecycleOwner) { showSnackbar(it) }
     }
 
