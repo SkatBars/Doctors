@@ -1,6 +1,7 @@
 package com.example.doctors.di
 
 import com.example.doctors.autorization.data.FirebaseAuthDataSource
+import com.example.doctors.autorization.registration.RegistationViewModel
 import com.example.doctors.autorization.signIn.SignInViewModel
 import com.example.doctors.splash.SplashViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -14,4 +15,5 @@ val modules = module {
 
     viewModel { SplashViewModel() }
     viewModel { SignInViewModel(db = get()) }
+    viewModel { RegistationViewModel(db = get()) }
 }
