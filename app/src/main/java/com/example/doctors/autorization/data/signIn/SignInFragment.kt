@@ -23,14 +23,10 @@ class SignInFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSignInBinding.inflate(inflater)
-
-        binding.signInGoogleBtn.setOnClickListener {
-            showGoogleAuthorizationActivity()
-        }
+        configurationClickListeners()
 
         return binding.root
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -41,6 +37,17 @@ class SignInFragment : Fragment() {
                 viewModel.signInWithGoogle(account.idToken!!)
             }catch (e: ApiException) {
                 showSnackbar(e.message.toString())
+            }
+        }
+    }
+
+    private fun configurationClickListeners() {
+        with(binding) {
+            signInGoogleBtn.setOnClickListener { showGoogleAuthorizationActivity() }
+            signInBtn.setOnClickListener {
+                val email = emailEditTextSignIn.text.toString()
+                val password = passwordEditTextSignIn.text.toString()
+                viewModel.signInWithEmail(email, password)
             }
         }
     }
