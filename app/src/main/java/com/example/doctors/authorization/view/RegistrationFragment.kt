@@ -10,6 +10,7 @@ import com.example.doctors.R
 import com.example.doctors.authorization.viewModel.AuthorizationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.example.doctors.databinding.FragmentRegistrationBinding
+import com.google.android.material.snackbar.Snackbar
 import org.koin.android.ext.android.bind
 
 class RegistrationFragment : Fragment() {
@@ -29,7 +30,8 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun configurationLiveDataObservers() {
-
+        viewModel.openMainFragmentEvent.observe(viewLifecycleOwner) { }
+        viewModel.showSnackbar.observe(viewLifecycleOwner) { showSnackbar(it) }
     }
 
     private fun configurationClickListeners() {
