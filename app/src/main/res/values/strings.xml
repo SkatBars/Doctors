@@ -10,7 +10,7 @@
     <string name="input_password">Введите пароль</string>
     <string name="repeat_password">Повторите пароль</string>
     <string name="signIn_with_google">Войти через google</string>
-    <string name="SignIn">Войти в аккаунт</string>
+    <string name="signIn">Войти в аккаунт</string>
     <string name="forgot_password">Забыли пароль</string>
     <string name="register">Зарегистрироваться</string>
     <string name="registration">Регистрация</string>
