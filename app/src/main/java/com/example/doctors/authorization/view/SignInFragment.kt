@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.example.doctors.R
 import com.example.doctors.RC_SIGN_IN
 import com.example.doctors.authorization.viewModel.AuthorizationViewModel
 import com.example.doctors.databinding.FragmentSignInBinding
@@ -51,6 +53,9 @@ class SignInFragment : Fragment() {
                 val password = passwordEditTextSignIn.text.toString()
                 viewModel.signInWithEmail(email, password)
             }
+            registrationBtn.setOnClickListener {
+                findNavController()
+                    .navigate(R.id.action_signInFragment_to_registrationFragment) }
         }
     }
 
