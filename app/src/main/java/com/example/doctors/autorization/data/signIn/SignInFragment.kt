@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.example.doctors.RC_SIGN_IN
 import com.example.doctors.databinding.FragmentSignInBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -24,6 +25,7 @@ class SignInFragment : Fragment() {
     ): View? {
         binding = FragmentSignInBinding.inflate(inflater)
         configurationClickListeners()
+        configurationLiveDataObservers()
 
         return binding.root
     }
@@ -52,8 +54,13 @@ class SignInFragment : Fragment() {
         }
     }
 
+    private fun configurationLiveDataObservers() {
+        viewModel.openMainFragmentEvent.observe(viewLifecycleOwner) { }
+        viewModel.showSnackbar.observe(viewLifecycleOwner) { showSnackbar(it) }
+    }
+
     private fun showSnackbar(message: String) {
-        Snackbar.make(binding.root, message, Snackbar.LENGTH_INDEFINITE).show()
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
 
     private fun showGoogleAuthorizationActivity() {
