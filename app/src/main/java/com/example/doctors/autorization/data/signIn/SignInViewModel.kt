@@ -44,8 +44,24 @@ class SignInViewModel(private val db: FirebaseAuthDataSource) : ViewModel() {
         }
     }
 
-    fun logInWithGoogle() {
+    fun signInWithGoogle(idToken: String) {
+        viewModelScope.launch {
+            val task = db.signInWithGoogle(idToken)
+            with(task) {
+                addOnCompleteListener { openMainFragment() }
+                addOnCanceledListener { showMessage("Операция была отменена, попробуйте снова") }
+                addOnFailureListener { showMessage("Произошла ошибка, попробуйте снова") }
+            }
 
+        }
+    }
+
+    private fun openMainFragment() {
+        _openMainFragmentEvent.value = true
+    }
+
+    private fun showMessage(message: String) {
+        _showSnackbar.value = message
     }
 
 }
