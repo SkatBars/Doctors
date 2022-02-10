@@ -53,6 +53,8 @@ class AuthorizationViewModel(private val db: FirebaseAuthDataSource) : ViewModel
                     }
                 }
             }
+        } else {
+            showMessage("Пароли не совпадают")
         }
     }
 
