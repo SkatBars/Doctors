@@ -1,4 +1,4 @@
-package com.example.doctors.autorization.data.signIn
+package com.example.doctors.autorization.signIn
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import com.example.doctors.RC_SIGN_IN
 import com.example.doctors.databinding.FragmentSignInBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
