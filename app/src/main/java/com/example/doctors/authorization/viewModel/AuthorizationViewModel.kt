@@ -42,6 +42,20 @@ class AuthorizationViewModel(private val db: FirebaseAuthDataSource) : ViewModel
         }
     }
 
+    fun register(email: String, password: String, repeatPassword: String) {
+        if (password == repeatPassword) {
+            viewModelScope.launch {
+                db.createUser(email, password).addOnCompleteListener { task ->
+                    with(task) {
+                        addOnCompleteListener { openMainFragment() }
+                        addOnCanceledListener { showMessage("Операция была отменена, попробуйте снова") }
+                        addOnFailureListener { showMessage("Произошла ошибка, попробуйте снова") }
+                    }
+                }
+            }
+        }
+    }
+
     fun signInWithGoogle(idToken: String) {
         viewModelScope.launch {
             val task = db.signInWithGoogle(idToken)
