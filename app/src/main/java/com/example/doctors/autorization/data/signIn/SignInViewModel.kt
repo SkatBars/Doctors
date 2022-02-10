@@ -30,17 +30,15 @@ class SignInViewModel(private val db: FirebaseAuthDataSource) : ViewModel() {
         }
     }
 
-    fun logInWithEmail(email: String, password: String) {
+    fun signInWithEmail(email: String, password: String) {
         viewModelScope.launch {
-                db.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-                    if (task.isCanceled) {
-                        _showSnackbar.value = "Ошибка загрузки"
-                    }
-
-                    if (task.isSuccessful) {
-                        _openMainFragmentEvent.value = true
-                    }
+            db.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                with(task) {
+                    addOnCompleteListener { openMainFragment() }
+                    addOnCanceledListener { showMessage("Операция была отменена, попробуйте снова") }
+                    addOnFailureListener { showMessage("Произошла ошибка, попробуйте снова") }
                 }
+            }
         }
     }
 
