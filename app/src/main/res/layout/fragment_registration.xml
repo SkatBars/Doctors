@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/blue_500"
-        tools:context=".authorization.registration.RegistrationFragment">
+        tools:context=".authorization.view.RegistrationFragment">
 
         <TextView
             android:id="@+id/title_registration"
@@ -92,7 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="@string/SignIn"
+                android:text="@string/signIn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/repeat_password_edit_text_registration" />

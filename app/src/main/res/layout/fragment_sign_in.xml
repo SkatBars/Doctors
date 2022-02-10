@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".authorization.signIn.SignInFragment"
+        tools:context=".authorization.view.SignInFragment"
         android:background="@color/blue_500">
 
         <TextView
@@ -124,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:text="@string/SignIn"
+                android:text="@string/signIn"
                 style="@style/title_white"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toTopOf="@+id/arrow_img"

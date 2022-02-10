@@ -1,4 +1,4 @@
-package com.example.doctors.authorization.signIn
+package com.example.doctors.authorization.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.doctors.RC_SIGN_IN
+import com.example.doctors.authorization.viewModel.AuthorizationViewModel
 import com.example.doctors.databinding.FragmentSignInBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException

@@ -1,4 +1,4 @@
-package com.example.doctors.authorization.signIn
+package com.example.doctors.authorization.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
