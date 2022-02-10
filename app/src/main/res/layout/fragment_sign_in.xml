@@ -84,7 +84,7 @@
                 android:layout_width="wrap_content"
                 style="@style/Widget.Material3.Button.TextButton"
                 android:textColor="@color/blue_500"
-                android:text="@string/registration"
+                android:text="@string/register"
                 android:textSize="14sp"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@id/password_edit_text_signIn"
