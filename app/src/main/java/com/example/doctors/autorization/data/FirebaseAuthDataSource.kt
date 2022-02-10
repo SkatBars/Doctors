@@ -32,11 +32,6 @@ class FirebaseAuthDataSource(private val auth: FirebaseAuth) {
         password: String
     ) : Task<AuthResult> = withContext(ioDispatcher) {
         return@withContext auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    task.result
-                }
-            }
     }
 
     suspend fun signInWithGoogle(
