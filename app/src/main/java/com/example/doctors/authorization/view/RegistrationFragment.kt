@@ -43,4 +43,8 @@ class RegistrationFragment : Fragment() {
             backBtn.setOnClickListener {findNavController().popBackStack()}
         }
     }
+
+    private fun showSnackbar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+    }
 }
