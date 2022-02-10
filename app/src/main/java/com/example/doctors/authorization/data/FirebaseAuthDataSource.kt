@@ -24,6 +24,13 @@ class FirebaseAuthDataSource(private val auth: FirebaseAuth) {
         auth.signOut()
     }
 
+    suspend fun createUser(
+        email: String,
+        password: String
+    ) : Task<AuthResult> = withContext(ioDispatcher) {
+        return@withContext auth.createUserWithEmailAndPassword(email, password)
+    }
+
     suspend fun signInWithEmailAndPassword(
         email: String,
         password: String
