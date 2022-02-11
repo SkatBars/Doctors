@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/doctorsAppointmentFragment">
 
     <include app:graph="@navigation/auth_navigation" />
     <fragment
@@ -11,18 +11,21 @@
         android:name="com.example.doctors.main.info.InfoFragment"
         android:label="fragment_info"
         tools:layout="@layout/fragment_info" />
-    <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.example.doctors.main.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
-        <action
-            android:id="@+id/action_mainFragment_to_navigation"
-            app:destination="@id/navigation" />
-    </fragment>
+
+
+
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.example.doctors.main.history.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/doctorsAppointmentFragment"
+        android:name="com.example.doctors.main.doctorsAppointment.DoctorsAppointmentFragment"
+        android:label="fragment_doctors_appointment"
+        tools:layout="@layout/fragment_doctors_appointment" >
+        <action
+            android:id="@+id/action_doctorsAppointmentFragment_to_navigation"
+            app:destination="@id/navigation" />
+    </fragment>
 </navigation>
