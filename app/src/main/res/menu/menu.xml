@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/doctorsAppointmentFragment"
+        android:icon="@drawable/ic_home"
+        android:title="Главная" />
+    <item
+        android:id="@+id/historyFragment"
+        android:icon="@drawable/ic_history"
+        android:title="История" />
+    <item
+        android:id="@+id/infoFragment"
+        android:icon="@drawable/ic_info"
+        android:title="Информация" />
+</menu>
