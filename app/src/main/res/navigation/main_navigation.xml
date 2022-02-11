@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_navigation">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/mainFragment">
 
+    <include app:graph="@navigation/auth_navigation" />
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.example.doctors.main.info.InfoFragment"
+        android:label="fragment_info"
+        tools:layout="@layout/fragment_info" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.doctors.main.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_navigation"
+            app:destination="@id/navigation" />
+    </fragment>
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.doctors.main.history.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
 </navigation>
