@@ -6,15 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.doctors.R
+import com.example.doctors.databinding.FragmentDoctorsListBinding
 
 class DoctorsListFragment : Fragment() {
 
     private lateinit var viewModel: DoctorsListViewModel
+    private lateinit var binding: FragmentDoctorsListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_doctors_list, container, false)
+        binding = FragmentDoctorsListBinding.inflate(inflater)
+
+        return binding.root
     }
 }
