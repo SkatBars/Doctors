@@ -2,6 +2,6 @@ package com.example.doctors.main.doctorsAppointment
 
 import androidx.lifecycle.ViewModel
 
-class DoctorsAppointmentViewModel : ViewModel() {
+class DoctorsListViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }
