@@ -3,6 +3,7 @@ package com.example.doctors.di
 import com.example.doctors.authorization.data.FirebaseAuthDataSource
 import com.example.doctors.authorization.viewModel.AuthorizationViewModel
 import com.example.doctors.main.MainViewModel
+import com.example.doctors.main.doctorsAppointment.DoctorsListViewModel
 import com.example.doctors.main.doctorsAppointment.data.DoctorsRecordRemoteDataSource
 import com.example.doctors.splash.SplashViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -22,4 +23,5 @@ val modules = module {
     viewModel { SplashViewModel() }
     viewModel { AuthorizationViewModel(db = get()) }
     viewModel { MainViewModel(db = get()) }
+    viewModel { DoctorsListViewModel(myAuth = get(), db = get()) }
 }

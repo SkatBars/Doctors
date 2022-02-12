@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.doctors.R
 import com.example.doctors.databinding.FragmentDoctorsListBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class DoctorsListFragment : Fragment() {
 
-    private lateinit var viewModel: DoctorsListViewModel
+    private val viewModel: DoctorsListViewModel by viewModel()
     private lateinit var binding: FragmentDoctorsListBinding
 
     override fun onCreateView(
