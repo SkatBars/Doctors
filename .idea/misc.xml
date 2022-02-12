@@ -4,12 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Projects/Android/Doctors/app/src/main/res/drawable/background_doctor_image.xml" value="0.1785" />
+        <entry key="..\:/Projects/Android/Doctors/app/src/main/res/drawable/background_for_search_doctor.xml" value="0.1785" />
         <entry key="..\:/Projects/Android/Doctors/app/src/main/res/drawable/background_information_splash.xml" value="0.1785" />
         <entry key="..\:/Projects/Android/Doctors/app/src/main/res/drawable/circle.xml" value="0.1" />
         <entry key="..\:/Projects/Android/Doctors/app/src/main/res/drawable/ic_doctor.xml" value="0.1785" />
         <entry key="..\:/Projects/Android/Doctors/app/src/main/res/drawable/ic_home.xml" value="0.1785" />
+        <entry key="..\:/Projects/Android/Doctors/app/src/main/res/drawable/ic_search.xml" value="0.1785" />
         <entry key="..\:/Projects/Android/Doctors/app/src/main/res/layout-land/fragment_registration.xml" value="0.43243243243243246" />
         <entry key="..\:/Projects/Android/Doctors/app/src/main/res/layout/activity_main.xml" value="0.26197916666666665" />
+        <entry key="..\:/Projects/Android/Doctors/app/src/main/res/layout/fragment_doctors_list.xml" value="0.264" />
         <entry key="..\:/Projects/Android/Doctors/app/src/main/res/layout/fragment_history.xml" value="0.2359375" />
         <entry key="..\:/Projects/Android/Doctors/app/src/main/res/layout/fragment_info.xml" value="0.25" />
         <entry key="..\:/Projects/Android/Doctors/app/src/main/res/layout/fragment_main.xml" value="0.25" />
