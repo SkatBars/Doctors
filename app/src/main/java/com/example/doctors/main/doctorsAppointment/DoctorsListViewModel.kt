@@ -6,7 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.doctors.authorization.data.FirebaseAuthDataSource
+import com.example.doctors.main.doctorsAppointment.data.Doctor
 import com.example.doctors.main.doctorsAppointment.data.DoctorsRecordRemoteDataSource
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import kotlinx.coroutines.launch
 
 class DoctorsListViewModel(
@@ -24,4 +26,8 @@ class DoctorsListViewModel(
             _openSignInFragment.value = true
         }
     }
+
+
+    fun getOptionsForDoctorsList(): FirestoreRecyclerOptions<Doctor> = db.optionsForRecyclerViewDoctors
+
 }
