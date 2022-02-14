@@ -22,8 +22,8 @@ class DoctorsRecordRemoteDataSource(private val firestore: FirebaseFirestore) {
     val optionsForRecyclerViewDoctors = {
         val query = firestore.collection("doctors")
         FirestoreRecyclerOptions
-            .Builder<PlaceToWrite>()
-            .setQuery(query, PlaceToWrite::class.java)
+            .Builder<Doctor>()
+            .setQuery(query, Doctor::class.java)
             .build()
     }
 
