@@ -19,13 +19,15 @@ class DoctorsRecordRemoteDataSource(private val firestore: FirebaseFirestore) {
 
     private lateinit var snapshotListener: ListenerRegistration
 
-    val optionsForRecyclerViewDoctors = {
-        val query = firestore.collection("doctors")
-        FirestoreRecyclerOptions
-            .Builder<Doctor>()
-            .setQuery(query, Doctor::class.java)
-            .build()
-    }
+    val optionsForRecyclerViewDoctors = FirestoreRecyclerOptions
+        .Builder<Doctor>()
+        .setQuery(
+            firestore.collection("doctors"),
+            Doctor::class.java)
+        .build()
+
+
+
 
     suspend fun updatePlace(placeToWrite: PlaceToWrite) = withContext(dispatcher) {
         return@withContext firestore
