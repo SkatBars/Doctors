@@ -9,9 +9,8 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 
 class DoctorsListAdapter(
-    options: FirestoreRecyclerOptions<Doctor>,
     private val viewModel: DoctorsListViewModel
-    ) : FirestoreRecyclerAdapter<Doctor, DoctorsListAdapter.DoctorsHolder>(options) {
+    ) : FirestoreRecyclerAdapter<Doctor, DoctorsListAdapter.DoctorsHolder>(viewModel.getOptionsForDoctorsList()) {
 
     class DoctorsHolder(
         private val binding: DoctorsListItemBinding
