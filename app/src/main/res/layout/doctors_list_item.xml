@@ -6,6 +6,9 @@
         <variable
             name="doctor"
             type="com.example.doctors.main.doctorsAppointment.data.Doctor" />
+        <variable
+            name="viewModel"
+            type="com.example.doctors.main.doctorsAppointment.DoctorsListViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView
