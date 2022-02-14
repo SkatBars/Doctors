@@ -18,9 +18,14 @@ class DoctorsListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentDoctorsListBinding.inflate(inflater)
-
+    ): View {
+        configureBinding(inflater, container)
         return binding.root
     }
+
+    private fun configureBinding(inflater: LayoutInflater, container: ViewGroup?) {
+        binding = FragmentDoctorsListBinding.inflate(inflater)
+        binding.viewModel = viewModel
+    }
+
 }
