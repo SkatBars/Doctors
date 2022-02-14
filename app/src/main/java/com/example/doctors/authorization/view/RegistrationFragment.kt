@@ -31,7 +31,7 @@ class RegistrationFragment : Fragment() {
 
     private fun configurationLiveDataObservers() {
         viewModel.openMainFragmentEvent.observe(viewLifecycleOwner) {
-            findNavController().navigate(
+            if (it) findNavController().navigate(
                 R.id.action_registrationFragment_to_mainFragment
             )
         }

@@ -61,7 +61,7 @@ class SignInFragment : Fragment() {
 
     private fun configurationLiveDataObservers() {
         viewModel.openMainFragmentEvent.observe(viewLifecycleOwner) {
-            findNavController().navigate(
+            if (it) findNavController().navigate(
                 R.id.action_signInFragment_to_mainFragment
             )
         }
