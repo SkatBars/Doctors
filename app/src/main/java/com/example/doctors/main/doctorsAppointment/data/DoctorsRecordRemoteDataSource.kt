@@ -3,8 +3,10 @@ package com.example.doctors.main.doctorsAppointment.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.*
@@ -19,15 +21,9 @@ class DoctorsRecordRemoteDataSource(private val firestore: FirebaseFirestore) {
 
     private lateinit var snapshotListener: ListenerRegistration
 
-    val optionsForRecyclerViewDoctors = FirestoreRecyclerOptions
-        .Builder<Doctor>()
-        .setQuery(
-            firestore.collection("doctors"),
-            Doctor::class.java)
-        .build()
-
-
-
+    suspend fun getQueryDoctors(): Task<QuerySnapshot> = withContext(dispatcher) {
+        return@withContext firestore.collection("doctors").get()
+    }
 
     suspend fun updatePlace(placeToWrite: PlaceToWrite) = withContext(dispatcher) {
         return@withContext firestore
