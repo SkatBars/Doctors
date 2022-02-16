@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".authorization.view.SignInFragment"
-        android:background="@color/blue_500">
+        android:background="@color/blue_700">
 
         <TextView
             style="@style/title_white"
