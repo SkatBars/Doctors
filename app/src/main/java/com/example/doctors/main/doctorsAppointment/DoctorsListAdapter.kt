@@ -1,5 +1,6 @@
 package com.example.doctors.main.doctorsAppointment
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,8 +10,10 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 
 class DoctorsListAdapter(
+    options: FirestoreRecyclerOptions<Doctor>,
     private val viewModel: DoctorsListViewModel
-    ) : FirestoreRecyclerAdapter<Doctor, DoctorsListAdapter.DoctorsHolder>(viewModel.getOptionsForDoctorsList()) {
+    ) : FirestoreRecyclerAdapter<Doctor, DoctorsListAdapter
+        .DoctorsHolder>(options) {
 
     class DoctorsHolder(
         private val binding: DoctorsListItemBinding
@@ -18,16 +21,16 @@ class DoctorsListAdapter(
         fun bind(viewModel: DoctorsListViewModel, doctor: Doctor) {
             binding.doctor = doctor
             binding.viewModel = viewModel
+            binding.executePendingBindings()
         }
 
         companion object {
             fun from(parent: ViewGroup): DoctorsHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = DoctorsListItemBinding.inflate(layoutInflater)
+                val binding = DoctorsListItemBinding.inflate(layoutInflater, parent, false)
                 return DoctorsHolder(binding)
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DoctorsHolder {
