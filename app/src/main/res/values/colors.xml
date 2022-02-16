@@ -3,10 +3,14 @@
     <color name="blue_100">#A8E4F1FD</color>
     <color name="blue_200">#0089BA</color>
     <color name="blue_500">#0081CF</color>
+
     <color name="blue_700">#2C73D2</color>
     <color name="orange_700">#FF9671</color>
     <color name="orange_200">#FFA18E</color>
+
+    <color name="gray_500">#434343</color>
+    <color name="gray_200">#FBFBFB</color>
+
     <color name="black">#FF000000</color>
-    <color name="gray">#434343</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
