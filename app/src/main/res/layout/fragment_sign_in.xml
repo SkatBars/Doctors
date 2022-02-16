@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:shadowColor="#373737"
                 android:text="@string/signIn_with_google"
-                android:textColor="@color/gray"
+                android:textColor="@color/gray_500"
                 app:backgroundTint="@android:color/white"
                 app:icon="@drawable/ic_google"
                 app:iconSize="14dp"
