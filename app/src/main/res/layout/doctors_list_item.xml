@@ -17,7 +17,6 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         app:cardCornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,23 +27,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
+            <com.github.siyamed.shapeimageview.RoundedImageView
                 android:id="@+id/doctor_avatar_img"
-                loadImage="@{doctor.urlAvatar}"
-                android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_margin="8dp"
+                android:layout_width="80dp"
+                loadImage="@{doctor.urlAvatar}"
+                app:siRadius="12dp"
                 android:scaleType="centerCrop"
+                app:layout_constraintCircleRadius="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="8dp" />
 
             <TextView
                 android:id="@+id/name_doctor"
                 style="@style/title_blue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="8dp"
                 android:text="@{doctor.name}"
                 android:textSize="24sp"
@@ -56,7 +57,7 @@
                 setPrice="@{doctor.avaragePrice}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="12dp"
                 app:layout_constraintStart_toEndOf="@id/doctor_avatar_img"
                 app:layout_constraintTop_toBottomOf="@id/name_doctor" />
 
@@ -64,7 +65,7 @@
                 android:id="@+id/star"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="12dp"
                 android:src="@drawable/ic_star"
                 app:layout_constraintBottom_toBottomOf="@+id/rating_textView"
                 app:layout_constraintStart_toEndOf="@+id/doctor_avatar_img"
