@@ -5,7 +5,6 @@
     android:id="@+id/main_navigation"
     app:startDestination="@id/doctorsAppointmentFragment">
 
-    <include app:graph="@navigation/auth_navigation" />
     <fragment
         android:id="@+id/infoFragment"
         android:name="com.example.doctors.main.info.InfoFragment"
@@ -23,9 +22,5 @@
         android:id="@+id/doctorsAppointmentFragment"
         android:name="com.example.doctors.main.doctorsAppointment.DoctorsListFragment"
         android:label="fragment_doctors_appointment"
-        tools:layout="@layout/fragment_doctors_list" >
-        <action
-            android:id="@+id/action_doctorsAppointmentFragment_to_navigation"
-            app:destination="@id/navigation" />
-    </fragment>
+        tools:layout="@layout/fragment_doctors_list" />
 </navigation>

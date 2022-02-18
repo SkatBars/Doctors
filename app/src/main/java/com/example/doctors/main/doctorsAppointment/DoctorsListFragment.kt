@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,7 +45,11 @@ class DoctorsListFragment : Fragment() {
 
     private fun configurationLiveDataObservers() {
         viewModel.openSignInFragment.observe(viewLifecycleOwner) {
-            if (it) findNavController().navigate(R.id.action_doctorsAppointmentFragment_to_navigation  )
+            if (it) {
+                requireActivity().supportFragmentManager
+                    .findFragmentById(R.id.myNavHost)!!.findNavController()
+                    .navigate(R.id.signInFragment)
+            }
         }
         viewModel.options.observe(viewLifecycleOwner) { options ->
             options?.let {configureRecyclerView(options)}

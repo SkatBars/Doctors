@@ -45,14 +45,14 @@
 
             <ImageButton
                 android:id="@+id/signOut_btn"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_margin="16dp"
-                android:background="@drawable/ic_sort"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_exit"
                 android:onClick="@{(view) -> viewModel.signOut()}"
                 app:layout_constraintBottom_toBottomOf="@+id/name_user"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/name_user" />
+                app:layout_constraintTop_toTopOf="@+id/hello"
+                android:layout_margin="16dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_doctors"
