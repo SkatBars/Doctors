@@ -54,17 +54,39 @@
                 app:layout_constraintTop_toTopOf="@+id/hello"
                 android:layout_margin="16dp" />
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/sort_cardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/name_user"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="8dp">
+
+                    <Spinner
+                        android:id="@+id/sort_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/values_for_sort_doctor"
+                        android:layout_margin="8dp"
+                        app:layout_constraintStart_toStartOf="@+id/recycler_doctors"
+                        app:layout_constraintTop_toBottomOf="@+id/name_user" />
+
+            </androidx.cardview.widget.CardView>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_doctors"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginTop="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/name_user" />
+                app:layout_constraintTop_toBottomOf="@+id/sort_cardView"
+                android:layout_marginTop="8dp"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

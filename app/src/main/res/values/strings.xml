@@ -16,4 +16,11 @@
     <string name="register">Зарегистрироваться</string>
     <string name="registration">Регистрация</string>
     <string name="write_doctor">Введите имя стаматолога</string>
+
+    <string-array name="values_for_sort_doctor">
+        <item>По убыванию рейтинга</item>
+        <item>По возрастанию рейтинга</item>
+        <item>По убыванию цены</item>
+        <item>По возрастанию цены</item>
+    </string-array>
 </resources>
