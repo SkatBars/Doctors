@@ -2,14 +2,11 @@ package com.example.doctors.main.doctorsAppointment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
+import android.widget.AdapterView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,9 +14,6 @@ import com.example.doctors.R
 import com.example.doctors.databinding.FragmentDoctorsListBinding
 import com.example.doctors.main.doctorsAppointment.data.Doctor
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -35,6 +29,7 @@ class DoctorsListFragment : Fragment() {
         viewModel.getOptionsForDoctorsList(this)
         configureBinding(inflater)
         configurationLiveDataObservers()
+        configureListener()
         return binding.root
     }
 
@@ -56,6 +51,28 @@ class DoctorsListFragment : Fragment() {
         }
     }
 
+    private fun configureListener() {
+        binding.sortSpinner.onItemSelectedListener =
+            object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>,
+                                        view: View, position: Int, id: Long) {
+
+                when(position) {
+                    0 -> viewModel.getOptionsForDoctorsList(viewLifecycleOwner, "rating",  true)
+                    1 -> viewModel.getOptionsForDoctorsList(viewLifecycleOwner, "rating",  false)
+                    2 -> viewModel.getOptionsForDoctorsList(viewLifecycleOwner, "avaragePrice",  true)
+                    3 -> viewModel.getOptionsForDoctorsList(viewLifecycleOwner, "avaragePrice",  false)
+                }
+
+            }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {}
+
+            }
+
+        }
+
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun configureRecyclerView(options: FirestoreRecyclerOptions<Doctor>) {
         with(binding.recyclerDoctors) {
@@ -65,7 +82,8 @@ class DoctorsListFragment : Fragment() {
                 false
             )
             adapter = DoctorsListAdapter(options, viewModel)
-            addItemDecoration(DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)
+            addItemDecoration(
+                DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)
                 .apply { setDrawable(context.getDrawable(R.drawable.line_for_recycler)!!) })
         }
 

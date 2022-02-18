@@ -31,8 +31,12 @@ class DoctorsListViewModel(
     }
 
 
-    fun getOptionsForDoctorsList(lifecycleOwner: LifecycleOwner) = viewModelScope.launch {
-        val task = db.getQueryDoctors()
+    fun getOptionsForDoctorsList(
+        lifecycleOwner: LifecycleOwner,
+        value: String = "rating",
+        reverse: Boolean = false
+    ) = viewModelScope.launch {
+        val task = db.getQueryDoctors(value, reverse)
             task.addOnCompleteListener {
                 _options.value =  FirestoreRecyclerOptions
                     .Builder<Doctor>()
