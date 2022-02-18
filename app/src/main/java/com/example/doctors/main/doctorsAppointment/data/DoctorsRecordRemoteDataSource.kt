@@ -6,6 +6,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -21,9 +22,18 @@ class DoctorsRecordRemoteDataSource(private val firestore: FirebaseFirestore) {
 
     private lateinit var snapshotListener: ListenerRegistration
 
-    suspend fun getQueryDoctors(): Task<QuerySnapshot> = withContext(dispatcher) {
-        return@withContext firestore.collection("doctors").get()
+    suspend fun getQueryDoctors(
+        keySort: String,
+        reverse: Boolean
+    ): Task<QuerySnapshot> = withContext(dispatcher) {
+        return@withContext if (reverse) {
+            firestore.collection("doctors")
+                .orderBy(keySort, Query.Direction.DESCENDING).get()
+        } else {
+            firestore.collection("doctors").orderBy(keySort, Query.Direction.ASCENDING).get()
+        }
     }
+
 
     suspend fun updatePlace(placeToWrite: PlaceToWrite) = withContext(dispatcher) {
         return@withContext firestore
