@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.doctors.R
 import com.example.doctors.databinding.FragmentDoctorsListBinding
 import com.example.doctors.main.doctors_list.data.Doctor
