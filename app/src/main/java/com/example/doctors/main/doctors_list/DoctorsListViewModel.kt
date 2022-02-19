@@ -1,9 +1,9 @@
-package com.example.doctors.main.doctorsList
+package com.example.doctors.main.doctors_list
 
 import androidx.lifecycle.*
 import com.example.doctors.authorization.data.FirebaseAuthDataSource
-import com.example.doctors.main.doctorsList.data.Doctor
-import com.example.doctors.main.doctorsList.data.DoctorsRecordRemoteDataSource
+import com.example.doctors.main.doctors_list.data.Doctor
+import com.example.doctors.main.doctors_list.data.DoctorsRecordRemoteDataSource
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import kotlinx.coroutines.launch
 

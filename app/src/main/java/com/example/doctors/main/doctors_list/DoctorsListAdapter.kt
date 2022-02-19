@@ -1,10 +1,10 @@
-package com.example.doctors.main.doctorsList
+package com.example.doctors.main.doctors_list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.doctors.databinding.DoctorsListItemBinding
-import com.example.doctors.main.doctorsList.data.Doctor
+import com.example.doctors.main.doctors_list.data.Doctor
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 

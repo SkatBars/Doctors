@@ -6,11 +6,11 @@
 
         <variable
             name="doctor"
-            type="com.example.doctors.main.doctorsList.data.Doctor" />
+            type="com.example.doctors.main.doctors_list.data.Doctor" />
 
         <variable
             name="viewModel"
-            type="com.example.doctors.main.doctorsList.DoctorsListViewModel" />
+            type="com.example.doctors.main.doctors_list.DoctorsListViewModel" />
     </data>
 
 

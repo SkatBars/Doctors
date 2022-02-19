@@ -1,4 +1,4 @@
-package com.example.doctors.main.doctorsList
+package com.example.doctors.main.doctors_list
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -10,7 +10,7 @@ import android.widget.AdapterView
 import androidx.navigation.fragment.findNavController
 import com.example.doctors.R
 import com.example.doctors.databinding.FragmentDoctorsListBinding
-import com.example.doctors.main.doctorsList.data.Doctor
+import com.example.doctors.main.doctors_list.data.Doctor
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
