@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.doctors.databinding.AppointmentFragmentBinding
 import com.example.doctors.main.doctors_list.data.PlaceToWrite
@@ -51,6 +52,7 @@ class AppointmentFragment : Fragment() {
         with(binding.appointmentRecyclerView) {
             adapter = myAdapter
             layoutManager = LinearLayoutManager(context)
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
     }
 
