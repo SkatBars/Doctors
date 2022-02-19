@@ -16,6 +16,8 @@
     <string name="register">Зарегистрироваться</string>
     <string name="registration">Регистрация</string>
     <string name="write_doctor">Введите имя стаматолога</string>
+    <string name="seat_is_taken">забранировано</string>
+    <string name="take_place">Забронировать</string>
 
     <string-array name="values_for_sort_doctor">
         <item>По убыванию рейтинга</item>
