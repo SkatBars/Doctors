@@ -6,7 +6,15 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.doctors.main.doctors_list.data.DoctorsRecordRemoteDataSource
 import com.example.doctors.main.doctors_list.data.PlaceToWrite
+import java.util.*
 
 class AppointmentViewModel(private val db: DoctorsRecordRemoteDataSource) : ViewModel() {
-    var places: LiveData<List<PlaceToWrite>> = db.places
+    var places: LiveData<MutableList<PlaceToWrite>> = db.places
+
+    fun enableListenerCollection(doctor: String, currentDate: Date) {
+        db.enableListenerCollection(doctor, currentDate)
+    }
+
+    fun disableListenerCollectionPlaces() = db.disableListenerCollectionPlaces()
+
 }
