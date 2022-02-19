@@ -29,6 +29,16 @@ class AppointmentFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.enableListenerCollection("3O2jTHzUWIZarH3etOxW", Date(2022, 2, 19))
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.disableListenerCollectionPlaces()
+    }
+
     private fun configureObserverLiveData() {
         viewModel.places.observe(viewLifecycleOwner, Observer {
             changeListRecyclerView(it.toList())
