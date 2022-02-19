@@ -10,7 +10,7 @@ import com.example.doctors.R
 import com.example.doctors.databinding.AppointmentItemBinding
 import com.example.doctors.main.doctors_list.data.PlaceToWrite
 
-class AppointmentAdapter(private val places: List<PlaceToWrite>)
+class AppointmentAdapter(private val places: MutableList<PlaceToWrite>)
     : RecyclerView.Adapter<AppointmentAdapter.AppointmentHolder>() {
 
     class AppointmentHolder(private val binding: AppointmentItemBinding)
@@ -65,6 +65,12 @@ class AppointmentAdapter(private val places: List<PlaceToWrite>)
 
     override fun getItemCount(): Int {
         return places.size
+    }
+
+    fun changeItems(newListWithPlaces: List<PlaceToWrite>){
+        places.clear()
+        places.addAll(newListWithPlaces)
+        notifyDataSetChanged()
     }
 
 }
