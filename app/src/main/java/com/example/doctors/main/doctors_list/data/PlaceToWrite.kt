@@ -9,5 +9,5 @@ data class PlaceToWrite(
     val time: String,
     val date: Date,
     @field:JvmField
-    val isSuccess: Boolean
+    val isTaken: Boolean
 )
