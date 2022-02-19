@@ -11,28 +11,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/appointment_layout"
         android:layout_width="match_parent"
-        android:layout_height="100dp">
-
-        <View
-            android:id="@+id/horizontal_line"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:id="@+id/vertical_line"
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:background="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        >
         <TextView
             android:id="@+id/time_textView"
             style="@style/title_white"
@@ -40,10 +21,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"
-            android:textSize="28sp"
+            android:textSize="24sp"
             android:text="@{time}"
-            app:layout_constraintStart_toStartOf="@id/vertical_line"
-            app:layout_constraintTop_toBottomOf="@+id/horizontal_line" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/is_taken_textView"
@@ -51,9 +32,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/seat_is_taken"
-            android:textSize="28sp"
+            android:textSize="24sp"
             android:layout_marginStart="16dp"
-            app:layout_constraintStart_toEndOf="@+id/vertical_line"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/time_textView" />
 
         <com.google.android.material.button.MaterialButton
@@ -64,7 +45,7 @@
             android:layout_marginStart="16dp"
             android:text="@string/take_place"
             android:textColor="@color/white"
-            android:textSize="24sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/time_textView" />
 
