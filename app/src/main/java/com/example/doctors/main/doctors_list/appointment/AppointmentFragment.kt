@@ -7,17 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.doctors.R
+import com.example.doctors.databinding.AppointmentFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AppointmentFragment : Fragment() {
 
     private val viewModel: AppointmentViewModel by viewModel()
+    private lateinit var  binding: AppointmentFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.appointment_fragment, container, false)
+    ): View {
+        binding = AppointmentFragmentBinding.inflate(inflater)
+        return binding.root
     }
+
 
 }
