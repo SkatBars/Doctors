@@ -10,8 +10,10 @@ import com.example.doctors.R
 import com.example.doctors.databinding.AppointmentItemBinding
 import com.example.doctors.main.doctors_list.data.PlaceToWrite
 
-class AppointmentAdapter(private val places: MutableList<PlaceToWrite>)
+class AppointmentAdapter()
     : RecyclerView.Adapter<AppointmentAdapter.AppointmentHolder>() {
+
+    private val places: MutableList<PlaceToWrite> = mutableListOf()
 
     class AppointmentHolder(private val binding: AppointmentItemBinding)
         : RecyclerView.ViewHolder(binding.root) {
