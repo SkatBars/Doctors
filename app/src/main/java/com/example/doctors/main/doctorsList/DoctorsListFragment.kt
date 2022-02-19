@@ -1,4 +1,4 @@
-package com.example.doctors.main.doctorsAppointment
+package com.example.doctors.main.doctorsList
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,11 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.doctors.R
 import com.example.doctors.databinding.FragmentDoctorsListBinding
-import com.example.doctors.main.doctorsAppointment.data.Doctor
+import com.example.doctors.main.doctorsList.data.Doctor
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

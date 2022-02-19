@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.doctors.main.doctorsAppointment.DoctorsListViewModel" />
+            type="com.example.doctors.main.doctorsList.DoctorsListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +17,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".main.doctorsAppointment.DoctorsListFragment"
+            tools:context=".main.doctorsList.DoctorsListFragment"
             android:background="@drawable/background_doctors_list">
 
             <TextView

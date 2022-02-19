@@ -1,4 +1,4 @@
-package com.example.doctors.main.doctorsAppointment.data
+package com.example.doctors.main.doctorsList.data
 
 import java.util.*
 

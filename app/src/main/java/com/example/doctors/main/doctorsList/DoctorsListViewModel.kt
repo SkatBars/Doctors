@@ -1,12 +1,10 @@
-package com.example.doctors.main.doctorsAppointment
+package com.example.doctors.main.doctorsList
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.doctors.authorization.data.FirebaseAuthDataSource
-import com.example.doctors.main.doctorsAppointment.data.Doctor
-import com.example.doctors.main.doctorsAppointment.data.DoctorsRecordRemoteDataSource
+import com.example.doctors.main.doctorsList.data.Doctor
+import com.example.doctors.main.doctorsList.data.DoctorsRecordRemoteDataSource
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class DoctorsListViewModel(

@@ -1,4 +1,4 @@
-package com.example.doctors.main.doctorsAppointment.data
+package com.example.doctors.main.doctorsList.data
 
 data class Doctor(
     val avaragePrice: Int = 0,
