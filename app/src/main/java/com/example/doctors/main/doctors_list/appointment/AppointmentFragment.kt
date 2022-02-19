@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.doctors.databinding.AppointmentFragmentBinding
 import com.example.doctors.main.doctors_list.data.PlaceToWrite
@@ -20,12 +21,20 @@ class AppointmentFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        configureRecyclerView()
+        configureObserverLiveData()
         binding = AppointmentFragmentBinding.inflate(inflater)
         return binding.root
     }
 
-    private fun configureRecyclerView(places: List<PlaceToWrite>) {
-        adapter = AppointmentAdapter(places.toMutableList())
+    private fun configureObserverLiveData() {
+        viewModel.places.observe(viewLifecycleOwner, Observer {
+            changeListRecyclerView(it)
+        })
+    }
+
+    private fun configureRecyclerView() {
+        adapter = AppointmentAdapter()
 
         with(binding.appointmentRecyclerView) {
             adapter = adapter
