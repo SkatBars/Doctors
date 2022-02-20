@@ -26,6 +26,12 @@ class AppointmentFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = AppointmentFragmentBinding.inflate(inflater)
+
+        viewModel.initVariable(
+            arguments?.getString("userId")!!,
+            arguments?.getString("doctorId")!!
+        )
+
         configureRecyclerView()
         configureObserverLiveData()
         return binding.root
@@ -33,7 +39,7 @@ class AppointmentFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.enableListenerCollection("3O2jTHzUWIZarH3etOxW", Date(2022, 2, 19))
+        viewModel.enableListenerCollection(viewModel.doctorId, Date(2022, 2, 20))
     }
 
     override fun onPause() {

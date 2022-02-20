@@ -12,6 +12,10 @@ class DoctorsListViewModel(
     private val db: DoctorsRecordRemoteDataSource
     ) : ViewModel() {
 
+    private val _openAppointmentFragment = MutableLiveData<String>()
+    val openAppointmentFragment: LiveData<String>
+        get() = _openAppointmentFragment
+
     private val _openSignInFragment = MutableLiveData<Boolean>(false)
     val openSignInFragment: LiveData<Boolean>
         get() = _openSignInFragment
@@ -21,6 +25,8 @@ class DoctorsListViewModel(
         get() = _options
 
 
+    fun getUser() = myAuth.getUser()
+
     fun signOut() {
         viewModelScope.launch {
             myAuth.signOut()
@@ -28,6 +34,9 @@ class DoctorsListViewModel(
         }
     }
 
+    fun openAppointmentFragment(doctorId: String) {
+        _openAppointmentFragment.value = doctorId
+    }
 
     fun getOptionsForDoctorsList(
         lifecycleOwner: LifecycleOwner,

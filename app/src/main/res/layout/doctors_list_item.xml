@@ -94,6 +94,7 @@
                 android:gravity="center"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
+                android:onClick="@{(view) -> viewModel.openAppointmentFragment(doctor.id)}"
                 android:text="Запись"
                 android:textColor="@color/white"
                 android:textSize="10sp"

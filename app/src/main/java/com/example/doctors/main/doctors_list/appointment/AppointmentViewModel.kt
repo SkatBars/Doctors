@@ -9,6 +9,8 @@ import java.util.*
 class AppointmentViewModel(
     private val db: DoctorsRecordRemoteDataSource) : ViewModel() {
     private lateinit var userId: String
+    lateinit var doctorId: String
+
     var places: LiveData<MutableList<PlaceToWrite>> = db.places
 
     private val _showMessage = MutableLiveData<String>()
@@ -21,8 +23,9 @@ class AppointmentViewModel(
 
     fun disableListenerCollectionPlaces() = db.disableListenerCollectionPlaces()
 
-    fun initUser(userId: String) {
+    fun initVariable(userId: String, doctorId: String) {
         this.userId = userId
+        this.doctorId = doctorId
     }
 
     fun takePlace(placeToWrite: PlaceToWrite) = viewModelScope.launch {

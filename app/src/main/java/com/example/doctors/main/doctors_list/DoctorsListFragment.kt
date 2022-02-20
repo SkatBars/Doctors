@@ -15,6 +15,7 @@ import com.example.doctors.databinding.FragmentDoctorsListBinding
 import com.example.doctors.main.doctors_list.data.Doctor
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.component.getScopeId
 
 
 class DoctorsListFragment : Fragment() {
@@ -46,32 +47,50 @@ class DoctorsListFragment : Fragment() {
                     .navigate(R.id.signInFragment)
             }
         }
+
+        viewModel.openAppointmentFragment.observe(viewLifecycleOwner) { doctorId ->
+            val arg = Bundle()
+            arg.putString("userId", viewModel.getUser()!!.getScopeId())
+            arg.putString("doctorId", doctorId)
+            findNavController().navigate(R.id.action_doctorsAppointmentFragment_to_appointmentFragment2, arg)
+        }
+
         viewModel.options.observe(viewLifecycleOwner) { options ->
-            options?.let {configureRecyclerView(options)}
+            options?.let { configureRecyclerView(options) }
         }
     }
 
     private fun configureListener() {
         binding.sortSpinner.onItemSelectedListener =
             object :
-            AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>,
-                                        view: View, position: Int, id: Long) {
+                AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View, position: Int, id: Long
+                ) {
 
-                when(position) {
-                    0 -> viewModel.getOptionsForDoctorsList(viewLifecycleOwner, "rating",  true)
-                    1 -> viewModel.getOptionsForDoctorsList(viewLifecycleOwner, "rating",  false)
-                    2 -> viewModel.getOptionsForDoctorsList(viewLifecycleOwner, "avaragePrice",  true)
-                    3 -> viewModel.getOptionsForDoctorsList(viewLifecycleOwner, "avaragePrice",  false)
+                    when (position) {
+                        0 -> viewModel.getOptionsForDoctorsList(viewLifecycleOwner, "rating", true)
+                        1 -> viewModel.getOptionsForDoctorsList(viewLifecycleOwner, "rating", false)
+                        2 -> viewModel.getOptionsForDoctorsList(
+                            viewLifecycleOwner,
+                            "avaragePrice",
+                            true
+                        )
+                        3 -> viewModel.getOptionsForDoctorsList(
+                            viewLifecycleOwner,
+                            "avaragePrice",
+                            false
+                        )
+                    }
+
                 }
-
-            }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {}
 
             }
 
-        }
+    }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun configureRecyclerView(options: FirestoreRecyclerOptions<Doctor>) {
@@ -84,7 +103,7 @@ class DoctorsListFragment : Fragment() {
             adapter = DoctorsListAdapter(options, viewModel)
             addItemDecoration(
                 DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL)
-                .apply { setDrawable(context.getDrawable(R.drawable.line_for_recycler)!!) })
+                    .apply { setDrawable(context.getDrawable(R.drawable.line_for_recycler)!!) })
         }
 
     }
