@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.doctors.databinding.AppointmentFragmentBinding
 import com.example.doctors.main.doctors_list.data.PlaceToWrite
+import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -44,6 +45,14 @@ class AppointmentFragment : Fragment() {
         viewModel.places.observe(viewLifecycleOwner, Observer {
             changeListRecyclerView(it.toList())
         })
+
+        viewModel.showMessage.observe(viewLifecycleOwner, Observer { message ->
+            showSnackbar(message)
+        })
+    }
+
+    private fun showSnackbar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
 
     private fun configureRecyclerView() {
