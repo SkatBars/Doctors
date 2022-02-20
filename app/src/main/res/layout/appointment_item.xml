@@ -11,18 +11,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/appointment_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
-        >
+        android:layout_height="wrap_content">
+
         <TextView
             android:id="@+id/time_textView"
             style="@style/title_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"
-            android:textSize="24sp"
+            android:layout_marginTop="8dp"
             android:text="@{time}"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,12 +29,14 @@
             android:id="@+id/is_taken_textView"
             style="@style/title_white"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:paddingStart="0dp"
             android:text="@string/seat_is_taken"
             android:textSize="24sp"
-            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/take_place_btn"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/time_textView" />
+            app:layout_constraintTop_toTopOf="@+id/take_place_btn" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/take_place_btn"
@@ -43,6 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:paddingLeft="0dp"
             android:text="@string/take_place"
             android:textColor="@color/white"
             android:textSize="20sp"

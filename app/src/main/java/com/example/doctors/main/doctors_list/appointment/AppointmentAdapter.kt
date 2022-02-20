@@ -39,7 +39,7 @@ class AppointmentAdapter()
         private fun bindForNotTaken() {
             with(binding) {
                 appointmentLayout.setBackgroundColor(
-                    appointmentLayout.context.getColor(R.color.green_500))
+                    appointmentLayout.context.getColor(R.color.blue_200))
                 takePlaceBtn.visibility = View.VISIBLE
                 isTakenTextView.visibility = View.INVISIBLE
             }
