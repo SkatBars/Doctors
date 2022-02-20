@@ -20,7 +20,7 @@
             app:destination="@id/registrationFragment" />
         <action
             android:id="@+id/action_signInFragment_to_mainFragment"
-            app:destination="@id/doctorsAppointmentFragment" />
+            app:destination="@id/doctorsLst" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -28,10 +28,10 @@
         android:label="RegistrationFragment" >
         <action
             android:id="@+id/action_registrationFragment_to_mainFragment"
-            app:destination="@id/doctorsAppointmentFragment" />
+            app:destination="@id/doctorsLst" />
     </fragment>
     <fragment
-        android:id="@+id/doctorsAppointmentFragment"
+        android:id="@+id/doctorsLst"
         android:name="com.example.doctors.main.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
