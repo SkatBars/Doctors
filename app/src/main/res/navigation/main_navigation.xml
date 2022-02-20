@@ -19,7 +19,7 @@
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
     <fragment
-        android:id="@+id/doctorsAppointmentFragment"
+        android:id="@+id/doctorsLst"
         android:name="com.example.doctors.main.doctors_list.DoctorsListFragment"
         android:label="fragment_doctors_appointment"
         tools:layout="@layout/fragment_doctors_list" />

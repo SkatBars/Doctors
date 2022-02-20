@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/doctorsAppointmentFragment"
+        android:id="@+id/doctorsLst"
         android:icon="@drawable/ic_home"
-        android:title="Главная" />
+        android:title="Список врачей" />
     <item
         android:id="@+id/historyFragment"
         android:icon="@drawable/ic_history"
