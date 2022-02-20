@@ -10,7 +10,7 @@ import com.example.doctors.R
 import com.example.doctors.databinding.AppointmentItemBinding
 import com.example.doctors.main.doctors_list.data.PlaceToWrite
 
-class AppointmentAdapter()
+class AppointmentAdapter(private val viewModel: AppointmentViewModel)
     : RecyclerView.Adapter<AppointmentAdapter.AppointmentHolder>() {
 
     private val places: MutableList<PlaceToWrite> = mutableListOf()
@@ -19,7 +19,8 @@ class AppointmentAdapter()
         : RecyclerView.ViewHolder(binding.root) {
 
             @RequiresApi(Build.VERSION_CODES.M)
-            fun bind(placeToWrite: PlaceToWrite) {
+            fun bind(placeToWrite: PlaceToWrite, viewModel: AppointmentViewModel) {
+                binding.viewModel = viewModel
                 binding.time = placeToWrite.time
                 if (placeToWrite.isTaken) bindForTaken()
                 else bindForNotTaken()
@@ -61,7 +62,7 @@ class AppointmentAdapter()
 
     override fun onBindViewHolder(holder: AppointmentHolder, position: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            holder.bind(places[position])
+            holder.bind(places[position], viewModel)
         }
     }
 

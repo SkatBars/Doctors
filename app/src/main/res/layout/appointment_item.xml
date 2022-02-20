@@ -6,6 +6,9 @@
         <variable
             name="time"
             type="String" />
+        <variable
+            name="viewModel"
+            type="com.example.doctors.main.doctors_list.appointment.AppointmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

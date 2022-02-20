@@ -47,7 +47,7 @@ class AppointmentFragment : Fragment() {
     }
 
     private fun configureRecyclerView() {
-        myAdapter = AppointmentAdapter()
+        myAdapter = AppointmentAdapter(viewModel)
 
         with(binding.appointmentRecyclerView) {
             adapter = myAdapter
