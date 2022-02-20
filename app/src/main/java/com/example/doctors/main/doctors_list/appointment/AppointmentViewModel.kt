@@ -17,8 +17,8 @@ class AppointmentViewModel(
     val showMessage: LiveData<String>
         get() = _showMessage
 
-    fun enableListenerCollection(doctor: String, currentDate: Date) {
-        db.enableListenerCollection(doctor, currentDate)
+    fun enableListenerCollection(doctor: String, year: Int, month: Int, day: Int) {
+        db.enableListenerCollection(doctor, year, month, day)
     }
 
     fun disableListenerCollectionPlaces() = db.disableListenerCollectionPlaces()
@@ -34,7 +34,7 @@ class AppointmentViewModel(
 
         val task = db.createTakenPlace(placeToWrite)
 
-        task.addOnCompleteListener {}
+        task.addOnCompleteListener {showMessage(placeToWrite.idDoctor)}
         task.addOnFailureListener {showMessage("Произошла ошибка. попробуйте снова")}
         task.addOnCanceledListener {showMessage("Произошла ошибка. попробуйте снова")}
     }

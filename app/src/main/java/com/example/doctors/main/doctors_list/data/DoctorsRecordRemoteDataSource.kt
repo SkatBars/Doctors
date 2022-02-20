@@ -11,6 +11,7 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.time.Year
 import java.util.*
 
 class DoctorsRecordRemoteDataSource(private val firestore: FirebaseFirestore) {
@@ -39,51 +40,52 @@ class DoctorsRecordRemoteDataSource(private val firestore: FirebaseFirestore) {
     suspend fun createTakenPlace(placeToWrite: PlaceToWrite) = withContext(dispatcher) {
         return@withContext firestore
             .collection("doctors").document(placeToWrite.idDoctor)
-            .collection("years").document(placeToWrite.date.year.toString())
-            .collection("months").document(placeToWrite.date.month.toString())
-            .collection("days").document(placeToWrite.date.date.toString())
-            .collection("places").document(placeToWrite.number.toString())
+            .collection("places").document(placeToWrite.id)
             .set(placeToWrite)
     }
 
-    fun enableListenerCollection(doctor: String, currentDate: Date) {
+    fun enableListenerCollection(doctor: String, year: Int, month: Int, day: Int) {
 
         val query = firestore
             .collection("doctors").document(doctor)
-            .collection("years").document(currentDate.year.toString())
-            .collection("months").document(currentDate.month.toString())
-            .collection("days").document(currentDate.date.toString())
-            .collection("places").orderBy("number")
+            .collection("places").whereEqualTo("year", year)
+            .whereEqualTo   ("month", month).whereEqualTo("day", day)
+
 
 
         snapshotListener = query.addSnapshotListener { value, error ->
-            if (value != null) {
-                updateListPlaces(value, doctor, currentDate)
-            }
+            updateListPlaces(value, doctor, year, month, day)
         }
     }
 
-    private fun updateListPlaces(value: QuerySnapshot, doctor: String, currentDate: Date) {
-        if (value.size() == COUNT_PLACES_FOR_WRITE_OF_DAY) {
-            _places.value = value.toObjects(PlaceToWrite::class.java)
-        } else {
-            val currentList = value.toObjects(PlaceToWrite::class.java)
+    private fun updateListPlaces(
+        value: QuerySnapshot?,
+        doctor: String,
+        year: Int,
+        month: Int,
+        day: Int
+    ) {
+        val tempList = mutableListOf<PlaceToWrite>()
 
-            val tempList = mutableListOf<PlaceToWrite>()
-
-            for (i in 0 until COUNT_PLACES_FOR_WRITE_OF_DAY) {
-                tempList.add(PlaceToWrite(
+        for (i in 0 until COUNT_PLACES_FOR_WRITE_OF_DAY) {
+            tempList.add(
+                PlaceToWrite(
                     doctor, "", i,
-                    getTimeByNumber(i), currentDate, false
-                ))
-            }
+                    getTimeByNumber(i), year,
+                    month, day, false
+                )
+            )
+        }
 
+        val currentList = value?.toObjects(PlaceToWrite::class.java)
+
+        if (currentList != null) {
             for (place in currentList) {
                 tempList[place.number] = place
             }
-
-            _places.value = tempList
         }
+
+        _places.value = tempList
     }
 
     private fun getTimeByNumber(number: Int): String {

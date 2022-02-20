@@ -39,7 +39,7 @@ class AppointmentFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.enableListenerCollection(viewModel.doctorId, Date(2022, 2, 20))
+        viewModel.enableListenerCollection(viewModel.doctorId, 2022, 2, 20)
     }
 
     override fun onPause() {
