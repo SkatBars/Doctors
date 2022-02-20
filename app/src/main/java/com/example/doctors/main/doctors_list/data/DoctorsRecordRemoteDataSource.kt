@@ -85,7 +85,11 @@ class DoctorsRecordRemoteDataSource(private val firestore: FirebaseFirestore) {
 
 
 private fun getTimeByNumber(number: Int): String {
-    return "${number + 9}:00-${number + 10}:00"
+    return if (number <= 3) {
+        "${number + 9}:00-${number + 10}:00"
+    }else {
+        "${number + 10}:00-${number + 11}:00"
+    }
 }
 
 fun disableListenerCollectionPlaces() {
