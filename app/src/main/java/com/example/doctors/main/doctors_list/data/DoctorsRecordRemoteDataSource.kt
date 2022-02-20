@@ -62,7 +62,7 @@ class DoctorsRecordRemoteDataSource(private val firestore: FirebaseFirestore) {
         .collection("doctors").document(doctor)
         .collection("years").document(currentDate.year.toString())
         .collection("months").document(currentDate.month.toString())
-        .collection("days").document(currentDate.day.toString())
+        .collection("days").document(currentDate.date.toString())
         .collection("places").orderBy("number")
 
     snapshotListener = query.addSnapshotListener{ value, error ->
