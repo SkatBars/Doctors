@@ -9,10 +9,9 @@
     <color name="orange_200">#FFA18E</color>
 
     <color name="red_500">#DA5151</color>
-    <color name="green_500">#5CB655</color>
 
     <color name="gray_500">#434343</color>
-    <color name="gray_200">#FBFBFB</color>
+    <color name="gray_200">#EAEAEA</color>
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
