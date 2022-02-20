@@ -3,7 +3,6 @@ package com.example.doctors.main.doctors_list.appointment
 import androidx.lifecycle.*
 import com.example.doctors.main.doctors_list.data.DoctorsRecordRemoteDataSource
 import com.example.doctors.main.doctors_list.data.PlaceToWrite
-import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -30,7 +29,7 @@ class AppointmentViewModel(
         placeToWrite.isTaken = true
         placeToWrite.idPatient = userId
 
-        val task = db.updatePlace(placeToWrite)
+        val task = db.createTakenPlace(placeToWrite)
 
         task.addOnCompleteListener {}
         task.addOnFailureListener {showMessage("Произошла ошибка. попробуйте снова")}

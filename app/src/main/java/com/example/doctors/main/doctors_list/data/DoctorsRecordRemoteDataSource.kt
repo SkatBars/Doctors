@@ -1,5 +1,6 @@
 package com.example.doctors.main.doctors_list.data
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.doctors.COUNT_PLACES_FOR_WRITE_OF_DAY
@@ -35,65 +36,66 @@ class DoctorsRecordRemoteDataSource(private val firestore: FirebaseFirestore) {
     }
 
 
-    suspend fun updatePlace(placeToWrite: PlaceToWrite) = withContext(dispatcher) {
+    suspend fun createTakenPlace(placeToWrite: PlaceToWrite) = withContext(dispatcher) {
         return@withContext firestore
             .collection("doctors").document(placeToWrite.idDoctor)
             .collection("years").document(placeToWrite.date.year.toString())
             .collection("months").document(placeToWrite.date.month.toString())
-            .collection("days").document(placeToWrite.date.day.toString())
+            .collection("days").document(placeToWrite.date.date.toString())
             .collection("places").document(placeToWrite.number.toString())
-            .update("idPatient", placeToWrite.idPatient)
+            .set(placeToWrite)
     }
 
     fun enableListenerCollection(doctor: String, currentDate: Date) {
 
-        val tempList = mutableListOf<PlaceToWrite>()
+        val query = firestore
+            .collection("doctors").document(doctor)
+            .collection("years").document(currentDate.year.toString())
+            .collection("months").document(currentDate.month.toString())
+            .collection("days").document(currentDate.date.toString())
+            .collection("places").orderBy("number")
 
-        for (i in 0 until COUNT_PLACES_FOR_WRITE_OF_DAY) {
-            tempList.add(PlaceToWrite(
-                doctor, "", i,
-                getTimeByNumber(i), currentDate, false
-            ))
-        }
 
-        _places.value = tempList
-
-    val query = firestore
-        .collection("doctors").document(doctor)
-        .collection("years").document(currentDate.year.toString())
-        .collection("months").document(currentDate.month.toString())
-        .collection("days").document(currentDate.date.toString())
-        .collection("places").orderBy("number")
-
-    snapshotListener = query.addSnapshotListener{ value, error ->
-        if (value != null) {
-            if (value.size() == COUNT_PLACES_FOR_WRITE_OF_DAY) {
-                _places.value = value.toObjects(PlaceToWrite::class.java)
-            } else {
-                val currentList = value.toObjects(PlaceToWrite::class.java)
-                val tempList = _places.value!!
-
-                for (place in currentList) {
-                    tempList[place.number] = place
-                }
-
-                _places.value = tempList
+        snapshotListener = query.addSnapshotListener { value, error ->
+            if (value != null) {
+                updateListPlaces(value, doctor, currentDate)
             }
         }
     }
-}
 
+    private fun updateListPlaces(value: QuerySnapshot, doctor: String, currentDate: Date) {
+        if (value.size() == COUNT_PLACES_FOR_WRITE_OF_DAY) {
+            _places.value = value.toObjects(PlaceToWrite::class.java)
+        } else {
+            val currentList = value.toObjects(PlaceToWrite::class.java)
 
-private fun getTimeByNumber(number: Int): String {
-    return if (number <= 3) {
-        "${number + 9}:00-${number + 10}:00"
-    }else {
-        "${number + 10}:00-${number + 11}:00"
+            val tempList = mutableListOf<PlaceToWrite>()
+
+            for (i in 0 until COUNT_PLACES_FOR_WRITE_OF_DAY) {
+                tempList.add(PlaceToWrite(
+                    doctor, "", i,
+                    getTimeByNumber(i), currentDate, false
+                ))
+            }
+
+            for (place in currentList) {
+                tempList[place.number] = place
+            }
+
+            _places.value = tempList
+        }
     }
-}
 
-fun disableListenerCollectionPlaces() {
-    snapshotListener.remove()
-}
+    private fun getTimeByNumber(number: Int): String {
+        return if (number <= 3) {
+            "${number + 9}:00-${number + 10}:00"
+        } else {
+            "${number + 10}:00-${number + 11}:00"
+        }
+    }
+
+    fun disableListenerCollectionPlaces() {
+        snapshotListener.remove()
+    }
 
 }
