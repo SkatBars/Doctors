@@ -20,10 +20,14 @@ class AppointmentAdapter(private val viewModel: AppointmentViewModel)
 
             @RequiresApi(Build.VERSION_CODES.M)
             fun bind(placeToWrite: PlaceToWrite, viewModel: AppointmentViewModel) {
-                binding.viewModel = viewModel
-                binding.place = placeToWrite
+                binding.time = placeToWrite.time
                 if (placeToWrite.isTaken) bindForTaken()
                 else bindForNotTaken()
+
+                binding.takePlaceBtn.setOnClickListener {
+                    viewModel.takePlace(placeToWrite)
+                }
+
             }
 
             @RequiresApi(Build.VERSION_CODES.M)

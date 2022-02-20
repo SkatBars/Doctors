@@ -4,11 +4,8 @@
 
     <data>
         <variable
-            name="place"
-            type="com.example.doctors.main.doctors_list.data.PlaceToWrite" />
-        <variable
-            name="viewModel"
-            type="com.example.doctors.main.doctors_list.appointment.AppointmentViewModel" />
+            name="time"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="@{place.time}"
+            android:text="@{time}"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -47,7 +44,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:onClick="@{(view) -> viewModel.takePlace(place)}"
             android:paddingLeft="0dp"
             android:text="@string/take_place"
             android:textColor="@color/white"
