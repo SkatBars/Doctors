@@ -3,10 +3,13 @@ package com.example.doctors.main.doctors_list.appointment
 import androidx.lifecycle.*
 import com.example.doctors.main.doctors_list.data.DoctorsRecordRemoteDataSource
 import com.example.doctors.main.doctors_list.data.PlaceToWrite
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.launch
 import java.util.*
 
-class AppointmentViewModel(private val db: DoctorsRecordRemoteDataSource) : ViewModel() {
+class AppointmentViewModel(
+    private val db: DoctorsRecordRemoteDataSource) : ViewModel() {
+    private lateinit var userId: String
     var places: LiveData<MutableList<PlaceToWrite>> = db.places
 
     private val _showMessage = MutableLiveData<String>()
@@ -19,7 +22,14 @@ class AppointmentViewModel(private val db: DoctorsRecordRemoteDataSource) : View
 
     fun disableListenerCollectionPlaces() = db.disableListenerCollectionPlaces()
 
-    fun updatePlace(placeToWrite: PlaceToWrite) = viewModelScope.launch {
+    fun initUser(userId: String) {
+        this.userId = userId
+    }
+
+    fun takePlace(placeToWrite: PlaceToWrite) = viewModelScope.launch {
+        placeToWrite.isTaken = true
+        placeToWrite.idPatient = userId
+
         val task = db.updatePlace(placeToWrite)
 
         task.addOnCompleteListener {}
