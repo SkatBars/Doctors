@@ -9,16 +9,16 @@ import java.util.*
 class AppointmentViewModel(
     private val db: DoctorsRecordRemoteDataSource) : ViewModel() {
     private lateinit var userId: String
-    lateinit var doctorId: String
 
     var places: LiveData<MutableList<PlaceToWrite>> = db.places
+    lateinit var doctorId: String
 
     private val _showMessage = MutableLiveData<String>()
     val showMessage: LiveData<String>
         get() = _showMessage
 
-    fun enableListenerCollection(doctor: String, year: Int, month: Int, day: Int) {
-        db.enableListenerCollection(doctor, year, month, day)
+    fun enableListenerCollection(year: Int, month: Int, day: Int) {
+        db.enableListenerCollection(doctorId, year, month, day)
     }
 
     fun disableListenerCollectionPlaces() = db.disableListenerCollectionPlaces()
