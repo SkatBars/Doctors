@@ -71,6 +71,32 @@ class AppointmentFragment : Fragment() {
         })
     }
 
+    private fun configureListener() {
+        binding.dateEditBtn.setOnClickListener {
+            showDatePickerDialog()
+        }
+    }
+
+    private fun showDatePickerDialog() {
+        val picker = MaterialDatePicker.Builder.datePicker().build()
+        picker.show(requireActivity().supportFragmentManager, "")
+        picker.addOnPositiveButtonClickListener {
+            val calendar = Calendar.getInstance()
+            calendar.timeInMillis = it
+
+            binding.currentDate = calendar.time
+
+            viewModel.disableListenerCollectionPlaces()
+
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH) + 1
+            val day = calendar.get(Calendar.DATE)
+
+            showSnackbar("$year $month $day")
+            viewModel.enableListenerCollection(year, month, day)
+        }
+    }
+
     private fun showSnackbar(message: String) {
         Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
