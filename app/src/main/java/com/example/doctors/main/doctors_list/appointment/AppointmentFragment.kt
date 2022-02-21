@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.doctors.R
 import com.example.doctors.databinding.AppointmentFragmentBinding
 import com.example.doctors.main.doctors_list.data.PlaceToWrite
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
@@ -46,6 +47,7 @@ class AppointmentFragment : Fragment() {
             arguments?.getString("doctorId")!!
         )
 
+        configureListener()
         configureRecyclerView()
         configureObserverLiveData()
         return binding.root
@@ -53,7 +55,17 @@ class AppointmentFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.enableListenerCollection(viewModel.doctorId, 2022, 2, 20)
+
+        val calendar = Calendar.getInstance()
+        binding.currentDate = calendar.time
+
+        with(calendar) {
+            viewModel.enableListenerCollection(
+                get(Calendar.YEAR),
+                get(Calendar.MONTH),
+                get(Calendar.DATE)
+            )
+        }
     }
 
     override fun onPause() {
