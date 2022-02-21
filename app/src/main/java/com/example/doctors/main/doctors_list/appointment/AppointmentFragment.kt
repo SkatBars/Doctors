@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.doctors.R
 import com.example.doctors.databinding.AppointmentFragmentBinding
 import com.example.doctors.main.doctors_list.data.PlaceToWrite
 import com.google.android.material.snackbar.Snackbar
@@ -21,11 +24,22 @@ class AppointmentFragment : Fragment() {
     private lateinit var  binding: AppointmentFragmentBinding
     private lateinit var myAdapter: AppointmentAdapter
 
+    private val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            findNavController().navigate(R.id.action_appointmentFragment2_to_doctorsLst)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = AppointmentFragmentBinding.inflate(inflater)
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            callback
+        )
 
         viewModel.initVariable(
             arguments?.getString("userId")!!,

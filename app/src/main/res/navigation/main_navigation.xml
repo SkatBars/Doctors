@@ -36,5 +36,9 @@
     <fragment
         android:id="@+id/appointmentFragment2"
         android:name="com.example.doctors.main.doctors_list.appointment.AppointmentFragment"
-        android:label="AppointmentFragment" />
+        android:label="AppointmentFragment" >
+        <action
+            android:id="@+id/action_appointmentFragment2_to_doctorsLst"
+            app:destination="@id/doctorsLst" />
+    </fragment>
 </navigation>
