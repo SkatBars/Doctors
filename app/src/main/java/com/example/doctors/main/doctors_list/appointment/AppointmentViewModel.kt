@@ -34,7 +34,7 @@ class AppointmentViewModel(
 
         val task = db.createTakenPlace(placeToWrite)
 
-        task.addOnCompleteListener {showMessage(placeToWrite.idDoctor)}
+        task.addOnCompleteListener {}
         task.addOnFailureListener {showMessage("Произошла ошибка. попробуйте снова")}
         task.addOnCanceledListener {showMessage("Произошла ошибка. попробуйте снова")}
     }

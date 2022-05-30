@@ -104,7 +104,6 @@ class AppointmentFragment : Fragment() {
             val month = calendar.get(Calendar.MONTH) + 1
             val day = calendar.get(Calendar.DATE)
 
-            showSnackbar("$year $month $day")
             viewModel.enableListenerCollection(year, month, day)
         }
     }
