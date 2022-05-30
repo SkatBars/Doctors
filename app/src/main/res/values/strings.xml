@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Doctors</string>
+    <string name="profile">Профиль</string>
+    <string name="history">История</string>
+    <string name="choose_doctor">Выбор доктора</string>
     <string name="title">Best online \n Doctors App.</string>
     <string name="description_splash">remgkfdmgdsfsdfdsfkmgkfdmgkfddkfvmkfdlmgvklfdmvkldfmklvmdfklvmdfkmvkdfmvkldfmvlkdfmvfdmkgmfdklgmkfdlkldfmgkldfmgklmrteklgmklfmbklvmcbklmcvklbmvcklmbklvcmb</string>
     <string name="start_splash">Начать</string>
