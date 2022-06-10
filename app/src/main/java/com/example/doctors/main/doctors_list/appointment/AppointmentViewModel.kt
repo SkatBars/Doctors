@@ -4,7 +4,6 @@ import androidx.lifecycle.*
 import com.example.doctors.main.doctors_list.data.DoctorsRecordRemoteDataSource
 import com.example.doctors.main.doctors_list.data.PlaceToWrite
 import kotlinx.coroutines.launch
-import java.util.*
 
 class AppointmentViewModel(
     private val db: DoctorsRecordRemoteDataSource) : ViewModel() {
@@ -18,7 +17,7 @@ class AppointmentViewModel(
         get() = _showMessage
 
     fun enableListenerCollection(year: Int, month: Int, day: Int) {
-        db.enableListenerCollection(doctorId, year, month, day)
+        db.enableListenerCollectionPlacces(doctorId, year, month, day)
     }
 
     fun disableListenerCollectionPlaces() = db.disableListenerCollectionPlaces()
