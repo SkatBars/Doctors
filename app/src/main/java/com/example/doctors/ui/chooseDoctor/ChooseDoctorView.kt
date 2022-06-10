@@ -7,10 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
@@ -73,7 +70,7 @@ fun ListDoctors(doctors : List<Doctor>, filterSample: String) {
 
 @Composable
 fun SearchDoctors(textState: MutableState<String>) {
-    TextField(
+    OutlinedTextField(
         value = textState.value,
         onValueChange ={it -> textState.value = it},
         label = {Text("Введите фамилию доктора")},
@@ -82,9 +79,14 @@ fun SearchDoctors(textState: MutableState<String>) {
             contentDescription = "search"
             )
         },
-        leadingIcon = {
-
-        }
+        shape = RoundedCornerShape(16.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 8.dp),
+        colors = TextFieldDefaults.textFieldColors(
+            backgroundColor = MaterialTheme.colors.surface,
+            disabledTrailingIconColor = MaterialTheme.colors.primaryVariant
+        )
     )
 }
 
