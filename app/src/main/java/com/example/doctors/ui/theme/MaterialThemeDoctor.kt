@@ -6,18 +6,23 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val darkPallete = darkColors(
     primary = Orange200,
     primaryVariant = Orange700,
-    background = Gray700
+    background = Gray700,
+    surface = Gray500
 )
 
 private val lightPallete = lightColors(
     primary = Blue500,
     primaryVariant = Blue700,
-    surface = white,
+    secondary = Orange200,
+    secondaryVariant = Orange700,
+    background = Gray200,
+    surface = Color.White
 
 )
 
