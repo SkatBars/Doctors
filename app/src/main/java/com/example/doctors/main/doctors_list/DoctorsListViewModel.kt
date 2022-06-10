@@ -5,11 +5,12 @@ import com.example.doctors.authorization.data.FirebaseAuthDataSource
 import com.example.doctors.main.doctors_list.data.Doctor
 import com.example.doctors.main.doctors_list.data.DoctorsRecordRemoteDataSource
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 
 class DoctorsListViewModel(
-    private val myAuth : FirebaseAuthDataSource,
-    private val db: DoctorsRecordRemoteDataSource
+    private val myAuth : FirebaseAuthDataSource = FirebaseAuthDataSource(),
+    private val db: DoctorsRecordRemoteDataSource = DoctorsRecordRemoteDataSource()
     ) : ViewModel() {
 
     private val _openAppointmentFragment = MutableLiveData<String>()
@@ -20,9 +21,9 @@ class DoctorsListViewModel(
     val openSignInFragment: LiveData<Boolean>
         get() = _openSignInFragment
 
-    private val _options = MutableLiveData<FirestoreRecyclerOptions<Doctor>?>(null)
-    val options: LiveData<FirestoreRecyclerOptions<Doctor>?>
-        get() = _options
+    private val _doctors = db.doctors
+    val doctors: LiveData<MutableList<Doctor>>
+        get() = _doctors
 
 
     fun getUser() = myAuth.getUser()
@@ -38,19 +39,27 @@ class DoctorsListViewModel(
         _openAppointmentFragment.value = doctorId
     }
 
-    fun getOptionsForDoctorsList(
+    fun getOptionsForDoctorsList (
         lifecycleOwner: LifecycleOwner,
         value: String = "rating",
         reverse: Boolean = false
-    ) = viewModelScope.launch {
-        val task = db.getQueryDoctors(value, reverse)
+    )
+    {
+        /*val task = db.getQueryDoctors(value, reverse)
             task.addOnCompleteListener {
                 _options.value =  FirestoreRecyclerOptions
                     .Builder<Doctor>()
                     .setQuery(task.result.query, Doctor::class.java)
                     .setLifecycleOwner(lifecycleOwner)
                     .build()
-            }
+            }*/
+
     }
 
+
+    fun enableListenerCollection( keySort: String = "rating", reverse: Boolean = false ) {
+        db.enableListenerCollectionDoctor(keySort = keySort, reverse = reverse )
+    }
+
+    fun disableListenerCollectionPlaces() = db.disableListenerCollectionDoctors()
 }

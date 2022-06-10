@@ -9,7 +9,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class FirebaseAuthDataSource(private val auth: FirebaseAuth) {
+class FirebaseAuthDataSource(private val auth: FirebaseAuth = FirebaseAuth.getInstance()) {
 
     private val ioDispatcher = Dispatchers.IO
 

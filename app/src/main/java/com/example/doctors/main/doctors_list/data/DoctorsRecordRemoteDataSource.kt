@@ -1,6 +1,5 @@
 package com.example.doctors.main.doctors_list.data
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.doctors.COUNT_PLACES_FOR_WRITE_OF_DAY
@@ -11,51 +10,55 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.time.Year
-import java.util.*
 
-class DoctorsRecordRemoteDataSource(private val firestore: FirebaseFirestore) {
+class DoctorsRecordRemoteDataSource(private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()) {
 
     private val _places = MutableLiveData<MutableList<PlaceToWrite>>()
     val places: LiveData<MutableList<PlaceToWrite>>
         get() = _places
 
+    private val _doctors = MutableLiveData<MutableList<Doctor>>()
+    val doctors: LiveData<MutableList<Doctor>>
+        get() = _doctors
+
     private val dispatcher = Dispatchers.IO
 
-    private lateinit var snapshotListener: ListenerRegistration
+    private lateinit var snapshotListenerPlaces: ListenerRegistration
+    private lateinit var snapshotListenerDoctors: ListenerRegistration
 
-    suspend fun getQueryDoctors(
-        keySort: String,
-        reverse: Boolean
-    ): Task<QuerySnapshot> = withContext(dispatcher) {
-        return@withContext if (reverse) {
+    fun getQueryDoctors(keySort: String, reverse: Boolean ): Query {
+        return if (reverse) {
             firestore.collection("doctors")
-                .orderBy(keySort, Query.Direction.DESCENDING).get()
+                .orderBy(keySort, Query.Direction.DESCENDING)
         } else {
-            firestore.collection("doctors").orderBy(keySort, Query.Direction.ASCENDING).get()
+            firestore.collection("doctors").orderBy(keySort, Query.Direction.ASCENDING)
         }
     }
 
-
-    suspend fun createTakenPlace(placeToWrite: PlaceToWrite) = withContext(dispatcher) {
-        return@withContext firestore
-            .collection("doctors").document(placeToWrite.idDoctor)
-            .collection("places").document(placeToWrite.id)
-            .set(placeToWrite)
+    fun enableListenerCollectionDoctor(keySort: String, reverse: Boolean) {
+        val query = getQueryDoctors(keySort = keySort, reverse = reverse)
+        snapshotListenerDoctors = query.addSnapshotListener { value, error ->
+            _doctors.value = value?.toObjects(Doctor::class.java)
+        }
     }
 
-    fun enableListenerCollection(doctor: String, year: Int, month: Int, day: Int) {
+    fun enableListenerCollectionPlacces(doctor: String, year: Int, month: Int, day: Int) {
 
         val query = firestore
             .collection("doctors").document(doctor)
             .collection("places").whereEqualTo("year", year)
             .whereEqualTo   ("month", month).whereEqualTo("day", day)
 
-
-
-        snapshotListener = query.addSnapshotListener { value, error ->
+        snapshotListenerPlaces = query.addSnapshotListener { value, error ->
             updateListPlaces(value, doctor, year, month, day)
         }
+    }
+
+    suspend fun createTakenPlace(placeToWrite: PlaceToWrite) = withContext(dispatcher) {
+        return@withContext firestore
+            .collection("doctors").document(placeToWrite.idDoctor)
+            .collection("places").document(placeToWrite.id)
+            .set(placeToWrite)
     }
 
     private fun updateListPlaces(
@@ -97,7 +100,11 @@ class DoctorsRecordRemoteDataSource(private val firestore: FirebaseFirestore) {
     }
 
     fun disableListenerCollectionPlaces() {
-        snapshotListener.remove()
+        snapshotListenerPlaces.remove()
+    }
+
+    fun disableListenerCollectionDoctors() {
+        snapshotListenerDoctors.remove()
     }
 
 }
