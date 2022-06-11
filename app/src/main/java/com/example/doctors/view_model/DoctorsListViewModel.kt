@@ -34,12 +34,6 @@ class DoctorsListViewModel(
         }
     }
 
-    fun openAppointmentFragment(doctorId: String) {
-        _openAppointmentFragment.value = doctorId
-    }
-
-
-
     fun enableListenerCollection(keyForSort: KeyForSort) {
         db.enableListenerCollectionDoctor(keySort = keyForSort.property, reverse = keyForSort.isReverse)
     }
