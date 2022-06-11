@@ -15,3 +15,14 @@ sealed class Screen(
     object History : Screen("history", R.string.history, R.drawable.ic_history)
     object ChooseDoctor : Screen("chooseDoctor", R.string.choose_doctor, R.drawable.ic_info)
 }
+
+sealed class KeyForSort(
+    val text: String,
+    val property: String,
+    val isReverse: Boolean
+) {
+    object RatingAscending : KeyForSort("По возрастанию рейтинга", "rating", false)
+    object RatingDescending : KeyForSort("По убыванию рейтинга", "rating", true)
+    object PriceAscending : KeyForSort("По возрастанию цены", "avaragePrice", false)
+    object PriceDescending : KeyForSort("По убыванию цены", "avaragePrice", true)
+}

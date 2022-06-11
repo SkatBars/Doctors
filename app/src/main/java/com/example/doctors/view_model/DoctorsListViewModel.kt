@@ -1,6 +1,7 @@
 package com.example.doctors.view_model
 
 import androidx.lifecycle.*
+import com.example.doctors.KeyForSort
 import com.example.doctors.datebase.FirebaseAuthDataSource
 import com.example.doctors.entities.Doctor
 import com.example.doctors.datebase.DoctorsRecordRemoteDataSource
@@ -37,26 +38,10 @@ class DoctorsListViewModel(
         _openAppointmentFragment.value = doctorId
     }
 
-    fun getOptionsForDoctorsList (
-        lifecycleOwner: LifecycleOwner,
-        value: String = "rating",
-        reverse: Boolean = false
-    )
-    {
-        /*val task = db.getQueryDoctors(value, reverse)
-            task.addOnCompleteListener {
-                _options.value =  FirestoreRecyclerOptions
-                    .Builder<Doctor>()
-                    .setQuery(task.result.query, Doctor::class.java)
-                    .setLifecycleOwner(lifecycleOwner)
-                    .build()
-            }*/
-
-    }
 
 
-    fun enableListenerCollection( keySort: String = "rating", reverse: Boolean = false ) {
-        db.enableListenerCollectionDoctor(keySort = keySort, reverse = reverse )
+    fun enableListenerCollection(keyForSort: KeyForSort) {
+        db.enableListenerCollectionDoctor(keySort = keyForSort.property, reverse = keyForSort.isReverse)
     }
 
     fun disableListenerCollectionPlaces() = db.disableListenerCollectionDoctors()
