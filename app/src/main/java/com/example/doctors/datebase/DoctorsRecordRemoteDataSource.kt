@@ -1,9 +1,10 @@
-package com.example.doctors.main.doctors_list.data
+package com.example.doctors.datebase
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.doctors.COUNT_PLACES_FOR_WRITE_OF_DAY
-import com.google.android.gms.tasks.Task
+import com.example.doctors.entities.Doctor
+import com.example.doctors.entities.PlaceToWrite
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query

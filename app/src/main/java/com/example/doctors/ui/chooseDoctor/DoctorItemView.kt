@@ -16,10 +16,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.doctors.R
-import com.example.doctors.main.doctors_list.data.Doctor
+import com.example.doctors.entities.Doctor
 import com.skydoves.landscapist.glide.GlideImage
-
-import org.intellij.lang.annotations.JdkConstants
 
 @Composable
 fun DoctorItem(doctor: Doctor) {

@@ -1,10 +1,10 @@
-package com.example.doctors.authorization.viewModel
+package com.example.doctors.view_model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.doctors.authorization.data.FirebaseAuthDataSource
+import com.example.doctors.datebase.FirebaseAuthDataSource
 import kotlinx.coroutines.launch
 
 class AuthorizationViewModel(private val db: FirebaseAuthDataSource) : ViewModel() {

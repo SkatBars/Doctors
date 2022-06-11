@@ -1,4 +1,4 @@
-package com.example.doctors.authorization.data
+package com.example.doctors.datebase
 
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task

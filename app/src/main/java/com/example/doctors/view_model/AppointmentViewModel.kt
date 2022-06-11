@@ -1,12 +1,13 @@
-package com.example.doctors.main.doctors_list.appointment
+package com.example.doctors.view_model
 
 import androidx.lifecycle.*
-import com.example.doctors.main.doctors_list.data.DoctorsRecordRemoteDataSource
-import com.example.doctors.main.doctors_list.data.PlaceToWrite
+import com.example.doctors.datebase.DoctorsRecordRemoteDataSource
+import com.example.doctors.entities.PlaceToWrite
 import kotlinx.coroutines.launch
 
 class AppointmentViewModel(
-    private val db: DoctorsRecordRemoteDataSource) : ViewModel() {
+    private val db: DoctorsRecordRemoteDataSource
+) : ViewModel() {
     private lateinit var userId: String
 
     var places: LiveData<MutableList<PlaceToWrite>> = db.places

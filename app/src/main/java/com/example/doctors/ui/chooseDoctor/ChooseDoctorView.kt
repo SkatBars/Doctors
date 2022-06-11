@@ -1,8 +1,5 @@
 package com.example.doctors.ui
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -11,21 +8,14 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.doctors.R
-import com.example.doctors.main.doctors_list.DoctorsListViewModel
-import com.example.doctors.main.doctors_list.data.Doctor
-import com.skydoves.landscapist.CircularReveal
-import com.skydoves.landscapist.coil.CoilImage
-import com.skydoves.landscapist.glide.GlideImage
-
+import com.example.doctors.view_model.DoctorsListViewModel
+import com.example.doctors.entities.Doctor
 
 
 @Composable

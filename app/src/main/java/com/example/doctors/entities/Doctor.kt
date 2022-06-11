@@ -1,4 +1,4 @@
-package com.example.doctors.main.doctors_list.data
+package com.example.doctors.entities
 
 data class Doctor(
     val id: String = "",    
