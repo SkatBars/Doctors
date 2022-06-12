@@ -1,10 +1,10 @@
 package com.example.doctors.view_model
 
 import androidx.lifecycle.*
-import com.example.doctors.KeyForSort
 import com.example.doctors.datebase.FirebaseAuthDataSource
 import com.example.doctors.entities.Doctor
 import com.example.doctors.datebase.DoctorsRecordRemoteDataSource
+import com.example.doctors.ui.views.doctors.chooseDoctor.KeyForSort
 import kotlinx.coroutines.launch
 
 class DoctorsListViewModel(

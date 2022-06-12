@@ -2,10 +2,7 @@ package com.example.doctors.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,12 +12,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.doctors.DoctorsScreen
 import com.example.doctors.R
 import com.example.doctors.entities.Doctor
 import com.skydoves.landscapist.glide.GlideImage
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun DoctorItem(doctor: Doctor) {
+fun DoctorItem(doctor: Doctor, navController: NavController) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -28,7 +28,9 @@ fun DoctorItem(doctor: Doctor) {
             .padding(start = 8.dp, end = 16.dp, top = 8.dp),
 
         shape = RoundedCornerShape(24.dp),
-        backgroundColor = MaterialTheme.colors.surface
+        backgroundColor = MaterialTheme.colors.surface,
+        onClick = {navController.navigate(DoctorsScreen.PlaceToWrite.route)}
+
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Avatar(uriImage = doctor.urlAvatar)

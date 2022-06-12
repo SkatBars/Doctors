@@ -13,15 +13,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.doctors.KeyForSort
+import androidx.navigation.NavController
 import com.example.doctors.R
 import com.example.doctors.view_model.DoctorsListViewModel
 import com.example.doctors.entities.Doctor
-
+import com.example.doctors.ui.views.doctors.chooseDoctor.KeyForSort
+import com.example.doctors.ui.views.doctors.chooseDoctor.keysForSort
 
 
 @Composable
-fun ChooseDoctor() {
+fun ChooseDoctor(navController: NavController) {
     Column(Modifier.padding(top = 32.dp, start = 8.dp)) {
         Title()
         val viewModel: DoctorsListViewModel = viewModel()
@@ -30,15 +31,10 @@ fun ChooseDoctor() {
             viewModel.enableListenerCollection(KeyForSort.RatingDescending)
         }
 
+        val doctors: List<Doctor> by viewModel.doctors.observeAsState(listOf())
+
         val textState = remember { mutableStateOf("") }
         SearchDoctors(textState = textState)
-
-        val keysForSort = listOf(
-            KeyForSort.RatingAscending,
-            KeyForSort.RatingDescending,
-            KeyForSort.PriceAscending,
-            KeyForSort.PriceDescending
-        )
 
         MySpinner(
             items = keysForSort,
@@ -51,8 +47,7 @@ fun ChooseDoctor() {
             }
         )
 
-        val doctors: List<Doctor> by viewModel.doctors.observeAsState(listOf())
-        ListDoctors(doctors = doctors, filterSample = textState.value)
+        ListDoctors(doctors = doctors, filterSample = textState.value, navController = navController)
     }
 }
 
@@ -69,12 +64,12 @@ fun Title() {
 }
 
 @Composable
-fun ListDoctors(doctors : List<Doctor>, filterSample: String) {
+fun ListDoctors(doctors: List<Doctor>, filterSample: String, navController: NavController) {
     LazyColumn {
         items(doctors.filter { it ->
             it.name.contains(other = filterSample, ignoreCase = true)
         }, key = {it.id}) { doctor ->
-            DoctorItem(doctor = doctor)
+            DoctorItem(doctor = doctor, navController = navController)
         }
     }
 }
