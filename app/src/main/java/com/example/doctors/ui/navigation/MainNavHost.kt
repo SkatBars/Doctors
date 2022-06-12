@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.doctors.DoctorsScreen
 import com.example.doctors.Screen
+import com.example.doctors.entities.Doctor
 import com.example.doctors.ui.ChooseDoctor
 import com.example.doctors.ui.HistoryView
 import com.example.doctors.ui.PlaceToWriteView
@@ -32,6 +33,11 @@ fun MainNavHost(
 private fun NavGraphBuilder.doctors(navController: NavController) {
     navigation(route = Screen.Doctors.route, startDestination = DoctorsScreen.ChooseDoctor.route) {
         composable(DoctorsScreen.ChooseDoctor.route) { ChooseDoctor(navController) }
-        composable(DoctorsScreen.PlaceToWrite.route) { PlaceToWriteView() }
+        composable(DoctorsScreen.PlaceToWrite.route) {
+            val currentDoctor = navController.previousBackStackEntry
+                ?.arguments?.getParcelable<Doctor>("current_doctor")
+
+            currentDoctor?.let { it1 -> PlaceToWriteView(it1) }
+        }
     }
 }

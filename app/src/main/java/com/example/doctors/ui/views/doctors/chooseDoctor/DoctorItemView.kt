@@ -29,7 +29,10 @@ fun DoctorItem(doctor: Doctor, navController: NavController) {
 
         shape = RoundedCornerShape(24.dp),
         backgroundColor = MaterialTheme.colors.surface,
-        onClick = {navController.navigate(DoctorsScreen.PlaceToWrite.route)}
+        onClick = {
+            navController.currentBackStackEntry?.arguments?.putParcelable("current_doctor", doctor)
+            navController.navigate(DoctorsScreen.PlaceToWrite.route)
+        }
 
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {

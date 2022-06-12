@@ -7,9 +7,6 @@ import com.example.doctors.entities.Doctor
 import com.example.doctors.entities.PlaceToWrite
 
 @Composable
-fun PlaceToWriteView() {
-    Text(
-        text = "PlaceToWrite",
-        fontSize = 32.sp
-    )
+fun PlaceToWriteView(doctor: Doctor) {
+    Text(text = doctor.name)
 }
