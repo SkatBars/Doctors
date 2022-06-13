@@ -12,5 +12,5 @@ data class PlaceToWrite(
     val day: Int = 20,
     @field:JvmField
     var isTaken: Boolean = false,
-    val id: String = UUID.randomUUID().toString()
+    var id: String = UUID.randomUUID().toString()
 )

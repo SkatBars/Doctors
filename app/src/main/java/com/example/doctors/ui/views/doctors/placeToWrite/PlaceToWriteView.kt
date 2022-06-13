@@ -1,47 +1,59 @@
 package com.example.doctors.ui.views.doctors.placeToWrite
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.doctors.DoctorsScreen
 import com.example.doctors.R
 import com.example.doctors.entities.Doctor
 import com.example.doctors.entities.PlaceToWrite
 import com.example.doctors.view_model.AppointmentViewModel
-import java.text.SimpleDateFormat
 import java.util.*
 
 @Composable
 fun PlaceToWriteView(doctor: Doctor, navController: NavController) {
     val viewModel: AppointmentViewModel = viewModel()
 
-    Scaffold(topBar = {
+    Column {
         TopAppBarPlaceToWrite(doctorName = doctor.name, backAction = {
             navController.navigate(DoctorsScreen.ChooseDoctor.route)
         })
-    }){
-        val currentDate = remember { mutableStateOf(Calendar.getInstance()) }
-        ChangeDate(currentDate, viewModel = viewModel)
+
+        Column {
+            val currentDate = remember { mutableStateOf(Calendar.getInstance()) }
+            viewModel.enableListenerCollection(currentDate.value, doctorId = doctor.id)
+
+            updateDateForPlaces(currentDate = currentDate, viewModel, doctor.id)
+            ChangeDate(currentDate, viewModel = viewModel)
+
+            val places =
+                viewModel.places.observeAsState(listOf()) as MutableState<List<PlaceToWrite>>
+            ListPlaces(places = places, viewModel = viewModel)
+        }
     }
 }
 
 
+fun updateDateForPlaces(
+    currentDate: MutableState<Calendar>,
+    appointmentViewModel: AppointmentViewModel,
+    doctorId: String
+) {
+    appointmentViewModel.disableListenerCollectionPlaces()
+    appointmentViewModel.enableListenerCollection(currentDate.value, doctorId = doctorId)
+}
 
 @Composable
 private fun TopAppBarPlaceToWrite(doctorName: String, backAction: () -> Unit) {
@@ -63,11 +75,11 @@ private fun TopAppBarPlaceToWrite(doctorName: String, backAction: () -> Unit) {
     }
 }
 
-
-
 @Composable
-private fun ListPlaces(places: List<PlaceToWrite>, viewModel: AppointmentViewModel) {
+private fun ListPlaces(places: MutableState<List<PlaceToWrite>>, viewModel: AppointmentViewModel) {
     LazyColumn {
-
+            items(places.value) { place ->
+                PlaceItem(place = place, viewModel = viewModel)
+            }
         }
     }

@@ -5,6 +5,7 @@ import com.example.doctors.datebase.DoctorsRecordRemoteDataSource
 import com.example.doctors.entities.PlaceToWrite
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
+import java.util.*
 
 class AppointmentViewModel(
     private val db: DoctorsRecordRemoteDataSource = DoctorsRecordRemoteDataSource(FirebaseFirestore.getInstance())
@@ -12,26 +13,30 @@ class AppointmentViewModel(
     private lateinit var userId: String
 
     var places: LiveData<MutableList<PlaceToWrite>> = db.places
-    lateinit var doctorId: String
 
     private val _showMessage = MutableLiveData<String>()
     val showMessage: LiveData<String>
         get() = _showMessage
 
-    fun enableListenerCollection(year: Int, month: Int, day: Int) {
-        db.enableListenerCollectionPlacces(doctorId, year, month, day)
+    fun enableListenerCollection(currentDate: Calendar, doctorId: String) {
+        db.enableListenerCollectionPlacces(
+            doctorId,
+            currentDate.get(Calendar.YEAR),
+            currentDate.get(Calendar.MONTH),
+            currentDate.get(Calendar.DATE),
+        )
     }
 
     fun disableListenerCollectionPlaces() = db.disableListenerCollectionPlaces()
 
     fun initVariable(userId: String, doctorId: String) {
         this.userId = userId
-        this.doctorId = doctorId
+        //this.doctorId = doctorId
     }
 
     fun takePlace(placeToWrite: PlaceToWrite) = viewModelScope.launch {
         placeToWrite.isTaken = true
-        placeToWrite.idPatient = userId
+        placeToWrite.idPatient = "com.google.firebase.auth.internal.zzx@116113010"
 
         val task = db.createTakenPlace(placeToWrite)
 

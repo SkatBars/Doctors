@@ -48,7 +48,7 @@ class DoctorsRecordRemoteDataSource(private val firestore: FirebaseFirestore = F
         val query = firestore
             .collection("doctors").document(doctor)
             .collection("places").whereEqualTo("year", year)
-            .whereEqualTo   ("month", month).whereEqualTo("day", day)
+            .whereEqualTo  ("month", month).whereEqualTo("day", day)
 
         snapshotListenerPlaces = query.addSnapshotListener { value, error ->
             updateListPlaces(value, doctor, year, month, day)
