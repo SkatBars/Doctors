@@ -12,7 +12,7 @@ import com.example.doctors.Screen
 import com.example.doctors.entities.Doctor
 import com.example.doctors.ui.ChooseDoctor
 import com.example.doctors.ui.HistoryView
-import com.example.doctors.ui.PlaceToWriteView
+import com.example.doctors.ui.views.doctors.placeToWrite.PlaceToWriteView
 import com.example.doctors.ui.Profile
 
 @Composable
@@ -37,7 +37,7 @@ private fun NavGraphBuilder.doctors(navController: NavController) {
             val currentDoctor = navController.previousBackStackEntry
                 ?.arguments?.getParcelable<Doctor>("current_doctor")
 
-            currentDoctor?.let { it1 -> PlaceToWriteView(it1) }
+            currentDoctor?.let { it1 -> PlaceToWriteView(it1, navController) }
         }
     }
 }

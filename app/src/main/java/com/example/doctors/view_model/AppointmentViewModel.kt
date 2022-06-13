@@ -3,10 +3,11 @@ package com.example.doctors.view_model
 import androidx.lifecycle.*
 import com.example.doctors.datebase.DoctorsRecordRemoteDataSource
 import com.example.doctors.entities.PlaceToWrite
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 
 class AppointmentViewModel(
-    private val db: DoctorsRecordRemoteDataSource
+    private val db: DoctorsRecordRemoteDataSource = DoctorsRecordRemoteDataSource(FirebaseFirestore.getInstance())
 ) : ViewModel() {
     private lateinit var userId: String
 
