@@ -7,6 +7,9 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -33,7 +36,8 @@ fun PlaceToWriteView(doctor: Doctor, navController: NavController) {
             navController.navigate(DoctorsScreen.ChooseDoctor.route)
         })
     }){
-        ChangeDate(Calendar.getInstance(), viewModel = viewModel)
+        val currentDate = remember { mutableStateOf(Calendar.getInstance()) }
+        ChangeDate(currentDate, viewModel = viewModel)
     }
 }
 

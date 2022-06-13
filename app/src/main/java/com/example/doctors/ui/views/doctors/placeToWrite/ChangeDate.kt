@@ -23,23 +23,23 @@ import java.util.*
 
 
 @Composable
-fun ChangeDate(chooseDate: Calendar, viewModel: AppointmentViewModel) {
-    val listDate = remember { mutableStateOf<List<Calendar>>(emptyList())}
-
+fun ChangeDate(chooseDate: MutableState<Calendar>, viewModel: AppointmentViewModel) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(100.dp),
         elevation = 10.dp
     ) {
-        updateListCurrentDate(listDate = listDate,chooseDate = chooseDate)
-        ArrowsBtn(80.dp, Color.Gray, PaddingValues(end = 16.dp), listDate, chooseDate)
-        ListDate(listDate = listDate)
+
+        ArrowsBtn(80.dp, Color.Gray, PaddingValues(end = 16.dp), chooseDate)
+
+        ListDate(getListCurrentDate(chooseDate = chooseDate.value))
     }
 }
 
 @Composable
-private fun ListDate(listDate: MutableState<List<Calendar>>) {
+private fun ListDate(listDate: List<Calendar>) {
+
 
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -47,7 +47,7 @@ private fun ListDate(listDate: MutableState<List<Calendar>>) {
         modifier = Modifier.fillMaxHeight()
     ) {
         for (i in 0..2) {
-            Date(listDate.value[i], i == 1)
+            Date(listDate[i], i == 1)
         }
 
     }
@@ -81,8 +81,7 @@ private fun ArrowsBtn(
     size: Dp,
     tint: Color,
     padding: PaddingValues,
-    listDate: MutableState<List<Calendar>>,
-    chooseDate: Calendar
+    chooseDate: MutableState<Calendar>
 ) {
 
     Row(
@@ -90,10 +89,7 @@ private fun ArrowsBtn(
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        TextButton(onClick = {
-            chooseDate.add(Calendar.DATE, -1)
-            updateListCurrentDate(listDate = listDate, chooseDate = chooseDate)
-        }) {
+        TextButton(onClick = { changeDate(chooseDate, -1)}) {
             Icon(
                 imageVector = Icons.Filled.KeyboardArrowLeft,
                 contentDescription = "left",
@@ -105,10 +101,7 @@ private fun ArrowsBtn(
             )
         }
 
-        TextButton(onClick = {
-            chooseDate.add(Calendar.DATE, 1)
-            updateListCurrentDate(listDate = listDate, chooseDate = chooseDate)
-        }) {
+        TextButton(onClick = { changeDate(chooseDate, 1) }) {
             Icon(
                 imageVector = Icons.Filled.KeyboardArrowRight,
                 contentDescription = "right",
@@ -123,12 +116,19 @@ private fun ArrowsBtn(
     }
 }
 
-private fun updateListCurrentDate(listDate: MutableState<List<Calendar>>,chooseDate: Calendar) {
+private fun getListCurrentDate(chooseDate: Calendar): List<Calendar> {
     val previousDate = (chooseDate.clone() as Calendar)
     previousDate.add(Calendar.DATE, -1)
 
     val nextDate = (chooseDate.clone() as Calendar)
     nextDate.add(Calendar.DATE, 1)
 
-    listDate.value = listOf(previousDate, chooseDate, nextDate)
+    return listOf(previousDate, chooseDate, nextDate)
+}
+
+private fun changeDate(currentDate: MutableState<Calendar>, number: Int) {
+    val tempDate = Calendar.getInstance()
+    tempDate.time = currentDate.value.time
+    tempDate.add(Calendar.DATE, number)
+    currentDate.value = tempDate
 }
