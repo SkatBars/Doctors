@@ -11,9 +11,10 @@ import androidx.compose.ui.unit.sp
 import com.example.doctors.R
 import com.example.doctors.entities.PlaceToWrite
 import com.example.doctors.view_model.AppointmentViewModel
+import kotlinx.coroutines.Job
 
 @Composable
-fun PlaceItem(place: PlaceToWrite, viewModel: AppointmentViewModel) {
+fun PlaceItem(place: PlaceToWrite, onClick: (place: PlaceToWrite) -> Unit) {
 
     Card(elevation = 15.dp, modifier = Modifier
         .fillMaxWidth()
@@ -30,7 +31,7 @@ fun PlaceItem(place: PlaceToWrite, viewModel: AppointmentViewModel) {
             Column {
                 Text(text = place.time, fontSize = 24.sp, modifier = Modifier.padding(start = 8.dp))
                 TextButton(
-                    onClick = { /*TODO*/ },
+                    onClick = { onClick(place) },
                     enabled = place.isTaken.not()
                 ) {
                     Text(text = "Записаться")
