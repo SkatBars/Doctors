@@ -9,11 +9,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.doctors.DoctorsScreen
 import com.example.doctors.MainScreen
+import com.example.doctors.Screen
 import com.example.doctors.entities.Doctor
 import com.example.doctors.ui.ChooseDoctor
 import com.example.doctors.ui.HistoryView
 import com.example.doctors.ui.views.doctors.placeToWrite.PlaceToWriteView
 import com.example.doctors.ui.Profile
+import com.example.doctors.ui.views.auth.SignInView
 
 @Composable
 fun MainNavHost(
@@ -24,9 +26,9 @@ fun MainNavHost(
         navController = navController,
         startDestination = startDestination
     ) {
-        doctors(navController)
-        composable(MainScreen.History.route) { HistoryView() }
-        composable(MainScreen.Profile.route) { Profile() }
+        composable(Screen.SignIn.route) { SignInView() }
+        composable(Screen.Registration.route) { SignInView() }
+        main(navController)
     }
 }
 
@@ -39,5 +41,13 @@ private fun NavGraphBuilder.doctors(navController: NavController) {
 
             currentDoctor?.let { it1 -> PlaceToWriteView(it1, navController) }
         }
+    }
+}
+
+private fun NavGraphBuilder.main(navController: NavController) {
+    navigation(route = Screen.Main.route, startDestination = MainScreen.Doctors.route) {
+        doctors(navController)
+        composable(MainScreen.History.route) { HistoryView() }
+        composable(MainScreen.Profile.route) { Profile() }
     }
 }
