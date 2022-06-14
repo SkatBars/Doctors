@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.example.doctors.Screen
+import com.example.doctors.MainScreen
 import com.example.doctors.ui.navigation.BottomNavigationDoctor
 import com.example.doctors.ui.navigation.MainNavHost
 import com.example.doctors.ui.theme.MaterialThemeDoctor
@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Column(modifier = Modifier.padding(it)) {
 
-                        MainNavHost(navController = navController, startDestination = Screen.Doctors.route)
+                        MainNavHost(navController = navController, startDestination = MainScreen.Doctors.route)
                     }
                 }
             }

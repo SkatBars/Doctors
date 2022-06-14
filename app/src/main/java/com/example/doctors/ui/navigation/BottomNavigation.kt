@@ -10,13 +10,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.doctors.Screen
+import com.example.doctors.MainScreen
 
 @Composable
 fun BottomNavigationDoctor(navController: NavController) {
     val backStackEntryState = navController.currentBackStackEntryAsState()
     val currentDestination = backStackEntryState.value?.destination
-    val screens = listOf(Screen.Doctors, Screen.History, Screen.Profile)
+    val screens = listOf(MainScreen.Doctors, MainScreen.History, MainScreen.Profile)
 
 
     BottomNavigation {

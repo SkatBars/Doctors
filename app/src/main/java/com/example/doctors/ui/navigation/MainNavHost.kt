@@ -8,7 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.doctors.DoctorsScreen
-import com.example.doctors.Screen
+import com.example.doctors.MainScreen
 import com.example.doctors.entities.Doctor
 import com.example.doctors.ui.ChooseDoctor
 import com.example.doctors.ui.HistoryView
@@ -25,13 +25,13 @@ fun MainNavHost(
         startDestination = startDestination
     ) {
         doctors(navController)
-        composable(Screen.History.route) { HistoryView() }
-        composable(Screen.Profile.route) { Profile() }
+        composable(MainScreen.History.route) { HistoryView() }
+        composable(MainScreen.Profile.route) { Profile() }
     }
 }
 
 private fun NavGraphBuilder.doctors(navController: NavController) {
-    navigation(route = Screen.Doctors.route, startDestination = DoctorsScreen.ChooseDoctor.route) {
+    navigation(route = MainScreen.Doctors.route, startDestination = DoctorsScreen.ChooseDoctor.route) {
         composable(DoctorsScreen.ChooseDoctor.route) { ChooseDoctor(navController) }
         composable(DoctorsScreen.PlaceToWrite.route) {
             val currentDoctor = navController.previousBackStackEntry
