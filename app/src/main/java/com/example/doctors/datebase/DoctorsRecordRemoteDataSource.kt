@@ -1,5 +1,6 @@
 package com.example.doctors.datebase
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.doctors.COUNT_PLACES_FOR_WRITE_OF_DAY
@@ -12,7 +13,10 @@ import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class DoctorsRecordRemoteDataSource(private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()) {
+object DoctorsRecordRemoteDataSource {
+
+    @SuppressLint("StaticFieldLeak")
+    private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     private val _places = MutableLiveData<MutableList<PlaceToWrite>>()
     val places: LiveData<MutableList<PlaceToWrite>>

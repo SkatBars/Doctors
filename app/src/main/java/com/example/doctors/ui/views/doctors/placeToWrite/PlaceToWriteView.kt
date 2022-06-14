@@ -75,7 +75,7 @@ private fun TopAppBarPlaceToWrite(doctorName: String, backAction: () -> Unit) {
 
 @Composable
 private fun ListPlaces(places: MutableState<List<PlaceToWrite>>, viewModel: AppointmentViewModel) {
-    LazyColumn {
+    LazyColumn(Modifier.padding(top = 8.dp)) {
             items(places.value) { place ->
                 PlaceItem(place = place) { viewModel.takePlace(it) }
             }

@@ -39,8 +39,6 @@ fun PlaceItem(place: PlaceToWrite, onClick: (place: PlaceToWrite) -> Unit) {
 
             }
         }
-
-
     }
 
 

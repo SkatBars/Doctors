@@ -9,8 +9,8 @@ import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class FirebaseAuthDataSource(private val auth: FirebaseAuth = FirebaseAuth.getInstance()) {
-
+object FirebaseAuthDataSource {
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val ioDispatcher = Dispatchers.IO
 
     val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

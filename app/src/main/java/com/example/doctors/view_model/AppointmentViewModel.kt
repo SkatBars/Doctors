@@ -7,10 +7,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 import java.util.*
 
-class AppointmentViewModel(
-    private val db: DoctorsRecordRemoteDataSource = DoctorsRecordRemoteDataSource(FirebaseFirestore.getInstance())
-) : ViewModel() {
+class AppointmentViewModel() : ViewModel() {
     private lateinit var userId: String
+
+    private val db = DoctorsRecordRemoteDataSource
 
     var places: LiveData<MutableList<PlaceToWrite>> = db.places
 

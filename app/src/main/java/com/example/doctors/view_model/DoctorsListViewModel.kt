@@ -7,18 +7,10 @@ import com.example.doctors.datebase.DoctorsRecordRemoteDataSource
 import com.example.doctors.ui.views.doctors.chooseDoctor.KeyForSort
 import kotlinx.coroutines.launch
 
-class DoctorsListViewModel(
-    private val myAuth : FirebaseAuthDataSource = FirebaseAuthDataSource(),
-    private val db: DoctorsRecordRemoteDataSource = DoctorsRecordRemoteDataSource()
-    ) : ViewModel() {
+class DoctorsListViewModel() : ViewModel() {
 
-    private val _openAppointmentFragment = MutableLiveData<String>()
-    val openAppointmentFragment: LiveData<String>
-        get() = _openAppointmentFragment
-
-    private val _openSignInFragment = MutableLiveData<Boolean>(false)
-    val openSignInFragment: LiveData<Boolean>
-        get() = _openSignInFragment
+    private val myAuth = FirebaseAuthDataSource
+    private val db = DoctorsRecordRemoteDataSource
 
     private val _doctors = db.doctors
     val doctors: LiveData<MutableList<Doctor>>
@@ -30,7 +22,6 @@ class DoctorsListViewModel(
     fun signOut() {
         viewModelScope.launch {
             myAuth.signOut()
-            _openSignInFragment.value = true
         }
     }
 
