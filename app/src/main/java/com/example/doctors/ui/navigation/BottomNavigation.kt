@@ -11,6 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.doctors.MainScreen
+import com.example.doctors.Screen
 
 @Composable
 fun BottomNavigationDoctor(navController: NavController) {
@@ -18,22 +19,27 @@ fun BottomNavigationDoctor(navController: NavController) {
     val currentDestination = backStackEntryState.value?.destination
     val screens = listOf(MainScreen.Doctors, MainScreen.History, MainScreen.Profile)
 
+    if (currentDestination?.route.toString() != Screen.Registration.route &&
+        currentDestination?.route.toString() != Screen.SignIn.route) {
 
-    BottomNavigation {
-        screens.forEach { currentScreen ->
-            val labelString = stringResource(id = currentScreen.labelResourcesId)
+        BottomNavigation {
+            screens.forEach { currentScreen ->
+                val labelString = stringResource(id = currentScreen.labelResourcesId)
 
-            BottomNavigationItem(
-                selected = currentDestination?.hierarchy?.any {it.route == currentScreen.route} == true,
-                onClick = { navController.navigate(currentScreen.route) },
-                icon = {
-                    Icon(
-                    painter = painterResource(id = currentScreen.iconResourcesId),
-                    contentDescription = labelString
+                BottomNavigationItem(
+                    selected = currentDestination?.hierarchy?.any {it.route == currentScreen.route} == true,
+                    onClick = { navController.navigate(currentScreen.route) },
+                    icon = {
+                        Icon(
+                            painter = painterResource(id = currentScreen.iconResourcesId),
+                            contentDescription = labelString
+                        )
+                    },
+                    label = { Text(text = labelString) }
                 )
-                },
-                label = { Text(text = labelString) }
-            )
+            }
         }
+
     }
+
 }

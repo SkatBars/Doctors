@@ -1,4 +1,4 @@
-package com.example.doctors.ui.views.doctors.placeToWrite
+package com.example.doctors.ui.views.main.doctors.placeToWrite
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn

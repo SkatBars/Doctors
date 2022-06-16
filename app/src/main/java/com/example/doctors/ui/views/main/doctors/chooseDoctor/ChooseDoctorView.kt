@@ -17,8 +17,8 @@ import androidx.navigation.NavController
 import com.example.doctors.R
 import com.example.doctors.view_model.DoctorsListViewModel
 import com.example.doctors.entities.Doctor
-import com.example.doctors.ui.views.doctors.chooseDoctor.KeyForSort
-import com.example.doctors.ui.views.doctors.chooseDoctor.keysForSort
+import com.example.doctors.ui.views.main.doctors.chooseDoctor.KeyForSort
+import com.example.doctors.ui.views.main.doctors.chooseDoctor.keysForSort
 
 
 @Composable

@@ -9,6 +9,7 @@ import androidx.compose.material.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.example.doctors.MainScreen
+import com.example.doctors.Screen
 import com.example.doctors.ui.navigation.BottomNavigationDoctor
 import com.example.doctors.ui.navigation.MainNavHost
 import com.example.doctors.ui.theme.MaterialThemeDoctor
@@ -19,15 +20,24 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
+
             MaterialThemeDoctor() {
                 Scaffold(
-                    bottomBar = { BottomNavigationDoctor(navController = navController)}
-                ) {
-                    Column(modifier = Modifier.padding(it)) {
 
-                        MainNavHost(navController = navController, startDestination = MainScreen.Doctors.route)
-                    }
-                }
+                    content = {
+                        Column {
+                            MainNavHost(
+                                navController = navController,
+                                startDestination = Screen.Main.route
+                            )
+                        }
+                    },
+
+                    bottomBar = {
+                        BottomNavigationDoctor(
+                            navController = navController
+                        )
+                    })
             }
         }
     }

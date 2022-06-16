@@ -1,17 +1,14 @@
-package com.example.doctors.ui.views.doctors.placeToWrite
+package com.example.doctors.ui.views.main.doctors.placeToWrite
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.doctors.R
 import com.example.doctors.entities.PlaceToWrite
-import com.example.doctors.view_model.AppointmentViewModel
-import kotlinx.coroutines.Job
 
 @Composable
 fun PlaceItem(place: PlaceToWrite, onClick: (place: PlaceToWrite) -> Unit) {

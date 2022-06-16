@@ -3,6 +3,7 @@ package com.example.doctors.ui.views.auth
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -13,15 +14,15 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.doctors.Screen
 
 @Composable
-fun SignInView() {
-    Column(modifier = Modifier.background(MaterialTheme.colors.background)) {
+fun SignInView(navController: NavController) {
+    Column(modifier = Modifier.background(MaterialTheme.colors.primaryVariant)) {
         Text(text = "Skatik", color = Color.White, fontSize = 32.sp)
-        BackgroundRoundCard(
-            color = Color.White, paddingValues = PaddingValues(top = 48.dp), radius = 16.dp) {
 
-        }
     }
 }
 

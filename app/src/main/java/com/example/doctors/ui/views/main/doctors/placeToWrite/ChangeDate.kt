@@ -1,4 +1,4 @@
-package com.example.doctors.ui.views.doctors.placeToWrite
+package com.example.doctors.ui.views.main.doctors.placeToWrite
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
@@ -8,8 +8,6 @@ import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color

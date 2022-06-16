@@ -13,9 +13,10 @@ import com.example.doctors.Screen
 import com.example.doctors.entities.Doctor
 import com.example.doctors.ui.ChooseDoctor
 import com.example.doctors.ui.HistoryView
-import com.example.doctors.ui.views.doctors.placeToWrite.PlaceToWriteView
+import com.example.doctors.ui.views.main.doctors.placeToWrite.PlaceToWriteView
 import com.example.doctors.ui.Profile
 import com.example.doctors.ui.views.auth.SignInView
+import com.example.doctors.ui.views.auth.Registration
 
 @Composable
 fun MainNavHost(
@@ -26,8 +27,8 @@ fun MainNavHost(
         navController = navController,
         startDestination = startDestination
     ) {
-        composable(Screen.SignIn.route) { SignInView() }
-        composable(Screen.Registration.route) { SignInView() }
+        composable(Screen.SignIn.route) { SignInView(navController) }
+        composable(Screen.Registration.route) { Registration() }
         main(navController)
     }
 }
