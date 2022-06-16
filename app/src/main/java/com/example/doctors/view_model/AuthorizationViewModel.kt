@@ -32,6 +32,8 @@ class AuthorizationViewModel() : ViewModel() {
         }
     }
 
+    fun isAuthorization() = db.getUser() != null
+
     fun signInWithEmail(email: String, password: String) {
         viewModelScope.launch {
             db.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
