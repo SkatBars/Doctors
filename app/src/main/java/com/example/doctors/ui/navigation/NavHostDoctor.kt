@@ -1,6 +1,8 @@
 package com.example.doctors.ui.navigation
 
+import androidx.compose.material.ScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -22,20 +24,28 @@ import com.example.doctors.ui.views.auth.Registration
 fun MainNavHost(
     navController: NavHostController,
     startDestination: String,
+    scaffoldState: ScaffoldState,
 ) {
     NavHost(
         navController = navController,
         startDestination = startDestination
     ) {
-        composable(Screen.SignIn.route) { SignInView(navController) }
-        composable(Screen.Registration.route) { Registration() }
+        composable(Screen.SignIn.route) {
+            SignInView(navController, scaffoldState = scaffoldState)
+        }
+        composable(Screen.Registration.route) { Registration()}
         main(navController)
     }
 }
 
 private fun NavGraphBuilder.doctors(navController: NavController) {
-    navigation(route = MainScreen.Doctors.route, startDestination = DoctorsScreen.ChooseDoctor.route) {
-        composable(DoctorsScreen.ChooseDoctor.route) { ChooseDoctor(navController) }
+    navigation(
+        route = MainScreen.Doctors.route,
+        startDestination = DoctorsScreen.ChooseDoctor.route
+    ) {
+        composable(DoctorsScreen.ChooseDoctor.route) {
+            ChooseDoctor(navController)
+        }
         composable(DoctorsScreen.PlaceToWrite.route) {
             val currentDoctor = navController.previousBackStackEntry
                 ?.arguments?.getParcelable<Doctor>("current_doctor")
@@ -46,9 +56,12 @@ private fun NavGraphBuilder.doctors(navController: NavController) {
 }
 
 private fun NavGraphBuilder.main(navController: NavController) {
+
     navigation(route = Screen.Main.route, startDestination = MainScreen.Doctors.route) {
         doctors(navController)
-        composable(MainScreen.History.route) { HistoryView() }
+        composable(MainScreen.History.route) {
+            HistoryView()
+        }
         composable(MainScreen.Profile.route) { Profile() }
     }
 }

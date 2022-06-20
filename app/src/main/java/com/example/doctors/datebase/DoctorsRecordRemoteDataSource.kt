@@ -1,6 +1,7 @@
 package com.example.doctors.datebase
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.doctors.COUNT_PLACES_FOR_WRITE_OF_DAY
@@ -43,6 +44,7 @@ object DoctorsRecordRemoteDataSource {
     fun enableListenerCollectionDoctor(keySort: String, reverse: Boolean) {
         val query = getQueryDoctors(keySort = keySort, reverse = reverse)
         snapshotListenerDoctors = query.addSnapshotListener { value, error ->
+            Log.i("Nav", "update doctors in db ${doctors.value}}")
             _doctors.value = value?.toObjects(Doctor::class.java)
         }
     }

@@ -1,15 +1,14 @@
 package com.example.doctors.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
-import com.example.doctors.MainScreen
 import com.example.doctors.Screen
 import com.example.doctors.ui.navigation.BottomNavigationDoctor
 import com.example.doctors.ui.navigation.MainNavHost
@@ -22,22 +21,33 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
+            val scaffoldState = rememberScaffoldState()
+
             val viewModel: AuthorizationViewModel = viewModel()
-            val startDestination =
-                if (viewModel.isAuthorization()) Screen.Main.route else Screen.SignIn.route
+            var startDestination = Screen.SignIn.route
+
+            if (viewModel.isAuthorization()) {
+                startDestination = Screen.Main.route
+            }
 
 
             val navController = rememberNavController()
 
             MaterialThemeDoctor() {
-                Scaffold(bottomBar = {
+                Scaffold(
+                    bottomBar = {
+                        Log.i("Nav", "bottomBar")
                         BottomNavigationDoctor(
                             navController = navController
                         )
-                }) {
+                    },
+                    scaffoldState = scaffoldState
+                    ) {
+                    Log.i("Nav", "MainNavHost")
                     MainNavHost(
                         navController = navController,
-                        startDestination = startDestination
+                        startDestination = startDestination,
+                        scaffoldState = scaffoldState
                     )
                 }
             }

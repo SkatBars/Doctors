@@ -19,12 +19,6 @@ class DoctorsListViewModel() : ViewModel() {
 
     fun getUser() = myAuth.getUser()
 
-    fun signOut() {
-        viewModelScope.launch {
-            myAuth.signOut()
-        }
-    }
-
     fun enableListenerCollection(keyForSort: KeyForSort) {
         db.enableListenerCollectionDoctor(keySort = keyForSort.property, reverse = keyForSort.isReverse)
     }

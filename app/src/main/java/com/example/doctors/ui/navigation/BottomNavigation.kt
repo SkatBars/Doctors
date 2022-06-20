@@ -1,5 +1,6 @@
 package com.example.doctors.ui.navigation
 
+import android.util.Log
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
@@ -19,27 +20,33 @@ fun BottomNavigationDoctor(navController: NavController) {
     val currentDestination = backStackEntryState.value?.destination
     val screens = listOf(MainScreen.Doctors, MainScreen.History, MainScreen.Profile)
 
-    if (currentDestination?.route.toString() != Screen.Registration.route &&
-        currentDestination?.route.toString() != Screen.SignIn.route) {
 
-        BottomNavigation {
-            screens.forEach { currentScreen ->
-                val labelString = stringResource(id = currentScreen.labelResourcesId)
+    currentDestination?.route?.let {
+        if (it != Screen.Registration.route &&
+            it != Screen.SignIn.route) {
 
-                BottomNavigationItem(
-                    selected = currentDestination?.hierarchy?.any {it.route == currentScreen.route} == true,
-                    onClick = { navController.navigate(currentScreen.route) },
-                    icon = {
-                        Icon(
-                            painter = painterResource(id = currentScreen.iconResourcesId),
-                            contentDescription = labelString
-                        )
-                    },
-                    label = { Text(text = labelString) }
-                )
+            Log.i("Nav", "BottomNavigation $it")
+
+            BottomNavigation {
+                screens.forEach { currentScreen ->
+                    val labelString = stringResource(id = currentScreen.labelResourcesId)
+
+                    BottomNavigationItem(
+                        selected = currentDestination.hierarchy.any { it.route == currentScreen.route } == true,
+                        onClick = { navController.navigate(currentScreen.route) },
+                        icon = {
+                            Icon(
+                                painter = painterResource(id = currentScreen.iconResourcesId),
+                                contentDescription = labelString
+                            )
+                        },
+                        label = { Text(text = labelString) }
+                    )
+                }
             }
-        }
 
+        }
     }
+
 
 }
