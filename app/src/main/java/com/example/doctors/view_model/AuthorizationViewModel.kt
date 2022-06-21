@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.doctors.datebase.FirebaseAuthDataSource
-import com.squareup.okhttp.Response
 import kotlinx.coroutines.launch
 
 class AuthorizationViewModel() : ViewModel() {
@@ -17,9 +16,10 @@ class AuthorizationViewModel() : ViewModel() {
     val openMainFragmentEvent: LiveData<Boolean>
         get() = _openMainFragmentEvent
 
-    private val _answerRequestSignIn = MutableLiveData<Result<String>?>()
+    private val _answerRequestFromDB = MutableLiveData<Result<String>?>()
     val answerRequestSignIn: LiveData<Result<String>?>
-        get() = _answerRequestSignIn
+        get() = _answerRequestFromDB
+
 
     val gsoDb = db.gso
 
@@ -38,17 +38,17 @@ class AuthorizationViewModel() : ViewModel() {
 
     fun signInWithEmail(email: String, password: String) {
         viewModelScope.launch {
-            Log.i("QWE", "viewModel1")
             db.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                 with(task) {
                     addOnSuccessListener {
-                        _answerRequestSignIn.value = Result.success("OK") }
+                        _answerRequestFromDB.value = Result.success("OK")
+                    }
                     addOnCanceledListener {
-                        _answerRequestSignIn.value =
+                        _answerRequestFromDB.value =
                             Result.failure(Exception())
                     }
                     addOnFailureListener {
-                        _answerRequestSignIn.value =
+                        _answerRequestFromDB.value =
                             Result.failure(Exception())
                     }
                 }
@@ -62,46 +62,49 @@ class AuthorizationViewModel() : ViewModel() {
         }
     }
 
-    fun register(email: String, password: String, repeatPassword: String) {
-        if (password == repeatPassword) {
-            viewModelScope.launch {
-                db.createUser(email, password).addOnCompleteListener { task ->
-                    with(task) {
-                        addOnCompleteListener { openMainFragment() }
-                        addOnCanceledListener { showMessage("Операция была отменена, попробуйте снова") }
-                        addOnFailureListener { showMessage("Произошла ошибка, попробуйте снова") }
+    fun register(email: String, password: String) {
+        viewModelScope.launch {
+            db.createUser(email, password).addOnCompleteListener { task ->
+                with(task) {
+                    addOnSuccessListener {
+                        _answerRequestFromDB.value = Result.success("Ok")
+                    }
+                    addOnCanceledListener {
+                        _answerRequestFromDB.value = Result.failure(Exception())
+                    }
+                    addOnFailureListener {
+                        _answerRequestFromDB.value = Result.failure(Exception())
                     }
                 }
             }
-        } else {
-            showMessage("Пароли не совпадают")
+
         }
     }
 
-  /*  fun signInWithGoogle(idToken: String) {
-        viewModelScope.launch {
-            val task = db.signInWithGoogle(idToken)
-            with(task) {
-                addOnCompleteListener { _answerRequestSignIn.value = Result.success("OK") }
-                addOnCanceledListener {
-                    _answerRequestSignIn.value =
-                        Result.failure(Exception())
-                }
-                addOnFailureListener {
-                    _answerRequestSignIn.value =
-                        Result.failure(Exception())
-                }
-            }
+    /*  fun signInWithGoogle(idToken: String) {
+          viewModelScope.launch {
+              val task = db.signInWithGoogle(idToken)
+              with(task) {
+                  addOnCompleteListener { _answerRequestSignIn.value = Result.success("OK") }
+                  addOnCanceledListener {
+                      _answerRequestSignIn.value =
+                          Result.failure(Exception())
+                  }
+                  addOnFailureListener {
+                      _answerRequestSignIn.value =
+                          Result.failure(Exception())
+                  }
+              }
 
-        }
-    }*/
+          }
+      }*/
 
     private fun openMainFragment() {
         _openMainFragmentEvent.value = true
     }
 
     private fun showMessage(message: String) {
-       // _AnswerRequestSignIn.value = message
+        // _AnswerRequestSignIn.value = message
     }
 
 }

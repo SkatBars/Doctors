@@ -31,9 +31,17 @@ fun MainNavHost(
         startDestination = startDestination
     ) {
         composable(Screen.SignIn.route) {
-            SignInView(navController, scaffoldState = scaffoldState)
+            SignInView(
+                navController = navController,
+                scaffoldState = scaffoldState
+            )
         }
-        composable(Screen.Registration.route) { Registration()}
+        composable(Screen.Registration.route) {
+            Registration(
+                navController = navController,
+                scaffoldState = scaffoldState
+            )
+        }
         main(navController)
     }
 }
