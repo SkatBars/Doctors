@@ -1,6 +1,5 @@
 package com.example.doctors.view_model
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,27 +11,10 @@ class AuthorizationViewModel() : ViewModel() {
 
     private val db = FirebaseAuthDataSource
 
-    private val _openMainFragmentEvent = MutableLiveData<Boolean>(false)
-    val openMainFragmentEvent: LiveData<Boolean>
-        get() = _openMainFragmentEvent
-
     private val _answerRequestFromDB = MutableLiveData<Result<String>?>()
     val answerRequestSignIn: LiveData<Result<String>?>
         get() = _answerRequestFromDB
 
-
-    val gsoDb = db.gso
-
-    init {
-        autoAuthorization()
-    }
-
-    private fun autoAuthorization() {
-        val user = db.getUser()
-        if (user != null) {
-            _openMainFragmentEvent.value = true
-        }
-    }
 
     fun isAuthorization() = db.getUser() != null
 
@@ -80,31 +62,4 @@ class AuthorizationViewModel() : ViewModel() {
 
         }
     }
-
-    /*  fun signInWithGoogle(idToken: String) {
-          viewModelScope.launch {
-              val task = db.signInWithGoogle(idToken)
-              with(task) {
-                  addOnCompleteListener { _answerRequestSignIn.value = Result.success("OK") }
-                  addOnCanceledListener {
-                      _answerRequestSignIn.value =
-                          Result.failure(Exception())
-                  }
-                  addOnFailureListener {
-                      _answerRequestSignIn.value =
-                          Result.failure(Exception())
-                  }
-              }
-
-          }
-      }*/
-
-    private fun openMainFragment() {
-        _openMainFragmentEvent.value = true
-    }
-
-    private fun showMessage(message: String) {
-        // _AnswerRequestSignIn.value = message
-    }
-
 }
