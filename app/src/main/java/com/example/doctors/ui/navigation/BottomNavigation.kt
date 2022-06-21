@@ -23,7 +23,8 @@ fun BottomNavigationDoctor(navController: NavController) {
 
     currentDestination?.route?.let {
         if (it != Screen.Registration.route &&
-            it != Screen.SignIn.route) {
+            it != Screen.SignIn.route
+        ) {
 
             Log.i("Nav", "BottomNavigation $it")
 
@@ -32,8 +33,16 @@ fun BottomNavigationDoctor(navController: NavController) {
                     val labelString = stringResource(id = currentScreen.labelResourcesId)
 
                     BottomNavigationItem(
-                        selected = currentDestination.hierarchy.any { it.route == currentScreen.route } == true,
-                        onClick = { navController.navigate(currentScreen.route) },
+                        selected = currentDestination.hierarchy.any { it.route == currentScreen.route },
+                        onClick = {
+                            navController.navigate(currentScreen.route) {
+                                popUpTo(navController.graph.startDestinationId) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                                  },
                         icon = {
                             Icon(
                                 painter = painterResource(id = currentScreen.iconResourcesId),
