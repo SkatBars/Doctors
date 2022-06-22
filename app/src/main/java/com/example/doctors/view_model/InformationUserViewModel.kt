@@ -34,6 +34,8 @@ class InformationUserViewModel : ViewModel() {
         }
     }
 
+    fun getUserName() = authDb.getUser()?.displayName
+
     private fun getToothById(toothId: String): Toothes {
         return when(toothId) {
             Toothes.BrokenTooth.id -> Toothes.BrokenTooth

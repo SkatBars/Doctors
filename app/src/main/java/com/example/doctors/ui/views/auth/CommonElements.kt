@@ -1,6 +1,7 @@
 package com.example.doctors.ui.views.auth
 
 import android.annotation.SuppressLint
+import android.graphics.Paint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -37,7 +38,7 @@ fun BackgroundAuthorization(
             contentDescription = "icon_doctor",
             modifier = Modifier
                 .height(sizeBackgroundImage)
-                .fillMaxWidth(  )
+                .fillMaxWidth()
         )
 
         BackgroundRoundCard(
@@ -62,20 +63,6 @@ fun BackgroundRoundCard(
             .fillMaxWidth(),
         shape = RoundedCornerShape(radius),
         content = content
-    )
-}
-
-@Composable
-fun LogoText(paddingValues: PaddingValues) {
-    Text(
-        text = "Skatik",
-        color = Color.White,
-        fontSize = 48.sp,
-        fontWeight = FontWeight.Bold,
-        textAlign = TextAlign.Center,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(paddingValues)
     )
 }
 
