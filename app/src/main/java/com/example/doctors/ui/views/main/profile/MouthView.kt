@@ -1,12 +1,10 @@
 package com.example.doctors.ui.views.main.profile
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.colorResource
@@ -22,7 +20,7 @@ import kotlin.math.absoluteValue
 @Composable
 fun Mouth(toothes: List<Toothes>, indexSelected: MutableState<Int>) {
 
-    Column {
+    Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
         Jaw(isUpperJaw = true, toothes = (toothes.subList(0, 16)), indexSelected = indexSelected)
         Jaw(isUpperJaw = false, toothes = (toothes.subList(16, 32)), indexSelected = indexSelected)
     }
@@ -39,7 +37,7 @@ private fun Jaw(
     val difference = if (isUpperJaw) 15 * 4
     else 0
 
-    Row() {
+    Row {
         for (i in 0..7) {
             Tooth(
                 isUpperJaw = isUpperJaw,
