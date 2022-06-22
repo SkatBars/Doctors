@@ -26,7 +26,7 @@ fun PlaceToWriteView(doctor: Doctor, navController: NavController) {
 
     Column {
         TopAppBarPlaceToWrite(doctorName = doctor.name, backAction = {
-            navController.navigate(DoctorsScreen.ChooseDoctor.route)
+            navController.popBackStack()
         })
 
         Column {

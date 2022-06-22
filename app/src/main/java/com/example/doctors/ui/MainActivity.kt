@@ -46,14 +46,11 @@ class MainActivity : ComponentActivity() {
                     },
                     scaffoldState = scaffoldState
                     ) {
-                    Log.i("Nav", "MainNavHost")
-                    Box(Modifier.padding(it)) {
-                        MainNavHost(
-                            navController = navController,
-                            startDestination = startDestination,
-                            scaffoldState = scaffoldState
-                        )
-                    }
+                    MainNavHost(
+                        navController = navController,
+                        startDestination = startDestination,
+                        scaffoldState = scaffoldState
+                    )
                 }
             }
         }

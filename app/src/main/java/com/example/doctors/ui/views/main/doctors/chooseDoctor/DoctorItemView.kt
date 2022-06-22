@@ -1,5 +1,6 @@
 package com.example.doctors.ui
 
+import android.os.Bundle
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -12,6 +13,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import com.example.doctors.DoctorsScreen
 import com.example.doctors.R
@@ -30,7 +32,10 @@ fun DoctorItem(doctor: Doctor, navController: NavController) {
         shape = RoundedCornerShape(24.dp),
         backgroundColor = MaterialTheme.colors.surface,
         onClick = {
-            navController.currentBackStackEntry?.arguments?.putParcelable("current_doctor", doctor)
+            navController.currentBackStackEntry?.savedStateHandle?.set(
+                "current_doctor",
+                doctor
+            )
             navController.navigate(DoctorsScreen.PlaceToWrite.route)
         }
 

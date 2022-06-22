@@ -55,10 +55,11 @@ private fun NavGraphBuilder.doctors(navController: NavController) {
             ChooseDoctor(navController)
         }
         composable(DoctorsScreen.PlaceToWrite.route) {
-            val currentDoctor = navController.previousBackStackEntry
-                ?.arguments?.getParcelable<Doctor>("current_doctor")
 
+            val currentDoctor = navController.previousBackStackEntry?.savedStateHandle?.get<Doctor>("current_doctor")
             currentDoctor?.let { it1 -> PlaceToWriteView(it1, navController) }
+
+
         }
     }
 }
