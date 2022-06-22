@@ -1,6 +1,7 @@
 package com.example.doctors.entities
 
 import androidx.annotation.DrawableRes
+import androidx.compose.runtime.MutableState
 import com.example.doctors.R
 
 sealed class Toothes(
