@@ -9,8 +9,8 @@ sealed class Toothes(
     val description: String,
     val id: String
 ) {
-    object BrokenTooth : Toothes(R.drawable.ic_broken_tooth, "Зуб поврежден", "broken")
-    object HealthyTooth : Toothes(R.drawable.ic_tooth, "Зуб здоров", "healthy")
-    object InWorkTooth : Toothes(R.drawable.ic_tooth_heart, "В процессе лечения", "inWork")
-    object СariesTooth : Toothes(R.drawable.ic_caries_tooth, "Обнаружен кариес", "caries")
+    object BrokenTooth : Toothes(R.drawable.ic_broken_tooth, "Поврежденный", "broken")
+    object HealthyTooth : Toothes(R.drawable.ic_tooth, "Здоровый", "healthy")
+    object InWorkTooth : Toothes(R.drawable.ic_tooth_heart, "Лечится", "inWork")
+    object СariesTooth : Toothes(R.drawable.ic_caries_tooth, "Кариес", "caries")
 }
