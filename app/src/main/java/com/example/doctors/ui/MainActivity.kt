@@ -46,6 +46,7 @@ class MainActivity : ComponentActivity() {
                     },
                     scaffoldState = scaffoldState
                     ) {
+
                     MainNavHost(
                         navController = navController,
                         startDestination = startDestination,

@@ -57,7 +57,7 @@ fun DoctorItem(doctor: Doctor, navController: NavController) {
 }
 
 @Composable
-fun Avatar(uriImage: String) {
+fun  Avatar(uriImage: String) {
     GlideImage(
         imageModel = uriImage,
 

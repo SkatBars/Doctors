@@ -32,30 +32,27 @@ fun Profile() {
     val toothes: List<Toothes> by viewModelUser.toothes.observeAsState(emptyList())
     val indexSelected = remember { mutableStateOf(5) }
 
-    if (toothes.isNotEmpty()) {
+    Column {
+        TopAppBar {
+            LogoText(PaddingValues(start = 8.dp))
+        }
 
-        Column {
-            TopAppBar {
-                LogoText(PaddingValues(start = 8.dp))
-            }
+        Text(
+            text = "Здесь вы можете ознакомиться с состоянием ваших зубов на данный момент",
+            textAlign = TextAlign.Center,
+            fontSize = 18.sp,
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
+        )
 
-            Text(
-                text = "Здесь вы можете ознакомиться с состоянием ваших зубов на данный момент",
-                textAlign = TextAlign.Center,
-                fontSize = 18.sp,
-                modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxWidth()
-            )
-
-            Card(modifier = Modifier.padding(16.dp)) {
-                Column(
-                    modifier = Modifier.padding(8.dp),
-                    verticalArrangement = Arrangement.Bottom
-                ) {
-                    ChangeCurrentTooth(toothes = toothes, indexSelected = indexSelected)
-                    Mouth(toothes = toothes, indexSelected = indexSelected)
-                }
+        Card(modifier = Modifier.padding(16.dp)) {
+            Column(
+                modifier = Modifier.padding(8.dp),
+                verticalArrangement = Arrangement.Bottom
+            ) {
+                ChangeCurrentTooth(toothes = toothes, indexSelected = indexSelected)
+                Mouth(toothes = toothes, indexSelected = indexSelected)
             }
         }
     }

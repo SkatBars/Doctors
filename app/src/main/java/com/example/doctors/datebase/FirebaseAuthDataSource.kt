@@ -22,7 +22,7 @@ object FirebaseAuthDataSource {
 
     suspend fun signOut() = withContext(ioDispatcher) {
         auth.signOut()
-    }
+     }
 
     suspend fun createUser(
         email: String,

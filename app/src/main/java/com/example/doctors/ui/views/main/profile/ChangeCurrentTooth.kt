@@ -39,7 +39,7 @@ fun ChangeCurrentTooth(toothes: List<Toothes>, indexSelected: MutableState<Int>)
                 tooth = toothes[indexSelected.value],
                 padding = 8.dp,
                 isSelected = false,
-                size = 48.dp
+                size = 32.dp
             )
             Text(toothes[indexSelected.value].description)
         }
