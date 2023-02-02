@@ -24,6 +24,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.example.doctors.R
 import com.example.doctors.Screen
+import com.example.doctors.util.emailIfValid
 import com.example.doctors.view_model.AuthorizationViewModel
 import kotlinx.coroutines.launch
 
@@ -77,10 +78,6 @@ fun TitleAuth(text: String) {
     )
 }
 
-private fun emailIfValid(email: String): Boolean {
-    return (email.isEmpty() || email.matches(Regex("\\S*@\\S*[.]\\S*")))
-}
-
 @Composable
 fun TextFieldEmailAndPassword(
     email: MutableState<String>,
@@ -88,7 +85,7 @@ fun TextFieldEmailAndPassword(
     paddingValues: PaddingValues,
     emailIsValid: MutableState<Boolean>,
 ) {
-    emailIsValid.value = emailIfValid(email = email.value)
+    emailIsValid.value = email.value.emailIfValid()
     Column {
         OutlinedTextField(
             value = email.value,
