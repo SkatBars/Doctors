@@ -6,13 +6,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.doctors.ui.components.AppButton
+import com.example.doctors.ui.components.BackgroundAuthorization
 import com.example.doctors.view_model.AuthorizationViewModel
 
 @Composable
@@ -38,7 +38,7 @@ fun Registration(navController: NavController, scaffoldState: ScaffoldState) {
 
             RepeatPasswordTextField(password = password, passwordIsValid = passwordIsValid)
 
-            AuthorizationButton(
+            AppButton(
                 dataIsValid = (passwordIsValid.value && emailIsValid.value),
                 text = "Зарегистрироваться"
             ) {

@@ -1,19 +1,17 @@
 package com.example.doctors.ui.views.auth
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.example.doctors.Screen
+import com.example.doctors.ui.components.AppButton
+import com.example.doctors.ui.components.BackgroundAuthorization
 import com.example.doctors.view_model.AuthorizationViewModel
-import kotlinx.coroutines.launch
 
 @Composable
 fun SignInView(navController: NavController, scaffoldState: ScaffoldState) {
@@ -35,7 +33,7 @@ fun SignInView(navController: NavController, scaffoldState: ScaffoldState) {
                 emailIsValid,
             )
 
-            AuthorizationButton(dataIsValid = emailIsValid.value, text = "Войти") {
+            AppButton(dataIsValid = emailIsValid.value, text = "Войти") {
                 viewModel.signInWithEmail(
                     email = email.value,
                     password = password.value
