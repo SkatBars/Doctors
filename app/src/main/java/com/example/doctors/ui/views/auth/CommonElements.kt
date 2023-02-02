@@ -19,16 +19,7 @@ import com.example.doctors.util.emailIfValid
 import com.example.doctors.view_model.AuthorizationViewModel
 import kotlinx.coroutines.launch
 
-@Composable
-fun TitleAuth(text: String) {
-    Text(
-        text = text,
-        color = MaterialTheme.colors.primaryVariant,
-        fontSize = 36.sp,
-        fontWeight = FontWeight.Bold,
-        modifier = Modifier.padding(16.dp)
-    )
-}
+
 
 @Composable
 fun TextFieldEmailAndPassword(

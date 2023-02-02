@@ -11,6 +11,7 @@ import androidx.navigation.NavController
 import com.example.doctors.Screen
 import com.example.doctors.ui.components.AppButton
 import com.example.doctors.ui.components.BackgroundAuthorization
+import com.example.doctors.ui.components.TitleAuth
 import com.example.doctors.view_model.AuthorizationViewModel
 
 @Composable
