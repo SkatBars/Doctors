@@ -1,17 +1,19 @@
 package com.example.doctors.ui.views.auth
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.doctors.Screen
-import com.example.doctors.ui.components.AppButton
-import com.example.doctors.ui.components.BackgroundAuthorization
-import com.example.doctors.ui.components.TitleAuth
+import com.example.doctors.ui.components.*
+import com.example.doctors.util.emailIfValid
 import com.example.doctors.view_model.AuthorizationViewModel
 
 @Composable
@@ -20,24 +22,18 @@ fun SignInView(navController: NavController, scaffoldState: ScaffoldState) {
 
     BackgroundAuthorization(sizeBackgroundImage = 410.dp) {
         Column {
-            TitleAuth(text = "Авторизация")
+                TitleAuth(text = "Авторизация")
 
-            val email = remember { mutableStateOf("") }
-            val password = remember { mutableStateOf("") }
+            var email by remember { mutableStateOf("") }
+            var password by remember { mutableStateOf("") }
 
-            val emailIsValid = remember { mutableStateOf(true) }
+            TextFieldEmail(email = email, onValueChange = { email = it })
+            TextFieldPassword(password = password, onValueChange = { password = it })
 
-            TextFieldEmailAndPassword(
-                email,
-                password,
-                PaddingValues(8.dp),
-                emailIsValid,
-            )
-
-            AppButton(dataIsValid = emailIsValid.value, text = "Войти") {
+            AppButton(dataIsValid = email.emailIfValid(), text = "Войти") {
                 viewModel.signInWithEmail(
-                    email = email.value,
-                    password = password.value
+                    email = email,
+                    password = password
                 )
             }
 

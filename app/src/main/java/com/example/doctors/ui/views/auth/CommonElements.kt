@@ -15,44 +15,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.example.doctors.Screen
+import com.example.doctors.ui.components.TextFieldsWithLabelError
 import com.example.doctors.util.emailIfValid
 import com.example.doctors.view_model.AuthorizationViewModel
 import kotlinx.coroutines.launch
-
-
-
-@Composable
-fun TextFieldEmailAndPassword(
-    email: MutableState<String>,
-    password: MutableState<String>,
-    paddingValues: PaddingValues,
-    emailIsValid: MutableState<Boolean>,
-) {
-    emailIsValid.value = email.value.emailIfValid()
-    Column {
-        OutlinedTextField(
-            value = email.value,
-            onValueChange = { text -> email.value = text },
-            label = { Text("Введите email") },
-            isError = emailIsValid.value.not(),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(paddingValues),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
-        )
-
-        OutlinedTextField(
-            value = password.value,
-            onValueChange = { text -> password.value = text },
-            label = { Text("Введите пароль") },
-            visualTransformation = PasswordVisualTransformation(),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(paddingValues)
-        )
-
-    }
-}
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable

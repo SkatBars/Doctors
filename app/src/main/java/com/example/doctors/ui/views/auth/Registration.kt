@@ -11,9 +11,8 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.doctors.ui.components.AppButton
-import com.example.doctors.ui.components.BackgroundAuthorization
-import com.example.doctors.ui.components.TitleAuth
+import com.example.doctors.ui.components.*
+import com.example.doctors.util.emailIfValid
 import com.example.doctors.view_model.AuthorizationViewModel
 
 @Composable
@@ -24,26 +23,27 @@ fun Registration(navController: NavController, scaffoldState: ScaffoldState) {
 
             val viewModel: AuthorizationViewModel = viewModel()
 
-            val email = remember { mutableStateOf("") }
-            val password = remember { mutableStateOf("") }
+            var email by remember { mutableStateOf("") }
+            var password by remember { mutableStateOf("") }
+            var repeatPassword by remember { mutableStateOf("") }
 
-            val emailIsValid = remember { mutableStateOf(true) }
-            val passwordIsValid = remember { mutableStateOf(true) }
+            TextFieldEmail(email = email, onValueChange = { email = it })
+            TextFieldPassword(password = password, onValueChange = { password = it })
 
-            TextFieldEmailAndPassword(
-                email = email,
-                password = password,
-                PaddingValues(8.dp),
-                emailIsValid = emailIsValid,
+            TextFieldsWithLabelError(
+                value = repeatPassword,
+                onValueChange = { text -> repeatPassword = text },
+                labelText = "Повторите пароль",
+                visualTransformation = PasswordVisualTransformation(),
+                isError = password != repeatPassword,
+                errorText = "Пароли не совпадают"
             )
 
-            RepeatPasswordTextField(password = password, passwordIsValid = passwordIsValid)
-
             AppButton(
-                dataIsValid = (passwordIsValid.value && emailIsValid.value),
+                dataIsValid = (password == repeatPassword && email.emailIfValid()),
                 text = "Зарегистрироваться"
             ) {
-                viewModel.register(email = email.value, password = password.value)
+                viewModel.register(email = email, password = password)
             }
 
             ObserverRequestsToFirebase(
@@ -55,31 +55,3 @@ fun Registration(navController: NavController, scaffoldState: ScaffoldState) {
     }
 }
 
-@Composable
-fun RepeatPasswordTextField(
-    password: MutableState<String>,
-    passwordIsValid: MutableState<Boolean>
-) {
-    val repeatPassword = remember { mutableStateOf("") }
-
-    passwordIsValid.value = repeatPassword.value == password.value
-
-    OutlinedTextField(
-        value = repeatPassword.value,
-        onValueChange = { text -> repeatPassword.value = text },
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp),
-        label = { Text("Повторите пароль") },
-        visualTransformation = PasswordVisualTransformation(),
-        isError = passwordIsValid.value.not()
-    )
-
-    if (passwordIsValid.value.not()) {
-        Text(
-            "Пароли не совпадают",
-            color = MaterialTheme.colors.secondary,
-            modifier = Modifier.padding(start = 8.dp)
-        )
-    }
-}
