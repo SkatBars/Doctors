@@ -1,12 +1,8 @@
 package com.example.doctors.ui.views.auth
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -40,7 +36,7 @@ fun Registration(navController: NavController, scaffoldState: ScaffoldState) {
             )
 
             AppButton(
-                dataIsValid = (password == repeatPassword && email.emailIfValid()),
+                isEnabled = (password == repeatPassword && email.emailIfValid()),
                 text = "Зарегистрироваться"
             ) {
                 viewModel.register(email = email, password = password)
