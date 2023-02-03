@@ -1,8 +1,10 @@
 package com.example.doctors.ui.views.auth
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -13,7 +15,7 @@ import com.example.doctors.view_model.AuthorizationViewModel
 
 @Composable
 fun Registration(navController: NavController, scaffoldState: ScaffoldState) {
-    BackgroundAuthorization(sizeBackgroundImage = 350.dp) {
+    BackgroundAuthorization(sizeBackgroundImage = 0.dp) {
         Column {
             TitleAuth("Регистрация")
 
@@ -22,8 +24,20 @@ fun Registration(navController: NavController, scaffoldState: ScaffoldState) {
             var email by remember { mutableStateOf("") }
             var password by remember { mutableStateOf("") }
             var repeatPassword by remember { mutableStateOf("") }
+            var name by remember { mutableStateOf("") }
+            var information by remember { mutableStateOf("") }
+            var phoneNumber by remember { mutableStateOf("") }
 
             TextFieldEmail(email = email, onValueChange = { email = it })
+
+            TextFieldsWithLabelError(
+                value = name,
+                onValueChange = { name = it },
+                labelText = "Введите имя и фамилию",
+                errorText = "Должно быть 2 слова",
+                isError = name.split(" ").size != 2 && name.isNotEmpty()
+            )
+
             TextFieldPassword(password = password, onValueChange = { password = it })
 
             TextFieldsWithLabelError(
@@ -35,8 +49,24 @@ fun Registration(navController: NavController, scaffoldState: ScaffoldState) {
                 errorText = "Пароли не совпадают"
             )
 
+            TextFieldsWithLabelError(
+                value = phoneNumber,
+                labelText = "Введите номер телефона",
+                isError = phoneNumber.isNotEmpty() && (phoneNumber.length != 10
+                        || phoneNumber[0] == '8'),
+                errorText = "Номер телефона имеет 10 цифр(8.....)",
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                onValueChange = { phoneNumber = it },
+            )
+
+            TextFieldsWithLabelError(
+                value = information,
+                labelText = "Введите информацию для врача",
+                onValueChange = { information = it },
+            )
+
             AppButton(
-                isEnabled = (password == repeatPassword && email.emailIfValid()),
+                isEnabled = (password == repeatPassword && email.emailIfValid() && name.split(" ").size == 2),
                 text = "Зарегистрироваться"
             ) {
                 viewModel.register(email = email, password = password)
