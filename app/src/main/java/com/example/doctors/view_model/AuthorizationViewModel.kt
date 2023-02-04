@@ -45,6 +45,7 @@ class AuthorizationViewModel() : ViewModel() {
         viewModelScope.launch {
             db.createUser(user.email, password)
                 .addOnSuccessListener {
+                    user.id = it.user!!.uid
                     addUserInDb(user)
                 }
                 .addOnCanceledListener {
