@@ -9,7 +9,7 @@ data class User(
     val toothes: List<String> = listOf(),
     val phoneNumber: String = "",
     val email: String = "",
-    val information: String,
+    val information: String = "",
     val name: String = "",
     val urlAvatar: String = ""
 ) : Parcelable

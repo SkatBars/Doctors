@@ -46,13 +46,15 @@ fun Profile() {
                 .fillMaxWidth()
         )
 
-        Card(modifier = Modifier.padding(16.dp)) {
-            Column(
-                modifier = Modifier.padding(8.dp),
-                verticalArrangement = Arrangement.Bottom
-            ) {
-                ChangeCurrentTooth(toothes = toothes, indexSelected = indexSelected)
-                Mouth(toothes = toothes, indexSelected = indexSelected)
+        if (toothes.isNotEmpty()) {
+            Card(modifier = Modifier.padding(16.dp)) {
+                Column(
+                    modifier = Modifier.padding(8.dp),
+                    verticalArrangement = Arrangement.Bottom
+                ) {
+                    ChangeCurrentTooth(toothes = toothes, indexSelected = indexSelected)
+                    Mouth(toothes = toothes, indexSelected = indexSelected)
+                }
             }
         }
     }

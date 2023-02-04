@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.doctors.datebase.FirebaseAuthDataSource
 import com.example.doctors.datebase.UserRemoteDataSource
 import com.example.doctors.entities.Toothes
+import com.example.doctors.entities.User
 import kotlinx.coroutines.launch
 
 class InformationUserViewModel : ViewModel() {
@@ -23,10 +24,10 @@ class InformationUserViewModel : ViewModel() {
         userId?.let {
             userDb.getToothes(userId = it)
                 .addOnSuccessListener { docScnapshot ->
-                    val dataFromDb = docScnapshot?.get("toothes") as List<String>?
+                    val dataFromDb = docScnapshot.toObject(User::class.java)
 
                     val tempList = mutableListOf<Toothes>()
-                    dataFromDb?.forEach { id ->
+                    dataFromDb?.toothes?.forEach { id ->
                         tempList.add(getToothById(id))
                     }
                     _toothes.value = tempList
