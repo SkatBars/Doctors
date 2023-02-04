@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.doctors.datebase.FirebaseAuthDataSource
+import com.example.doctors.entities.User
 import kotlinx.coroutines.launch
 
 class AuthorizationViewModel() : ViewModel() {
@@ -40,11 +41,11 @@ class AuthorizationViewModel() : ViewModel() {
         db.signOut()
     }
 
-    fun register(email: String, password: String) {
+    fun register(user: User, password: String) {
         viewModelScope.launch {
-            db.createUser(email, password)
+            db.createUser(user.email, password)
                 .addOnSuccessListener {
-                    _answerRequestFromDB.value = Result.success("Ok")
+                    addUserInDb(user)
                 }
                 .addOnCanceledListener {
                     _answerRequestFromDB.value = Result.failure(Exception())
@@ -53,5 +54,16 @@ class AuthorizationViewModel() : ViewModel() {
                     _answerRequestFromDB.value = Result.failure(Exception())
                 }
         }
+    }
+
+    fun addUserInDb(user: User) = viewModelScope.launch {
+        db.addUserInDb(user)
+            .addOnSuccessListener {
+                _answerRequestFromDB.value = Result.success("Ok")
+            }
+
+            .addOnFailureListener {
+                _answerRequestFromDB.value = Result.failure(it)
+            }
     }
 }

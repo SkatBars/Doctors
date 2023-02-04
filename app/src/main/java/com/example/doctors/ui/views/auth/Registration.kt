@@ -9,6 +9,8 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.doctors.entities.Toothes
+import com.example.doctors.entities.User
 import com.example.doctors.ui.components.*
 import com.example.doctors.util.emailIfValid
 import com.example.doctors.view_model.AuthorizationViewModel
@@ -69,7 +71,18 @@ fun Registration(navController: NavController, scaffoldState: ScaffoldState) {
                 isEnabled = (password == repeatPassword && email.emailIfValid() && name.split(" ").size == 2),
                 text = "Зарегистрироваться"
             ) {
-                viewModel.register(email = email, password = password)
+                val toothes = mutableListOf<String>()
+                repeat(32) { toothes.add(Toothes.HealthyTooth.id) }
+
+                val user = User(
+                    name = name,
+                    email = email,
+                    phoneNumber = phoneNumber,
+                    information = information,
+                    toothes = toothes.toList()
+                )
+
+                viewModel.register(user = user, password = password)
             }
 
             ObserverRequestsToFirebase(
