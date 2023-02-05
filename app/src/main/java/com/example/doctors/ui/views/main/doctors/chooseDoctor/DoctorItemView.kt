@@ -2,6 +2,7 @@ package com.example.doctors.ui
 
 import android.os.Bundle
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -26,10 +27,9 @@ fun DoctorItem(doctor: Doctor, navController: NavController) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(110.dp)
-            .padding(start = 8.dp, end = 16.dp, top = 8.dp),
-
-        shape = RoundedCornerShape(24.dp),
+            .height(120.dp)
+            .padding(vertical = 8.dp),
+        shape = RoundedCornerShape(8.dp),
         backgroundColor = MaterialTheme.colors.surface,
         onClick = {
             navController.currentBackStackEntry?.savedStateHandle?.set(
@@ -62,10 +62,9 @@ fun  Avatar(uriImage: String) {
         imageModel = uriImage,
 
         modifier = Modifier
-            .padding(start = 16.dp)
-            .width(80.dp)
-            .height(80.dp)
-            .clip(shape = RoundedCornerShape(12.dp))
+            .padding(start = 8.dp)
+            .size(80.dp)
+            .clip(shape = CircleShape)
     )
 }
 

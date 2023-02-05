@@ -11,6 +11,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -28,13 +29,19 @@ import org.intellij.lang.annotations.JdkConstants
 
 @Composable
 fun ChooseDoctor(navController: NavController) {
-    Column(Modifier.padding(top = 32.dp, start = 8.dp)) {
+    Column(Modifier.padding(top = 32.dp, start = 8.dp, end = 8.dp)) {
 
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Title()
+            Text(
+                text = "Find you doctor",
+                fontSize = 36.sp,
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold
+            )
+
             ButtonSignOut(navController = navController)
         }
 
@@ -67,32 +74,20 @@ fun ChooseDoctor(navController: NavController) {
 }
 
 @Composable
-private fun Title() {
-
-    Column {
-        Text(
-            text = "Hello, Sema"
-        )
-        Text(
-            text = "Find you doctor",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold
-        )
-    }
-}
-
-@Composable
 private fun ListDoctors(
     viewModel: DoctorsListViewModel,
     filterSample: String,
     navController: NavController
 ) {
     val doctors: List<Doctor> by viewModel.doctors.observeAsState(listOf())
-    Log.i("QWE", "sadsad${doctors.size}")
-    LazyColumn {
-        items(doctors.filter { it ->
-            it.name.contains(other = filterSample, ignoreCase = true)
-        }, key = { it.id }) { doctor ->
+
+    LazyColumn(Modifier.padding(start = 0.dp)) {
+        items(
+            items = doctors.filter { it ->
+                it.name.contains(other = filterSample, ignoreCase = true)
+            },
+            key = { it.id }
+        ) { doctor ->
             DoctorItem(doctor = doctor, navController = navController)
         }
     }
