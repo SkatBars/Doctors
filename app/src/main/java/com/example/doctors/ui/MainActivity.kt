@@ -15,8 +15,10 @@ import androidx.navigation.compose.rememberNavController
 import com.example.doctors.Screen
 import com.example.doctors.ui.navigation.BottomNavigationDoctor
 import com.example.doctors.ui.navigation.MainNavHost
+import com.example.doctors.ui.theme.Gray200
 import com.example.doctors.ui.theme.MaterialThemeDoctor
 import com.example.doctors.view_model.AuthorizationViewModel
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 class MainActivity : ComponentActivity() {
 
@@ -33,7 +35,6 @@ class MainActivity : ComponentActivity() {
                 startDestination = Screen.Main.route
             }
 
-
             val navController = rememberNavController()
 
             MaterialThemeDoctor() {
@@ -46,6 +47,8 @@ class MainActivity : ComponentActivity() {
                     },
                     scaffoldState = scaffoldState
                     ) {
+                    val ui = rememberSystemUiController()
+                    ui.setStatusBarColor(Gray200)
 
                     MainNavHost(
                         navController = navController,
