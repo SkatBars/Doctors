@@ -9,6 +9,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -23,23 +24,16 @@ import java.util.*
 @Composable
 fun PlaceToWriteView(doctor: Doctor, navController: NavController) {
     val viewModel: AppointmentViewModel = viewModel()
-
     Column {
-        TopAppBarPlaceToWrite(doctorName = doctor.name, backAction = {
-            navController.popBackStack()
-        })
+        val currentDate = remember { mutableStateOf(Calendar.getInstance()) }
+        viewModel.enableListenerCollection(currentDate.value, doctorId = doctor.id)
 
-        Column {
-            val currentDate = remember { mutableStateOf(Calendar.getInstance()) }
-            viewModel.enableListenerCollection(currentDate.value, doctorId = doctor.id)
+        updateDateForPlaces(currentDate = currentDate, viewModel, doctor.id)
+        ChangeDate(currentDate)
 
-            updateDateForPlaces(currentDate = currentDate, viewModel, doctor.id)
-            ChangeDate(currentDate, viewModel = viewModel)
-
-            val places =
-                viewModel.places.observeAsState(listOf()) as MutableState<List<PlaceToWrite>>
-            ListPlaces(places = places, viewModel = viewModel)
-        }
+        val places =
+            viewModel.places.observeAsState(listOf()) as MutableState<List<PlaceToWrite>>
+        ListPlaces(places = places, viewModel = viewModel)
     }
 }
 
@@ -76,8 +70,8 @@ private fun TopAppBarPlaceToWrite(doctorName: String, backAction: () -> Unit) {
 @Composable
 private fun ListPlaces(places: MutableState<List<PlaceToWrite>>, viewModel: AppointmentViewModel) {
     LazyColumn(Modifier.padding(top = 8.dp)) {
-            items(places.value) { place ->
-                PlaceItem(place = place) { viewModel.takePlace(it) }
-            }
+        items(places.value) { place ->
+            PlaceItem(place = place) { viewModel.takePlace(it) }
         }
     }
+}

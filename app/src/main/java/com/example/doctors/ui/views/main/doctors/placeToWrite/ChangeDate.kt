@@ -21,17 +21,18 @@ import java.util.*
 
 
 @Composable
-fun ChangeDate(chooseDate: MutableState<Calendar>, viewModel: AppointmentViewModel) {
+fun ChangeDate(
+    chooseDate: MutableState<Calendar>,
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(100.dp),
         elevation = 10.dp
     ) {
-
         ArrowsBtn(80.dp, Color.Gray, PaddingValues(end = 16.dp), chooseDate)
-
         ListDate(getListCurrentDate(chooseDate = chooseDate.value))
+
     }
 }
 
@@ -87,7 +88,7 @@ private fun ArrowsBtn(
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        TextButton(onClick = { changeDate(chooseDate, -1)}) {
+        TextButton(onClick = { changeDate(chooseDate, -1) }) {
             Icon(
                 imageVector = Icons.Filled.KeyboardArrowLeft,
                 contentDescription = "left",
