@@ -28,42 +28,12 @@ fun PlaceToWriteView(doctor: Doctor, navController: NavController) {
         val currentDate = remember { mutableStateOf(Calendar.getInstance()) }
         viewModel.enableListenerCollection(currentDate.value, doctorId = doctor.id)
 
-        updateDateForPlaces(currentDate = currentDate, viewModel, doctor.id)
+        viewModel.updateDateForPlaces(currentDate = currentDate, viewModel, doctor.id)
         ChangeDate(currentDate)
 
         val places =
             viewModel.places.observeAsState(listOf()) as MutableState<List<PlaceToWrite>>
         ListPlaces(places = places, viewModel = viewModel)
-    }
-}
-
-
-fun updateDateForPlaces(
-    currentDate: MutableState<Calendar>,
-    appointmentViewModel: AppointmentViewModel,
-    doctorId: String
-) {
-    appointmentViewModel.disableListenerCollectionPlaces()
-    appointmentViewModel.enableListenerCollection(currentDate.value, doctorId = doctorId)
-}
-
-@Composable
-private fun TopAppBarPlaceToWrite(doctorName: String, backAction: () -> Unit) {
-    TopAppBar {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-
-            Button(onClick = { backAction }) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_baseline_arrow_back),
-                    contentDescription = "back",
-                    Modifier
-                        .width(30.dp)
-                        .height(30.dp)
-                )
-            }
-
-            Text(text = doctorName, fontSize = 24.sp)
-        }
     }
 }
 

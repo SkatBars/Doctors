@@ -1,5 +1,6 @@
 package com.example.doctors.view_model
 
+import androidx.compose.runtime.MutableState
 import androidx.lifecycle.*
 import com.example.doctors.datebase.DoctorsRecordRemoteDataSource
 import com.example.doctors.entities.PlaceToWrite
@@ -17,6 +18,15 @@ class AppointmentViewModel() : ViewModel() {
     private val _showMessage = MutableLiveData<String>()
     val showMessage: LiveData<String>
         get() = _showMessage
+
+    fun updateDateForPlaces(
+        currentDate: MutableState<Calendar>,
+        appointmentViewModel: AppointmentViewModel,
+        doctorId: String
+    ) {
+        appointmentViewModel.disableListenerCollectionPlaces()
+        appointmentViewModel.enableListenerCollection(currentDate.value, doctorId = doctorId)
+    }
 
     fun enableListenerCollection(currentDate: Calendar, doctorId: String) {
         db.enableListenerCollectionPlacces(
