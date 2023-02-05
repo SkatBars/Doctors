@@ -19,6 +19,10 @@ import androidx.navigation.NavController
 import com.example.doctors.DoctorsScreen
 import com.example.doctors.R
 import com.example.doctors.entities.Doctor
+import com.example.doctors.ui.components.CircleImage
+import com.example.doctors.ui.components.RatingText
+import com.example.doctors.ui.components.TextWithCaption
+import com.example.doctors.ui.components.Title
 import com.skydoves.landscapist.glide.GlideImage
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -41,68 +45,23 @@ fun DoctorItem(doctor: Doctor, navController: NavController) {
 
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Avatar(uriImage = doctor.urlAvatar)
+            CircleImage(uriImage = doctor.urlAvatar)
 
             Column(
                 modifier = Modifier.padding(start = 16.dp),
                 verticalArrangement = Arrangement.SpaceBetween,
             ) {
-                DoctorName(doctorName = doctor.name)
-                PriceText(price = doctor.avaragePrice)
+                Title(text = doctor.name, fontSize = 20.sp)
+
+                TextWithCaption(
+                    caption = "price",
+                    text = doctor.avaragePrice.toString(),
+                    fontSize = 16.sp
+                )
+
                 RatingText(rating = doctor.rating)
             }
         }
 
     }
-}
-
-@Composable
-fun  Avatar(uriImage: String) {
-    GlideImage(
-        imageModel = uriImage,
-
-        modifier = Modifier
-            .padding(start = 8.dp)
-            .size(80.dp)
-            .clip(shape = CircleShape)
-    )
-}
-
-@Composable
-fun DoctorName(doctorName: String) {
-    Text(
-        text = doctorName,
-        color = MaterialTheme.colors.primaryVariant,
-        fontWeight = FontWeight.Bold,
-        fontSize = 20.sp,
-    )
-}
-
-@Composable
-fun PriceText(price: Int) {
-    Text(
-        text = "price: $price",
-        fontSize = 16.sp
-    )
-}
-
-@Composable
-fun RatingText(rating: Double) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Text(
-            text = "$rating",
-            modifier = Modifier.padding(top = 8.dp),
-            color = Color.Gray,
-            fontSize = 20.sp,
-            fontWeight = FontWeight.W700
-        )
-        Icon(
-            painter = painterResource(
-                id = R.drawable.ic_star),
-                contentDescription = "rating",
-                modifier = Modifier.padding(top = 8.dp, start = 4.dp),
-                tint = Color.Gray
-        )
-    }
-
 }
