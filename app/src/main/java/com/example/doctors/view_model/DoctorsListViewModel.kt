@@ -4,8 +4,7 @@ import androidx.lifecycle.*
 import com.example.doctors.datebase.FirebaseAuthDataSource
 import com.example.doctors.entities.Doctor
 import com.example.doctors.datebase.DoctorsRecordRemoteDataSource
-import com.example.doctors.ui.views.main.doctors.chooseDoctor.KeyForSort
-import kotlinx.coroutines.launch
+import com.example.doctors.ui.components.spiner.KeyForSort
 
 class DoctorsListViewModel() : ViewModel() {
 
