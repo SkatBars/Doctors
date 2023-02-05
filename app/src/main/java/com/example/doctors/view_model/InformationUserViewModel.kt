@@ -14,8 +14,8 @@ class InformationUserViewModel : ViewModel() {
     val authDb = FirebaseAuthDataSource
     val userDb = UserRemoteDataSource
 
-    private val _userInfo = MutableLiveData<User>()
-    val userInfo: LiveData<User>
+    private val _userInfo = MutableLiveData<User?>(null)
+    val userInfo: LiveData<User?>
         get() = _userInfo
 
     fun getUserInformation() = viewModelScope.launch{
@@ -24,19 +24,10 @@ class InformationUserViewModel : ViewModel() {
             userDb.getUserInfo(userId = it)
                 .addOnSuccessListener { docScnapshot ->
                     val user = docScnapshot.toObject(User::class.java)
-                    _userInfo.value = user!!
+                    _userInfo.value = user
                 }
         }
     }
 
     fun getUserName() = authDb.getUser()?.displayName
-
-    private fun getToothById(toothId: String): Toothes {
-        return when(toothId) {
-            Toothes.BrokenTooth.id -> Toothes.BrokenTooth
-            Toothes.InWorkTooth.id -> Toothes.InWorkTooth
-            Toothes.HealthyTooth.id -> Toothes.HealthyTooth
-            else -> Toothes.СariesTooth
-        }
-    }
 }
