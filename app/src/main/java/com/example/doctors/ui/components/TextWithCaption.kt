@@ -9,16 +9,27 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
-fun TextWithCaption(caption: String, text: String, modifier: Modifier = Modifier) {
+fun TextWithCaption(
+    caption: String,
+    text: String,
+    modifier: Modifier = Modifier,
+    fontSize: TextUnit = 24.sp,
+) {
     Row(horizontalArrangement = Arrangement.Start) {
-        Text(text = caption, style = MaterialTheme.typography.h5, fontWeight = FontWeight.Bold)
+        Text(
+            text = caption,
+            fontSize = fontSize,
+            fontWeight = FontWeight.Bold
+        )
+
         Text(
             text = text,
-            style = MaterialTheme.typography.h5,
-            fontWeight = FontWeight.Normal,
+            fontSize = fontSize,
             modifier = modifier.padding(start = 8.dp)
         )
     }
