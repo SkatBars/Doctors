@@ -19,9 +19,9 @@ import com.example.doctors.R
 import com.example.doctors.Screen
 import com.example.doctors.view_model.DoctorsListViewModel
 import com.example.doctors.entities.Doctor
+import com.example.doctors.ui.components.spiner.KeyForSort
 import com.example.doctors.ui.components.spiner.MySpinner
-import com.example.doctors.ui.views.main.doctors.chooseDoctor.KeyForSort
-import com.example.doctors.ui.views.main.doctors.chooseDoctor.keysForSort
+import com.example.doctors.ui.components.spiner.keysForSort
 import com.example.doctors.view_model.AuthorizationViewModel
 
 
