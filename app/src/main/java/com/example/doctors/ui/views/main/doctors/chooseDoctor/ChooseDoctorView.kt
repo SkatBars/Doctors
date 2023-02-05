@@ -19,6 +19,7 @@ import com.example.doctors.R
 import com.example.doctors.Screen
 import com.example.doctors.view_model.DoctorsListViewModel
 import com.example.doctors.entities.Doctor
+import com.example.doctors.ui.components.SearchText
 import com.example.doctors.ui.components.spiner.KeyForSort
 import com.example.doctors.ui.components.spiner.MySpinner
 import com.example.doctors.ui.components.spiner.keysForSort
@@ -50,7 +51,7 @@ fun ChooseDoctor(navController: NavController) {
         }
 
         val textState = remember { mutableStateOf("") }
-        SearchDoctors(textState = textState)
+        SearchText(textState = textState, labelText = "Введите фамилию доктора")
 
         MySpinner(
             items = keysForSort,
@@ -89,29 +90,6 @@ private fun ListDoctors(
             DoctorItem(doctor = doctor, navController = navController)
         }
     }
-}
-
-@Composable
-private fun SearchDoctors(textState: MutableState<String>) {
-    OutlinedTextField(
-        value = textState.value,
-        onValueChange = { it -> textState.value = it },
-        label = { Text("Введите фамилию доктора") },
-        trailingIcon = {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_search),
-                contentDescription = "search"
-            )
-        },
-        shape = RoundedCornerShape(16.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 8.dp),
-        colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = MaterialTheme.colors.surface,
-            disabledTrailingIconColor = MaterialTheme.colors.primaryVariant
-        )
-    )
 }
 
 @Composable
