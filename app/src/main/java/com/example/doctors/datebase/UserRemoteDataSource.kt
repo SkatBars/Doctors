@@ -9,7 +9,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 object UserRemoteDataSource {
     private val firestore = FirebaseFirestore.getInstance()
 
-    suspend fun getToothes(userId: String): Task<DocumentSnapshot> {
+    suspend fun getUserInfo(userId: String): Task<DocumentSnapshot> {
         return firestore.collection("users").document(userId).get()
     }
 

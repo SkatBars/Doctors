@@ -1,6 +1,5 @@
 package com.example.doctors.view_model
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,22 +14,17 @@ class InformationUserViewModel : ViewModel() {
     val authDb = FirebaseAuthDataSource
     val userDb = UserRemoteDataSource
 
-    private val _toothes = MutableLiveData<List<Toothes>>()
-    val toothes: LiveData<List<Toothes>>
-        get() = _toothes
+    private val _userInfo = MutableLiveData<User>()
+    val userInfo: LiveData<User>
+        get() = _userInfo
 
-    fun getToothes() = viewModelScope.launch{
+    fun getUserInformation() = viewModelScope.launch{
         val userId = authDb.getUser()?.uid
         userId?.let {
-            userDb.getToothes(userId = it)
+            userDb.getUserInfo(userId = it)
                 .addOnSuccessListener { docScnapshot ->
-                    val dataFromDb = docScnapshot.toObject(User::class.java)
-
-                    val tempList = mutableListOf<Toothes>()
-                    dataFromDb?.toothes?.forEach { id ->
-                        tempList.add(getToothById(id))
-                    }
-                    _toothes.value = tempList
+                    val user = docScnapshot.toObject(User::class.java)
+                    _userInfo.value = user!!
                 }
         }
     }
