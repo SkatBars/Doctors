@@ -1,4 +1,4 @@
-package com.example.doctors.ui
+package com.example.doctors.ui.components.spiner
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -16,7 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.doctors.R
-import com.example.doctors.ui.views.main.doctors.chooseDoctor.KeyForSort
+import com.example.doctors.ui.components.spiner.KeyForSort
 
 @Composable
 fun MySpinner(
