@@ -19,6 +19,7 @@ import com.example.doctors.R
 import com.example.doctors.Screen
 import com.example.doctors.view_model.DoctorsListViewModel
 import com.example.doctors.entities.Doctor
+import com.example.doctors.ui.components.ButtonSignOut
 import com.example.doctors.ui.components.SearchText
 import com.example.doctors.ui.components.spiner.KeyForSort
 import com.example.doctors.ui.components.spiner.MySpinner
@@ -89,26 +90,6 @@ private fun ListDoctors(
         ) { doctor ->
             DoctorItem(doctor = doctor, navController = navController)
         }
-    }
-}
-
-@Composable
-private fun ButtonSignOut(navController: NavController) {
-    val authViewModel: AuthorizationViewModel = viewModel()
-
-    TextButton(onClick = {
-        authViewModel.signOut()
-        navController.navigate(Screen.SignIn.route) {
-            launchSingleTop = true
-        }
-    }) {
-        Icon(
-            painter = painterResource(id = R.drawable.ic_exit),
-            contentDescription = "sign out",
-            modifier = Modifier
-                .height(30.dp)
-                .width(30.dp)
-        )
     }
 }
 
