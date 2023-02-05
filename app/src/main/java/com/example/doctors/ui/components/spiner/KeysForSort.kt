@@ -1,4 +1,4 @@
-package com.example.doctors.ui.views.main.doctors.chooseDoctor
+package com.example.doctors.ui.components.spiner
 
 sealed class KeyForSort(
     val text: String,
