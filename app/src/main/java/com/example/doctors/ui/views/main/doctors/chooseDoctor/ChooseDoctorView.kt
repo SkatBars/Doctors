@@ -30,26 +30,12 @@ import com.example.doctors.view_model.AuthorizationViewModel
 @Composable
 fun ChooseDoctor(navController: NavController) {
     Column(Modifier.padding(top = 32.dp, start = 8.dp, end = 8.dp)) {
-
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(
-                text = "Find you doctor",
-                fontSize = 36.sp,
-                textAlign = TextAlign.Center,
-                fontWeight = FontWeight.Bold
-            )
-
-            ButtonSignOut(navController = navController)
-        }
-
         val viewModel: DoctorsListViewModel = viewModel()
-
         if (viewModel.doctors.value == null) {
             viewModel.enableListenerCollection(KeyForSort.RatingDescending)
         }
+
+        ToolbarDoctor(navController = navController)
 
         val textState = remember { mutableStateOf("") }
         SearchText(textState = textState, labelText = "Введите фамилию доктора")
@@ -70,6 +56,23 @@ fun ChooseDoctor(navController: NavController) {
             filterSample = textState.value,
             navController = navController
         )
+    }
+}
+
+@Composable
+private fun ToolbarDoctor(navController: NavController) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text(
+            text = "Find you doctor",
+            fontSize = 36.sp,
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Bold
+        )
+
+        ButtonSignOut(navController = navController)
     }
 }
 
