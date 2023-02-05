@@ -1,16 +1,20 @@
 package com.example.doctors.ui.components
 
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -18,6 +22,7 @@ import androidx.navigation.NavController
 import com.example.doctors.R
 import com.example.doctors.Screen
 import com.example.doctors.view_model.AuthorizationViewModel
+import java.util.*
 
 @Composable
 fun AppButton(
@@ -65,5 +70,44 @@ fun ButtonSignOut(navController: NavController) {
                 .height(30.dp)
                 .width(30.dp)
         )
+    }
+}
+
+@Composable
+fun ArrowsBtn(
+    size: Dp,
+    tint: Color,
+    padding: PaddingValues,
+    changeValue: (index: Int) -> Unit,
+) {
+
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceAround,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        TextButton(onClick = { changeValue(-1) }) {
+            Icon(
+                imageVector = Icons.Filled.KeyboardArrowLeft,
+                contentDescription = "left",
+                Modifier
+                    .width(size)
+                    .height(size)
+                    .padding(padding),
+                tint = tint,
+            )
+        }
+
+        TextButton(onClick = { changeValue( 1) }) {
+            Icon(
+                imageVector = Icons.Filled.KeyboardArrowRight,
+                contentDescription = "right",
+                Modifier
+                    .width(size)
+                    .height(size)
+                    .padding(padding),
+                tint = tint
+            )
+        }
     }
 }
