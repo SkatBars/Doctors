@@ -26,9 +26,15 @@ fun PlaceToWriteView(doctor: Doctor, navController: NavController) {
     val viewModel: AppointmentViewModel = viewModel()
     Column {
         val currentDate = remember { mutableStateOf(Calendar.getInstance()) }
-        viewModel.enableListenerCollection(currentDate.value, doctorId = doctor.id)
 
-        viewModel.updateDateForPlaces(currentDate = currentDate, viewModel, doctor.id)
+        LaunchedEffect(key1 = Unit, block = {
+            viewModel.enableListenerCollection(currentDate.value, doctorId = doctor.id)
+        })
+
+        LaunchedEffect(key1 = currentDate, block = {
+            viewModel.updateDateForPlaces(currentDate = currentDate, viewModel, doctor.id)
+        })
+
         ChangeDate(currentDate)
 
         val places =
