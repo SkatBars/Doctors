@@ -44,7 +44,6 @@ object DoctorsRecordRemoteDataSource {
     fun enableListenerCollectionDoctor(keySort: String, reverse: Boolean) {
         val query = getQueryDoctors(keySort = keySort, reverse = reverse)
         snapshotListenerDoctors = query.addSnapshotListener { value, error ->
-            Log.i("Nav", "update doctors in db ${doctors.value}}")
             _doctors.value = value?.toObjects(Doctor::class.java)
         }
     }
