@@ -19,6 +19,8 @@ class AuthorizationViewModel() : ViewModel() {
 
     fun isAuthorization() = db.getUser() != null
 
+    fun getIdUser() = db.getUser()?.uid
+
     fun signInWithEmail(email: String, password: String) {
         viewModelScope.launch {
             db.signInWithEmailAndPassword(email, password)

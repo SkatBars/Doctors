@@ -47,7 +47,7 @@ fun PlaceToWriteView(doctor: Doctor, navController: NavController) {
 private fun ListPlaces(places: MutableState<List<PlaceToWrite>>, viewModel: AppointmentViewModel) {
     LazyColumn(Modifier.padding(top = 8.dp)) {
         items(places.value) { place ->
-            PlaceItem(place = place) { viewModel.takePlace(it) }
+            PlaceItem(place = place) { place, patientId -> viewModel.takePlace(place, patientId) }
         }
     }
 }

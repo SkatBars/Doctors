@@ -7,11 +7,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.doctors.R
 import com.example.doctors.entities.PlaceToWrite
+import com.example.doctors.view_model.AuthorizationViewModel
+import org.koin.core.component.getScopeId
 
 @Composable
-fun PlaceItem(place: PlaceToWrite, onClick: (place: PlaceToWrite) -> Unit) {
+fun PlaceItem(place: PlaceToWrite, onClick: (place: PlaceToWrite, idPatient: String) -> Unit) {
+    val authViewModel = viewModel(AuthorizationViewModel::class.java)
 
     Card(elevation = 15.dp, modifier = Modifier
         .fillMaxWidth()
@@ -27,13 +31,22 @@ fun PlaceItem(place: PlaceToWrite, onClick: (place: PlaceToWrite) -> Unit) {
 
             Column {
                 Text(text = place.time, fontSize = 24.sp, modifier = Modifier.padding(start = 8.dp))
-                TextButton(
-                    onClick = { onClick(place) },
-                    enabled = place.isTaken.not()
-                ) {
-                    Text(text = "Записаться")
-                }
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    TextButton(
+                        onClick = { onClick(place, authViewModel.getIdUser()!!) },
+                        enabled = place.isTaken.not()
+                    ) {
+                        Text(text = "Записаться")
+                    }
 
+                    if (authViewModel.getIdUser()!! == place.idPatient) {
+                        TextButton(
+                            onClick = {  },
+                        ) {
+                            Text(text = "Снять бронь")
+                        }
+                    }
+                }
             }
         }
     }

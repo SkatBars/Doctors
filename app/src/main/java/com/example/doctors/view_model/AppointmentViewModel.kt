@@ -44,9 +44,9 @@ class AppointmentViewModel() : ViewModel() {
         //this.doctorId = doctorId
     }
 
-    fun takePlace(placeToWrite: PlaceToWrite) = viewModelScope.launch {
+    fun takePlace(placeToWrite: PlaceToWrite, idPatient: String) = viewModelScope.launch {
         placeToWrite.isTaken = true
-        placeToWrite.idPatient = "com.google.firebase.auth.internal.zzx@116113010"
+        placeToWrite.idPatient = idPatient
 
         val task = db.createTakenPlace(placeToWrite)
 
