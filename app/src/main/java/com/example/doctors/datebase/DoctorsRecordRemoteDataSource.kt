@@ -67,6 +67,13 @@ object DoctorsRecordRemoteDataSource {
             .set(placeToWrite)
     }
 
+    suspend fun deleteTakenPlace(placeId: String, idDoctor: String) = withContext(dispatcher) {
+        return@withContext firestore
+            .collection("doctors").document(idDoctor)
+            .collection("places").document(placeId)
+            .delete()
+    }
+
     private fun updateListPlaces(
         value: QuerySnapshot?,
         doctor: String,

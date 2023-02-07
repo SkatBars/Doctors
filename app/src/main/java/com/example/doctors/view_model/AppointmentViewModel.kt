@@ -44,6 +44,14 @@ class AppointmentViewModel() : ViewModel() {
         //this.doctorId = doctorId
     }
 
+    fun takeOfPlace(placeId: String, doctorId: String) = viewModelScope.launch {
+        val task = db.deleteTakenPlace(placeId, doctorId)
+
+        task.addOnCompleteListener {}
+        task.addOnFailureListener {showMessage("Произошла ошибка. попробуйте снова")}
+        task.addOnCanceledListener {showMessage("Произошла ошибка. попробуйте снова")}
+    }
+
     fun takePlace(placeToWrite: PlaceToWrite, idPatient: String) = viewModelScope.launch {
         placeToWrite.isTaken = true
         placeToWrite.idPatient = idPatient
