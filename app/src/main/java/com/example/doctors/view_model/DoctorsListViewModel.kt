@@ -31,14 +31,14 @@ class DoctorsListViewModel() : ViewModel() {
         )
     }
 
-    fun updateRating(doctorId: String, rating: Double, isFirstUpdate: Boolean = false) =
+    fun updateRating(doctorId: String, newRatingFromUser: Int, isFirstUpdate: Boolean = false) =
         viewModelScope.launch {
             val doctor = async {
                 return@async db.getDoctorById(doctorId)
             }.await().result.toObject(Doctor::class.java)
 
             doctor?.let {
-                val newRating = rating + doctor.rating
+                val newRating = doctor.rating * doctor.countPeopleForRating + newRatingFromUser
                 var newCount = doctor.countPeopleForRating
                 if (isFirstUpdate) newCount++
 
