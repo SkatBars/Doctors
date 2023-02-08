@@ -17,6 +17,6 @@ object UserRemoteDataSource {
     }
 
     suspend fun getHistory(userId: String) = withContext(dispatcher) {
-        firestore.collection("users").document(userId).collection("history").get()
+        return@withContext firestore.collection("users").document(userId).collection("history").get()
     }
 }
