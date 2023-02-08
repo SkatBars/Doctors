@@ -17,6 +17,15 @@ object UserRemoteDataSource {
     }
 
     suspend fun getHistory(userId: String) = withContext(dispatcher) {
-        return@withContext firestore.collection("users").document(userId).collection("history").get()
+        return@withContext firestore
+            .collection("users").document(userId)
+            .collection("history").get()
     }
+
+    suspend fun updateRatingInHistory(historyId: String, userId: String, newRating: Int) =
+        withContext(dispatcher) {
+            return@withContext firestore.collection("users")
+                .document(userId).collection("history")
+                .document(historyId).update("ratingForDoctor", newRating)
+        }
 }
