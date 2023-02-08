@@ -14,12 +14,18 @@ import com.example.doctors.view_model.AuthorizationViewModel
 import org.koin.core.component.getScopeId
 
 @Composable
-fun PlaceItem(place: PlaceToWrite, onClick: (place: PlaceToWrite, idPatient: String) -> Unit) {
+fun PlaceItem(
+    place: PlaceToWrite,
+    takePlace: (place: PlaceToWrite, idPatient: String) -> Unit,
+    takeOfPlace: (placeId: String, doctorId: String) -> Unit
+) {
     val authViewModel = viewModel(AuthorizationViewModel::class.java)
 
-    Card(elevation = 15.dp, modifier = Modifier
-        .fillMaxWidth()
-        .padding(8.dp)) {
+    Card(
+        elevation = 15.dp, modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+    ) {
 
         Row(modifier = Modifier.height(70.dp)) {
             Divider(
@@ -33,7 +39,7 @@ fun PlaceItem(place: PlaceToWrite, onClick: (place: PlaceToWrite, idPatient: Str
                 Text(text = place.time, fontSize = 24.sp, modifier = Modifier.padding(start = 8.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     TextButton(
-                        onClick = { onClick(place, authViewModel.getIdUser()!!) },
+                        onClick = { takePlace(place, authViewModel.getIdUser()!!) },
                         enabled = place.isTaken.not()
                     ) {
                         Text(text = "Записаться")
@@ -41,7 +47,7 @@ fun PlaceItem(place: PlaceToWrite, onClick: (place: PlaceToWrite, idPatient: Str
 
                     if (authViewModel.getIdUser()!! == place.idPatient) {
                         TextButton(
-                            onClick = {  },
+                            onClick = { takeOfPlace(place.id, place.idDoctor) },
                         ) {
                             Text(text = "Снять бронь")
                         }
