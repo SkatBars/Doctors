@@ -11,10 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.doctors.DoctorsScreen
 import com.example.doctors.entities.History
-import com.example.doctors.ui.components.CircleImage
-import com.example.doctors.ui.components.RatingText
-import com.example.doctors.ui.components.TextWithCaption
-import com.example.doctors.ui.components.Title
+import com.example.doctors.ui.components.*
 import java.text.SimpleDateFormat
 
 @Composable
@@ -26,7 +23,7 @@ fun HistoryItem(history: History, updateRating: (newValue: Int) -> Unit, current
         backgroundColor = MaterialTheme.colors.surface,
     ) {
         Column(
-            modifier = Modifier.padding(start = 16.dp),
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.SpaceBetween,
         ) {
             Title(text = history.nameDoctor, fontSize = 20.sp)
@@ -42,6 +39,8 @@ fun HistoryItem(history: History, updateRating: (newValue: Int) -> Unit, current
                 text = history.description,
                 fontSize = 16.sp
             )
+
+            RatingView(currentRating = currentRating, onChangeRating = {updateRating(it)})
         }
     }
 }
