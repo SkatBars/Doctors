@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.doctors.datebase.FirebaseAuthDataSource
 import com.example.doctors.datebase.UserRemoteDataSource
-import com.example.doctors.entities.Toothes
 import com.example.doctors.entities.User
 import kotlinx.coroutines.launch
 
@@ -29,5 +28,5 @@ class InformationUserViewModel : ViewModel() {
         }
     }
 
-    fun getUserName() = authDb.getUser()?.displayName
+
 }
