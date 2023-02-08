@@ -60,11 +60,9 @@ object DoctorsRecordRemoteDataSource {
         }
     }
 
-    suspend fun updateRating(doctorId: String, newRating: Int) =
-        withContext(dispatcher) {
-            return@withContext firestore.collection("doctor")
-                .document(doctorId).update("rating", newRating)
-        }
+    suspend fun getDoctorById(idDoctor: String) = withContext(dispatcher) {
+         return@withContext firestore.collection("doctors").document(idDoctor).get()
+    }
 
     suspend fun addRating(doctorId: String, rating: Double, countPeopleForRating: Int) =
         withContext(dispatcher) {
