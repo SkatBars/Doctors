@@ -6,6 +6,7 @@ import com.example.doctors.entities.Doctor
 import com.example.doctors.datebase.DoctorsRecordRemoteDataSource
 import com.example.doctors.entities.User
 import com.example.doctors.ui.components.spiner.KeyForSort
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class DoctorsListViewModel() : ViewModel() {
@@ -30,12 +31,23 @@ class DoctorsListViewModel() : ViewModel() {
         )
     }
 
-    fun updateRating(doctorId: String, rating: Double, countPeopleForRating: Int) =
+    fun updateRating(doctorId: String, rating: Double, isFirstUpdate: Boolean = false) =
         viewModelScope.launch {
-            db.updateRating(doctorId, rating, countPeopleForRating)
-                .addOnSuccessListener {
-                    _updateIsLoaded.value = true
-                }
+            val doctor = async {
+                return@async db.getDoctorById(doctorId)
+            }.await().result.toObject(Doctor::class.java)
+
+            doctor?.let {
+                val newRating = rating + doctor.rating
+                var newCount = doctor.countPeopleForRating
+                if (isFirstUpdate) newCount++
+
+                db.updateRating(doctorId, newRating, newCount)
+                    .addOnSuccessListener {
+                        _updateIsLoaded.value = true
+
+                    }
+            }
         }
 
     fun disableListenerCollectionPlaces() = db.disableListenerCollectionDoctors()
