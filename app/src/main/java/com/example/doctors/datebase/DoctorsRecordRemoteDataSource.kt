@@ -32,7 +32,7 @@ object DoctorsRecordRemoteDataSource {
     private lateinit var snapshotListenerPlaces: ListenerRegistration
     private lateinit var snapshotListenerDoctors: ListenerRegistration
 
-    fun getQueryDoctors(keySort: String, reverse: Boolean ): Query {
+    fun getQueryDoctors(keySort: String, reverse: Boolean): Query {
         return if (reverse) {
             firestore.collection("doctors")
                 .orderBy(keySort, Query.Direction.DESCENDING)
@@ -53,12 +53,21 @@ object DoctorsRecordRemoteDataSource {
         val query = firestore
             .collection("doctors").document(doctor)
             .collection("places").whereEqualTo("year", year)
-            .whereEqualTo  ("month", month).whereEqualTo("day", day)
+            .whereEqualTo("month", month).whereEqualTo("day", day)
 
         snapshotListenerPlaces = query.addSnapshotListener { value, error ->
             updateListPlaces(value, doctor, year, month, day)
         }
     }
+
+    suspend fun updateRating(doctorId: String, rating: Double, countPeopleForRating: Int) =
+        withContext(dispatcher) {
+            return@withContext firestore.collection("doctor")
+                .document(doctorId).update(
+                    "rating", rating,
+                    "countPeopleForRating", countPeopleForRating
+                )
+        }
 
     suspend fun createTakenPlace(placeToWrite: PlaceToWrite) = withContext(dispatcher) {
         return@withContext firestore
