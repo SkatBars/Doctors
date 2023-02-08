@@ -25,6 +25,7 @@ import com.example.doctors.ui.components.Title
 import com.example.doctors.ui.views.main.history.HistoryItem
 import com.example.doctors.view_model.DoctorsListViewModel
 import com.example.doctors.view_model.InformationUserViewModel
+import kotlin.math.absoluteValue
 
 @Composable
 fun HistoryView() {
@@ -50,13 +51,14 @@ fun HistoryView() {
                 HistoryItem(
                     history = historyItem,
                     updateRating = {
-                        val isFirstUpdateRating = currentRating == 0
+                        val previousRating = currentRating
+
                         currentRating = it
                         userViewModel.updateRating(historyItem, currentRating)
                         doctorViewModel.updateRating(
                             historyItem.doctorId,
-                            currentRating,
-                            isFirstUpdateRating
+                            currentRating - previousRating,
+                            previousRating == 0
                         )
                     },
                     currentRating = currentRating
