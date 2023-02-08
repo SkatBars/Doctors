@@ -8,6 +8,7 @@ import com.example.doctors.entities.User
 import com.example.doctors.ui.components.spiner.KeyForSort
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DoctorsListViewModel() : ViewModel() {
 
@@ -33,21 +34,26 @@ class DoctorsListViewModel() : ViewModel() {
 
     fun updateRating(doctorId: String, newRatingFromUser: Int, isFirstUpdate: Boolean = false) =
         viewModelScope.launch {
-            val doctor = async {
-                return@async db.getDoctorById(doctorId)
-            }.await().result.toObject(Doctor::class.java)
+            db.getDoctorById(doctorId).addOnSuccessListener {
+                val doctor = it.toObject(Doctor::class.java)
 
-            doctor?.let {
-                val newRating = doctor.rating * doctor.countPeopleForRating + newRatingFromUser
-                var newCount = doctor.countPeopleForRating
-                if (isFirstUpdate) newCount++
+                doctor?.let {
+                    val sum = doctor.rating * doctor.countPeopleForRating + newRatingFromUser
+                    var newCount = doctor.countPeopleForRating
+                    if (isFirstUpdate) newCount++
+                    val newRating = sum / newCount
 
-                db.updateRating(doctorId, newRating, newCount)
-                    .addOnSuccessListener {
-                        _updateIsLoaded.value = true
-
-                    }
+                    updateInDb(doctorId, newRating, newCount)
+                }
             }
+        }
+
+    private fun updateInDb(doctorId: String, newRating: Double, newCount: Int) =
+        viewModelScope.launch {
+            db.updateRating(doctorId, newRating, newCount)
+                .addOnSuccessListener {
+                    _updateIsLoaded.value = true
+                }
         }
 
     fun disableListenerCollectionPlaces() = db.disableListenerCollectionDoctors()
