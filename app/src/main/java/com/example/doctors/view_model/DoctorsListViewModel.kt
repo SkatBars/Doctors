@@ -4,8 +4,8 @@ import androidx.lifecycle.*
 import com.example.doctors.datebase.FirebaseAuthDataSource
 import com.example.doctors.entities.Doctor
 import com.example.doctors.datebase.DoctorsRecordRemoteDataSource
-import com.example.doctors.entities.User
 import com.example.doctors.ui.components.spiner.KeyForSort
+import com.google.firebase.firestore.ListenerRegistration
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -15,21 +15,25 @@ class DoctorsListViewModel() : ViewModel() {
     private val myAuth = FirebaseAuthDataSource
     private val db = DoctorsRecordRemoteDataSource
 
-    private val _doctors = db.doctors
+    private val _doctors = MutableLiveData<MutableList<Doctor>>()
     val doctors: LiveData<MutableList<Doctor>>
         get() = _doctors
+
 
     private val _updateIsLoaded = MutableLiveData(false)
     val updateIsLoaded: LiveData<Boolean>
         get() = _updateIsLoaded
 
+    private lateinit var snapshotListenerDoctors: ListenerRegistration
+
     fun getUser() = myAuth.getUser()
 
-    fun enableListenerCollection(keyForSort: KeyForSort) {
-        db.enableListenerCollectionDoctor(
-            keySort = keyForSort.property,
-            reverse = keyForSort.isReverse
-        )
+    fun enableListenerCollectionDoctor(keySort: String, reverse: Boolean) {
+        val query =
+            DoctorsRecordRemoteDataSource.getQueryDoctors(keySort = keySort, reverse = reverse)
+        snapshotListenerDoctors = query.addSnapshotListener { value, error ->
+            _doctors.value = value?.toObjects(Doctor::class.java)
+        }
     }
 
     fun updateRating(doctorId: String, newRatingFromUser: Int, isFirstUpdate: Boolean = false) =
@@ -56,5 +60,5 @@ class DoctorsListViewModel() : ViewModel() {
                 }
         }
 
-    fun disableListenerCollectionPlaces() = db.disableListenerCollectionDoctors()
+    fun disableListenerCollectionPlaces() = snapshotListenerDoctors.remove()
 }

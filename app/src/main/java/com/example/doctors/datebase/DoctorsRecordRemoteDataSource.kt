@@ -19,13 +19,7 @@ object DoctorsRecordRemoteDataSource {
     @SuppressLint("StaticFieldLeak")
     private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    private val _doctors = MutableLiveData<MutableList<Doctor>>()
-    val doctors: LiveData<MutableList<Doctor>>
-        get() = _doctors
-
     private val dispatcher = Dispatchers.IO
-
-    private lateinit var snapshotListenerDoctors: ListenerRegistration
 
     fun getQueryDoctors(keySort: String, reverse: Boolean): Query {
         return if (reverse) {
@@ -33,13 +27,6 @@ object DoctorsRecordRemoteDataSource {
                 .orderBy(keySort, Query.Direction.DESCENDING)
         } else {
             firestore.collection("doctors").orderBy(keySort, Query.Direction.ASCENDING)
-        }
-    }
-
-    fun enableListenerCollectionDoctor(keySort: String, reverse: Boolean) {
-        val query = getQueryDoctors(keySort = keySort, reverse = reverse)
-        snapshotListenerDoctors = query.addSnapshotListener { value, error ->
-            _doctors.value = value?.toObjects(Doctor::class.java)
         }
     }
 
