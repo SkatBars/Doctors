@@ -24,9 +24,12 @@ class DoctorsListViewModel() : ViewModel() {
 
     private lateinit var snapshotListenerDoctors: ListenerRegistration
 
-    fun enableListenerCollectionDoctor(keySort: String, reverse: Boolean) {
+    fun enableListenerCollectionDoctor(keySort: KeyForSort) {
         val query =
-            DoctorsRecordRemoteDataSource.getQueryDoctors(keySort = keySort, reverse = reverse)
+            DoctorsRecordRemoteDataSource.getQueryDoctors(
+                keySort = keySort.property,
+                reverse = keySort.isReverse
+            )
         snapshotListenerDoctors = query.addSnapshotListener { value, error ->
             _doctors.value = value?.toObjects(Doctor::class.java)
         }
