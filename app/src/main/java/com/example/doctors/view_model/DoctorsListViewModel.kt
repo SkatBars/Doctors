@@ -11,8 +11,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class DoctorsListViewModel() : ViewModel() {
-
-    private val myAuth = FirebaseAuthDataSource
     private val db = DoctorsRecordRemoteDataSource
 
     private val _doctors = MutableLiveData<MutableList<Doctor>>()
@@ -25,8 +23,6 @@ class DoctorsListViewModel() : ViewModel() {
         get() = _updateIsLoaded
 
     private lateinit var snapshotListenerDoctors: ListenerRegistration
-
-    fun getUser() = myAuth.getUser()
 
     fun enableListenerCollectionDoctor(keySort: String, reverse: Boolean) {
         val query =
