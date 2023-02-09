@@ -9,6 +9,7 @@ import com.google.firebase.firestore.ListenerRegistration
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.math.roundToInt
 
 class DoctorsListViewModel() : ViewModel() {
     private val db = DoctorsRecordRemoteDataSource
@@ -44,7 +45,7 @@ class DoctorsListViewModel() : ViewModel() {
                     val sum = doctor.rating * doctor.countPeopleForRating + newRatingFromUser
                     var newCount = doctor.countPeopleForRating
                     if (isFirstUpdate) newCount++
-                    val newRating = sum / newCount
+                    val newRating = (sum / newCount * 100).roundToInt() / 100.0
 
                     updateInDb(doctorId, newRating, newCount)
                 }
