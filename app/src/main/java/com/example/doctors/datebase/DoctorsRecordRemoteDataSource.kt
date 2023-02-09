@@ -19,17 +19,12 @@ object DoctorsRecordRemoteDataSource {
     @SuppressLint("StaticFieldLeak")
     private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    private val _places = MutableLiveData<MutableList<PlaceToWrite>>()
-    val places: LiveData<MutableList<PlaceToWrite>>
-        get() = _places
-
     private val _doctors = MutableLiveData<MutableList<Doctor>>()
     val doctors: LiveData<MutableList<Doctor>>
         get() = _doctors
 
     private val dispatcher = Dispatchers.IO
 
-    private lateinit var snapshotListenerPlaces: ListenerRegistration
     private lateinit var snapshotListenerDoctors: ListenerRegistration
 
     fun getQueryDoctors(keySort: String, reverse: Boolean): Query {
@@ -48,17 +43,13 @@ object DoctorsRecordRemoteDataSource {
         }
     }
 
-    fun enableListenerCollectionPlacces(doctor: String, year: Int, month: Int, day: Int) {
-
-        val query = firestore
+    fun getQueryPlaces(doctor: String, year: Int, month: Int, day: Int): Query {
+        return firestore
             .collection("doctors").document(doctor)
             .collection("places").whereEqualTo("year", year)
             .whereEqualTo("month", month).whereEqualTo("day", day)
-
-        snapshotListenerPlaces = query.addSnapshotListener { value, error ->
-            updateListPlaces(value, doctor, year, month, day)
-        }
     }
+
 
     suspend fun getDoctorById(idDoctor: String) = withContext(dispatcher) {
          return@withContext firestore.collection("doctors").document(idDoctor).get()
@@ -86,51 +77,4 @@ object DoctorsRecordRemoteDataSource {
             .collection("places").document(placeId)
             .delete()
     }
-
-    private fun updateListPlaces(
-        value: QuerySnapshot?,
-        doctor: String,
-        year: Int,
-        month: Int,
-        day: Int
-    ) {
-        val tempList = mutableListOf<PlaceToWrite>()
-
-        for (i in 0 until COUNT_PLACES_FOR_WRITE_OF_DAY) {
-            tempList.add(
-                PlaceToWrite(
-                    doctor, "", i,
-                    getTimeByNumber(i), year,
-                    month, day, false
-                )
-            )
-        }
-
-        val currentList = value?.toObjects(PlaceToWrite::class.java)
-
-        if (currentList != null) {
-            for (place in currentList) {
-                tempList[place.number] = place
-            }
-        }
-
-        _places.value = tempList
-    }
-
-    private fun getTimeByNumber(number: Int): String {
-        return if (number <= 3) {
-            "${number + 9}:00-${number + 10}:00"
-        } else {
-            "${number + 10}:00-${number + 11}:00"
-        }
-    }
-
-    fun disableListenerCollectionPlaces() {
-        snapshotListenerPlaces.remove()
-    }
-
-    fun disableListenerCollectionDoctors() {
-        snapshotListenerDoctors.remove()
-    }
-
 }
