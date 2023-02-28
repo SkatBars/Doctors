@@ -23,7 +23,8 @@ import java.util.*
 
 @Composable
 fun ChangeDate(
-    chooseDate: MutableState<Calendar>,
+    chooseDate: Calendar,
+    changeDate: (newDate: Calendar) -> Unit,
 ) {
     Card(
         modifier = Modifier
@@ -31,8 +32,12 @@ fun ChangeDate(
             .height(100.dp),
         elevation = 10.dp
     ) {
-        ArrowsBtn(80.dp, Color.Gray, PaddingValues(end = 16.dp)) { changeDate(chooseDate, it) }
-        ListDate(getListCurrentDate(chooseDate = chooseDate.value))
+        ArrowsBtn(80.dp, Color.Gray, PaddingValues(end = 16.dp)) { step ->
+            getNewDate(step, chooseDate) {newDate ->
+                changeDate(newDate)
+            }
+        }
+        ListDate(getListCurrentDate(chooseDate = chooseDate))
 
     }
 }
@@ -47,9 +52,9 @@ private fun getListCurrentDate(chooseDate: Calendar): List<Calendar> {
     return listOf(previousDate, chooseDate, nextDate)
 }
 
-private fun changeDate(currentDate: MutableState<Calendar>, number: Int) {
+private fun getNewDate(number: Int, currentDate: Calendar, changeDate: (newDate: Calendar) -> Unit) {
     val tempDate = Calendar.getInstance()
-    tempDate.time = currentDate.value.time
+    tempDate.time = currentDate.time
     tempDate.add(Calendar.DATE, number)
-    currentDate.value = tempDate
+    changeDate(tempDate)
 }

@@ -35,7 +35,10 @@ fun PlaceToWriteView(doctor: Doctor, navController: NavController) {
             viewModel.updateDateForPlaces(currentDate = currentDate, viewModel, doctor.id)
         })
 
-        ChangeDate(currentDate)
+        ChangeDate(currentDate.value) {
+            currentDate.value = it
+            viewModel.updateDateForPlaces(currentDate = currentDate, viewModel, doctor.id)
+        }
 
         val places =
             viewModel.places.observeAsState(listOf()) as MutableState<List<PlaceToWrite>>
